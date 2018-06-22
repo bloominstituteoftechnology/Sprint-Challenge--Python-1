@@ -13,23 +13,31 @@ class Paddle():
         self.height = 20
         self.image = pygame.Surface([self.width, self.height])
 
-        self.rect = self.image.get_rect()
+        self.rectangle = self.image.get_rect()
         self.screenheight = pygame.display.get_surface().get_height()
         self.screenwidth = pygame.display.get_surface().get_width()
 
-        self.rect.x = 0
-        self.rect.y = self.screenheight-self.height
+        self.rectangle.x = 0
+        self.rectangle.y = self.screenheight-self.height
+
+        self.touched_by_ball = True
 
     def check_collision(self):
         pass
 
     def draw(self, screen, pygame):
         color = (0, 0, 0)
-        pygame.draw.rect(screen, color, self.rect)
+        pygame.draw.rect(screen, color, self.rectangle)
 
     def update(self, **kwargs):
         """ Update the player position. """
         pos = pygame.mouse.get_pos()
-        self.rect.x = pos[0]
-        if self.rect.x > self.screenwidth - self.width:
-            self.rect.x = self.screenwidth - self.width
+        self.rectangle.x = pos[0]
+        if self.rectangle.x > self.screenwidth - self.width:
+            self.rectangle.x = self.screenwidth - self.width
+
+        self.touched_by_ball = True
+
+
+class KineticPaddle(Paddle):
+    pass

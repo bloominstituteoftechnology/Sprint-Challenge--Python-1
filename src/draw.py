@@ -25,7 +25,7 @@ def debug_create_objects(object_list):
     block2 = KineticBlock(Vector2(200, 0), 100, 50, [0, 255, 0])
     object_list.append(block2)
 
-    paddle = Paddle()
+    paddle = KineticPaddle()
     object_list.append(paddle)
 
 
