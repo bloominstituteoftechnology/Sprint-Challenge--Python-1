@@ -1,5 +1,6 @@
 import pygame #TODO:  Fix intellisense
 import random
+import sys
 
 from pygame.math import Vector2
 
@@ -36,10 +37,10 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
+            print('move block left') #update block
             pass
         if keys[pygame.K_RIGHT]:
-            # Do something
+            print('move block right') #update block
             pass
 
         for object in object_list:
