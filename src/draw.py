@@ -7,9 +7,8 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
-PADDLE_SIZE = [60, 20]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -20,7 +19,10 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
-  
+
+    paddle = KineticBlock(Vector2(200, 200), 100, 100, [255, 0, 255])
+    object_list.append(paddle)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -38,14 +40,16 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            paddle.left -= 5
-            if self.paddle.left < 0:
-                self.paddle.left = 0
+            # paddle.left -= 5
+            # if self.paddle.left < 0:
+            #     self.paddle.left = 0
+            pass
             
         if keys[pygame.K_RIGHT]:
-            self.paddle.left += 5
-            if self.paddle.left > SCREEN_SIZE[0] - PADDLE_SIZE[0]:
-                self.paddle.left = SCREEN_SIZE[0] - PADDLE_SIZE[0]
+            # self.paddle.left += 5
+            # if self.paddle.left > SCREEN_SIZE[0] - PADDLE_SIZE[0]:
+            #     self.paddle.left = SCREEN_SIZE[0] - PADDLE_SIZE[0]
+            pass
 
         for object in object_list:
             object.update()
