@@ -32,8 +32,9 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius:  # screen height
-            self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            # self.position.y = self.radius + 1
+            # self.velocity.y *= -1
+            sys.exit()
         if self.position.y >= self.bounds[1] - self.radius:
             sys.exit()
         #     self.position.y = self.bounds[1] - self.radius - 1
