@@ -5,6 +5,7 @@ from pygame.math import Vector2
 
 from ball import *
 from block import *
+from paddle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -16,8 +17,19 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    block1 = KineticBlock(Vector2(100,200), 50, 50, [0, 0, 255])
+    block2 = KineticBlock(Vector2(250,150), 50, 50, [0, 243, 255])
+    block3 = KineticBlock(Vector2(390,280), 50, 50, [255, 0, 0])
+    block4 = KineticBlock(Vector2(550,250), 50, 50, [0, 255, 0])
+    object_list.append(block1)
+    object_list.append(block2)
+    object_list.append(block3)
+    object_list.append(block4)
+
+    #paddle here
+    paddle = KineticPaddle(Vector2(300,SCREEN_SIZE[1]), 100, 20, [255, 0, 0])
+    object_list.append(paddle)
+    print(object_list[5].position.x)
   
 def main():
     pygame.init()
@@ -37,10 +49,11 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            object_list[5].position.x -=5
+            #pass
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            object_list[5].position.x +=5
 
         for object in object_list:
             object.update()
