@@ -36,12 +36,13 @@ class Ball:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
-        self.position += self.velocity
+        #TODO, better way to alter speed?
+        self.position += self.velocity * 4
         self.collision_rectangle = self.update_rectangle()
 
     def check_collision(self):
         # No collision on base models
-        pass
+        print('col')
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
@@ -118,6 +119,7 @@ class GameBall(Ball):
         
         if test == 1:
             object.touched_by_ball = True
+            print('true')
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
             if left or right:
