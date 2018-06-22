@@ -22,10 +22,10 @@ def debug_create_objects(object_list):
     for i in range(6):
         breakable_block = BreakableBlock(Vector2(50 + i*102 + 10,30), 100, 20, [0, 255, 0])
         object_list.append(breakable_block)
-        breakable_block = BreakableBlock(Vector2(50 + i*102 + 10,74), 100, 20, [0, 255, 0])
+        breakable_block = BreakableBlock(Vector2(50 + i*102 + 10, 74), 100, 20, [0, 255, 0])
         object_list.append(breakable_block)
     for i in range(5):
-        breakable_block = BreakableBlock(Vector2(100 + i*102 + 10,52), 100, 20, [0, 255, 0])
+        breakable_block = Multi_hit_block(Vector2(100 + i*102 + 10,52), 100, 20, [0, 255, 0])
         object_list.append(breakable_block)
         
 

@@ -26,6 +26,8 @@ class Ball:
         if self.position.x <= 0 + self.radius: # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
+            #here is the ball hitting the bottom ^^^^
+            
         if self.position.x >= self.bounds[0] - self.radius:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1

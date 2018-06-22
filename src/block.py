@@ -41,6 +41,22 @@ class BreakableBlock(KineticBlock):
     def get_hit(self):
         self.should_draw = False
 
+class Multi_hit_block(BreakableBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.hit_count = 0
+
+    def get_hit(self):
+        self.hit_count += 1
+        if self.hit_count >= 3:
+            self.should_draw = False
+        else:
+            if self.hit_count == 1:
+                self.color=[255, 0, 0]
+            if self.hit_count == 2:
+                self.color = [0, 0, 255]
+
+
 class Paddle(KineticBlock):
     def update(self, **kwargs):
         self.touched_by_ball = False
