@@ -1,4 +1,5 @@
 import math
+from time import sleep
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -16,6 +17,7 @@ class Ball:
         self.color = color
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
+        self.dropped_count = 0
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
@@ -35,6 +37,8 @@ class Ball:
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            self.dropped_count += 1
+            print(self.dropped_count)
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -85,7 +89,7 @@ class GameBall(Ball):
         if (
             object.position.x > self.position.x and
             object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             left = True
