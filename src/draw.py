@@ -55,10 +55,9 @@ def main():
             # Do something
             # obj list 1 which is a block located near the bottom of play area.. decrement pos x
             # print("Left key is pressed..")
+            # object_list[1].update(move_left)
             print("The paddle.. ", object_list[1].position)
             object_list[1].position[0] -= 10
-            print("The paddle.. ", object_list[1].position)
-            # object_list[1].update(move_left)
             pass
         if keys[pygame.K_RIGHT]:
             # Do something
@@ -66,7 +65,6 @@ def main():
             # print("Right key is pressed..")
             print("The paddle.. ", object_list[1].position)
             object_list[1].position[0] += 10
-            print("The paddle.. ", object_list[1].position)
             pass
 
         for object in object_list:
