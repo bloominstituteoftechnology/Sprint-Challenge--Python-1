@@ -12,7 +12,7 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(8*random.random() - 2, 8*random.random() - 2),
+                                    Vector2(10*random.random() - 2, 10*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
@@ -55,10 +55,10 @@ def main():
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
-            if not (issubclass(type(ball), BreakableBlock) and ball.should_draw == False):
-                ball.draw(screen, pygame)
-            else:
+            if (issubclass(type(ball), BreakableBlock) and ball.should_draw == False):
                 object_list.pop(object_list.index(ball))
+            else:
+                ball.draw(screen, pygame)
                 
         clock.tick(60)
         pygame.display.flip()
