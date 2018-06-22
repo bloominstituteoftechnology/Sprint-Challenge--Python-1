@@ -166,4 +166,5 @@ class GameBall(Ball):
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
+                    object.touched_by_ball = True
                     self.collide_with_rectangle(object)
