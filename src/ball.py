@@ -113,8 +113,14 @@ class GameBall(Ball):
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
-
+            
+        # print("left:", left)    
+        # print("right:", right)
+        # print("top:", top)
+        # print("bottom:", bottom)
         test = left + right + top + bottom
+        # print("test:", test)
+        
         
         if test == 1:
             object.touched_by_ball = True

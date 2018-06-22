@@ -8,12 +8,11 @@ from block import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [0, 0, 0]
-# BALL_SPEED = 50
-GAME_BLOCK_COLOR = [50,50,50]
+GAME_BLOCK_COLOR = [150,150,150]
 
 # TODO: random RGB color generator for Blocks to be Destroyed
 def rgb_color():
-   return [random.randint(0, 255),random.randint(0, 255),random.randint(0, 255)]
+   return [random.randint(150, 255),random.randint(150, 255),random.randint(150, 255)]
     
 
 
@@ -34,23 +33,21 @@ def debug_create_objects(object_list):
     object_list.append(block)
 
     # Blocks to be Destroyed by User
-    dblock_0 = KineticBlock(Vector2(0,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_1 = KineticBlock(Vector2(25,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_2 = KineticBlock(Vector2(75,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_3 = KineticBlock(Vector2(125,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_4 = KineticBlock(Vector2(175,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_5 = KineticBlock(Vector2(225,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_6 = KineticBlock(Vector2(275,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_7 = KineticBlock(Vector2(325,10), 50, 20, GAME_BLOCK_COLOR)
-    dblock_8 = KineticBlock(Vector2(375,10), 50, 20, GAME_BLOCK_COLOR)
-    object_list.append(dblock_0)
+    dblock_1 = KineticBlock(Vector2(25,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_1)
+    dblock_2 = KineticBlock(Vector2(75,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_2)
+    dblock_3 = KineticBlock(Vector2(125,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_3)
+    dblock_4 = KineticBlock(Vector2(175,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_4)
+    dblock_5 = KineticBlock(Vector2(225,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_5)
+    dblock_6 = KineticBlock(Vector2(275,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_6)
+    dblock_7 = KineticBlock(Vector2(325,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_7)
+    dblock_8 = KineticBlock(Vector2(375,10), 40, 20, GAME_BLOCK_COLOR)
     object_list.append(dblock_8)
 
 
@@ -72,12 +69,23 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
+            print(object_list[1].position[0])
+            object_list[1].position[0] += 1
+            print(object_list[1].position[0])
             
-            pass
+            
+            
         if keys[pygame.K_RIGHT]:
             # Do something
+            # print(object_list[0]) # ball.GameBall object x 8
+            # print(object_list[1]) # block.KineticBlock object x 1
+            # print(object_list[2]) # block.KineticBlock object x 1
+            # print(len(object_list)) # 10... 1 ball, 1 user block, 8 blocks to destroy
+            print(object_list[1].position[0])
+            object_list[1].position[0] -= 1
+            print(object_list[1].position[0])
+            # TODO: Figure out how to implement super().update() .. like in OOP-Toy            
             
-            pass
 
         for object in object_list:
             object.update()
