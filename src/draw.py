@@ -43,6 +43,7 @@ def main():
                 sys.exit()
 
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_UP]:
             object_list[0].velocity[1] += 1
 
@@ -75,6 +76,10 @@ def main():
                 else:
                     object.draw(screen, pygame)
             object.draw(screen, pygame)
+
+        if len(object_list) == 2:
+            print("Game Over! YOU WIN!")
+            pygame.quit()
 
         clock.tick(60)
         pygame.display.flip()
