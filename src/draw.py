@@ -6,18 +6,24 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [400, 800]
+SCREEN_SIZE = [400, 700] # change back to 800 height
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(300, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 70, 15, [0, 0, 0])
+    object_list.append(paddle)
+
+    for i in range(5):
+        color = [random.randint(100, 250), random.randint(100, 250), random.randint(100, 250)]
+        for j in range(3):
+            block = KineticBlock(Vector2(52 + (i*74),100 + (j* 40)), 70, 30, color)
+            object_list.append(block)
   
 def main():
     pygame.init()
@@ -29,17 +35,17 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
- 
+
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
+            object_list[1].move('left', SCREEN_SIZE[0])
             pass
         if keys[pygame.K_RIGHT]:
-            # Do something
+            object_list[1].move('right', SCREEN_SIZE[0])
             pass
 
         for object in object_list:
