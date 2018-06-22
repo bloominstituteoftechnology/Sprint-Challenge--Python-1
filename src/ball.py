@@ -168,6 +168,8 @@ class GameBall(Ball):
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
+                    obj_index = self.object_list.index(object)
+                    del self.object_list[obj_index]
             # Balls colliding with paddle
             if issubclass(type(object), KineticPaddle) and object != self:
                 # Do a first round pass for collision (we know object is a KineticPaddle)

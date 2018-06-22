@@ -9,6 +9,8 @@ from paddle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
+PADDLE_X = 320
+PADDLE_Y = 450
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -17,13 +19,21 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    x = 100
+    y = 150
+    for i in range(5):
+        for j in range(5):
+            block = KineticBlock(Vector2(x,y), 100, 25, [0, 0, 255])
+            x += 105
+            object_list.append(block)
+        x = 100
+        y -= 30
 
-    paddle = KineticPaddle(Vector2(320, 450), 100, 20, [128, 0, 128])
+    paddle = KineticPaddle(Vector2(PADDLE_X, PADDLE_Y), 100, 20, [128, 0, 128])
     object_list.append(paddle)
   
 def main():
+    global PADDLE_X
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
  
@@ -35,16 +45,18 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
+        # print(PADDLE_X)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
-            print('Left pressed')
+            print('left pressed')
+            PADDLE_X -= 1
+
         if keys[pygame.K_RIGHT]:
-            # Do something
-            print('Right pressed')
+            print('right pressed')
+            PADDLE_X += 1
 
         for object in object_list:
             object.update()
