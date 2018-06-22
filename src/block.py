@@ -45,5 +45,3 @@ class BreakableBlock(KineticBlock):
     def get_hit(self):
         self.should_draw = False
 
-
-

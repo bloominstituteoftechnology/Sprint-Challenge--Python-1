@@ -47,17 +47,22 @@ def main():
             pass
 
         for object in object_list:
-            if issubclass(type(object), BreakableBlock) and object.should_draw == False:
-                print('do nothing')
-            else: 
-                object.update()
-                object.check_collision()
+            object.update()
+            object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
-            ball.draw(screen, pygame)
- 
+            if not (issubclass(type(ball), BreakableBlock) and ball.should_draw == False):
+                ball.draw(screen, pygame)
+            # if issubclass(type(ball), BreakableBlock):
+            #     if ball.should_draw == False:
+            #         print("dont draw")
+            #     else:
+            #         ball.draw(screen, pygame)    
+            # else:
+            #     ball.draw(screen, pygame)
+                
         clock.tick(60)
         pygame.display.flip()
  
