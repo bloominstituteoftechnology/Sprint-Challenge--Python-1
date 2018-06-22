@@ -26,21 +26,21 @@ def fill_game_board(object_list):
     blockWidth = 50
     blockHeight = 20
     buffer = 20
+    ballVelocity = 4
 
     paddle = Paddle(Vector2(200, 780), 200, 5, [0, 0, 255], SCREEN_SIZE[0])
     object_list.append(paddle)
 
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
-                       Vector2(random.randint(
-                           20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                       Vector2(4, 4),
+                       Vector2(int(SCREEN_SIZE[0]/2), 780),
+                       Vector2(ballVelocity, ballVelocity),
                        [255, 10, 0], 5)
     object_list.append(kinetic)
 
     # Generate random blocks
     for y in range(int((SCREEN_SIZE[1] - 100)/(blockHeight+buffer))):
         block = KineticBlock(Vector2(random.randint(
-            0, SCREEN_SIZE[0]), y*(blockHeight+buffer)), blockWidth, blockHeight, [0, 0, 255])
+            0, SCREEN_SIZE[0]), y*(blockHeight+buffer)), blockWidth, blockHeight, [0, 255, 0])
         object_list.append(block)
 
 
