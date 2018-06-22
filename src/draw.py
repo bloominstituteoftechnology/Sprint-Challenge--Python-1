@@ -7,16 +7,22 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [400, 800]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [0, 0, 0]
+# BALL_SPEED = 50
 
 def debug_create_objects(object_list):
-    kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+    kinetic = GameBall(1, object_list, 
+                                    SCREEN_SIZE, # bounds
+                                    # randomized starting position 
+                                    Vector2(random.randint(30, SCREEN_SIZE[0] - 10), random.randint(10, SCREEN_SIZE[1] - 10)),
+                                    # velocity
+                                    # Two random numbers between -2 and 2 -- Why would you randomize the velocity?
+                                    Vector2(-2, 2), # was `4*random.random() - 2`
+                                    [255, 255, 255], # color
+                                    10) # radius
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(200,790), 100, 20, [255, 0, 0])
     object_list.append(block)
   
 def main():
@@ -36,10 +42,11 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
+            
             pass
         if keys[pygame.K_RIGHT]:
             # Do something
+            
             pass
 
         for object in object_list:
