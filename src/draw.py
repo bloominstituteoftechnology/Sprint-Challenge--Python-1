@@ -6,19 +6,41 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    [255, 10, 0], 10)
     object_list.append(kinetic)
-
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    #top blocks
+    tblock = KineticBlock(Vector2(50,50), 50, 10, [0, 0, 255])
+    object_list.append(tblock)
+    tblock1 = KineticBlock(Vector2(150,50), 50, 10, [0, 0, 255])
+    object_list.append(tblock1)
+    tblock2 = KineticBlock(Vector2(250,50), 50, 10, [0, 0, 255])
+    object_list.append(tblock2)
+    tblock3 = KineticBlock(Vector2(350,50), 50, 10, [0, 0, 255])
+    object_list.append(tblock3)
+    #middle blocks
+    mblock = KineticBlock(Vector2(100,100), 50, 10, [0, 150, 255])
+    object_list.append(mblock)
+    mblock1 = KineticBlock(Vector2(200,100), 50, 10, [0, 150, 255])
+    object_list.append(mblock1)
+    mblock2 = KineticBlock(Vector2(300,100), 50, 10, [0, 150, 255])
+    object_list.append(mblock2)
+    #bottom blocks
+    block = KineticBlock(Vector2(50,150), 50, 10, [0, 200, 255])
     object_list.append(block)
-  
+    block1 = KineticBlock(Vector2(150,150), 50, 10, [0, 200, 255])
+    object_list.append(block1)
+    block2 = KineticBlock(Vector2(250,150), 50, 10, [0, 200, 255])
+    object_list.append(block2)
+    block3 = KineticBlock(Vector2(350,150), 50, 10, [0, 200, 255])
+    object_list.append(block3)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
