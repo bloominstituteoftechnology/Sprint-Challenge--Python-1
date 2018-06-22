@@ -1,5 +1,6 @@
 import pygame #TODO:  Fix intellisense
 import random
+import sys
 
 from pygame.math import Vector2
 
@@ -8,6 +9,7 @@ from block import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
+PADDLE_SIZE = [60, 20]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -36,11 +38,14 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
-            pass
+            paddle.left -= 5
+            if self.paddle.left < 0:
+                self.paddle.left = 0
+            
         if keys[pygame.K_RIGHT]:
-            # Do something
-            pass
+            self.paddle.left += 5
+            if self.paddle.left > SCREEN_SIZE[0] - PADDLE_SIZE[0]:
+                self.paddle.left = SCREEN_SIZE[0] - PADDLE_SIZE[0]
 
         for object in object_list:
             object.update()
@@ -51,7 +56,7 @@ def main():
         for ball in object_list:
             ball.draw(screen, pygame)
  
-        clock.tick(60)
+        clock.tick(200)
         pygame.display.flip()
  
     # Close everything down

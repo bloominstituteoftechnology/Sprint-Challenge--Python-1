@@ -3,6 +3,9 @@ import pygame
 from pygame.math import Vector2
 from pygame import Rect
 
+PADDLE_WIDTH = 100
+PADDLE_HEIGHT = 20
+
 class Block:
     """
     Base class for square or rectangular object
@@ -12,10 +15,10 @@ class Block:
         # Create a rectangle centered around the x and y
         self.position = position
         self.rectangle = pygame.Rect(
-                                    position.x - (width/2),
-                                    position.y - (height/2),
-                                    width,
-                                    height)
+                                    position.x - (PADDLE_WIDTH/2),
+                                    position.y - (PADDLE_HEIGHT/2),
+                                    PADDLE_WIDTH,
+                                    PADDLE_HEIGHT)
         self.color = color
         self.touched_by_ball = False
 
