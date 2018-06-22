@@ -37,9 +37,11 @@ class KineticBlock(Block):
     pass
 
 class Paddle(KineticBlock):
+    '''
     def player(self, direction, width):
         if direction == 'left':
             self.position.x - 1
         if direction == 'right':
             self.position.x + 1
-
+'''
+    pass
