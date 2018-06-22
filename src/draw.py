@@ -41,15 +41,10 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # paddle.left -= 5
-            # if self.paddle.left < 0:
-            #     self.paddle.left = 0
+            object_list[2].position -= 5
             pass
             
         if keys[pygame.K_RIGHT]:
-            # self.paddle.left += 5
-            # if self.paddle.left > SCREEN_SIZE[0] - PADDLE_SIZE[0]:
-            #     self.paddle.left = SCREEN_SIZE[0] - PADDLE_SIZE[0]
             pass
 
         for object in object_list:

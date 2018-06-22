@@ -21,7 +21,6 @@ class Paddle:
         self.color = color
         self.touched_by_ball = False
 
-
     def update(self, **kwargs):
         self.touched_by_ball = False
 
