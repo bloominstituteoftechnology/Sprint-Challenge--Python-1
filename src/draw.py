@@ -5,6 +5,7 @@ from pygame.math import Vector2
 
 from ball import *
 from block import *
+from paddle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -15,9 +16,23 @@ def debug_create_objects(object_list):
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
+    
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    block1 = KineticBlock(Vector2(100,200), 50, 50, [0, 0, 255])
+    block2 = KineticBlock(Vector2(250,150), 50, 50, [0, 243, 255])
+    block3 = KineticBlock(Vector2(390,280), 50, 50, [255, 0, 0])
+    block4 = KineticBlock(Vector2(550,250), 50, 50, [0, 255, 0])
+    object_list.append(block1)
+    object_list.append(block2)
+    object_list.append(block3)
+    object_list.append(block4)
+
+    print(object_list[4])
+
+    #paddle here
+    paddle = KineticPaddle(Vector2(400,SCREEN_SIZE[1]), 10, 100, 20, [255, 0, 0])
+    object_list.append(paddle)
+    #print(object_list[5].position.x)
   
 def main():
     pygame.init()
@@ -37,14 +52,37 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            object_list[5].dx = object_list[5].dx
+            object_list[5].update()
+            #object_list[5].position.x = object_list[5].position.x -5
+            print(object_list[5].position.x)
+            #pass
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            object_list[5].dx = object_list[5].dx
+            object_list[5].update()
+            #object_list[5].position.x = object_list[5].position.x + 5
+            print(object_list[5].position.x)
+            
+        if object_list[5].position.x < 0: # screen width
+            object_list[5].x = 0
+        
+        if object_list[5].position.x > SCREEN_SIZE[0]:
+            object_list[5].x = SCREEN_SIZE[0] 
+
+
+        def random_color():
+            levels = range(32,256,32)
+            return tuple(random.choice(levels) for _ in range(3))
+
 
         for object in object_list:
             object.update()
             object.check_collision()
+            if object.check_collision():
+                if object.color and object != 'kinetic':
+                    object.color = random_color()
+                    #print(object)
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
