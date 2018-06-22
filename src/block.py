@@ -20,6 +20,7 @@ class Block:
         self.touched_by_ball = False
         self.width = width
 
+
     def update(self, **kwargs):
         self.touched_by_ball = False
 
@@ -29,7 +30,16 @@ class Block:
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
 
+
 class KineticBlock(Block):
+    # No custom code needed here, just want to be able to differentiate
+    # KineticBall will handle the collison
+    # def __del__(self):
+    #     print('deleted')
+    pass
+
+
+class Paddle(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     def update(self, **kwargs):
@@ -38,6 +48,3 @@ class KineticBlock(Block):
         mouse_pos = pygame.mouse.get_pos()
         self.position.x = mouse_pos[0]
         self.rectangle[0] = mouse_pos[0] - self.width / 2
-
-
-
