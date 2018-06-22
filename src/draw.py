@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -22,13 +22,16 @@ def debug_create_objects(object_list):
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
- 
+
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
  
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
+
+    paddle = Block(Vector2(100, 770), 100, 20, [0, 255, 255]) # what does vector2 do?
+    object_list.append(paddle)
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
@@ -36,11 +39,9 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
-            pass
+            self.paddle.move_ip(0, -1) # paddle is made in a different function, not available
         if keys[pygame.K_RIGHT]:
-            # Do something
-            pass
+            self.paddle.move_ip(0, 1)
 
         for object in object_list:
             object.update()
@@ -59,3 +60,4 @@ def main():
  
 if __name__ == "__main__":
     main()
+    
