@@ -5,6 +5,12 @@ from pygame import Rect
 
 from block import KineticBlock
 from ball import GameBall
+
+# paddle global variables
+PADDLE_HEIGHT = 50
+PADDLE_WIDTH = 4
+
+SCREEN_HEIGHT = 800
 class Paddle:
     def __init__(self, x, y, clr, vel):
         self.x = x
@@ -22,13 +28,13 @@ class Paddle:
         leftx = self.x - self.width/2
         topy = self.y - self.height/2
         coords = pygame.Rect(leftx, topy, self.width, self.height)
-        pygame.draw.rect(DISPLAYSURF, self.color, coords, 0)
+        pygame.draw.rect(self.color, coords, 0)
 
     def move(self):
         if not self.is_moving:
             return
 
-        if self.direction == UP and self.y - self.height/2 > 0:
+        if self.direction == self.y - self.height/2 > 0:
             self.y -= self.vel 
-        elif self.direction == DOWN and self.y + self.height/2 < SCREEN_HEIGHT:
+        elif self.direction == self.y + self.height/2 < SCREEN_HEIGHT:
             self.y += self.vel 
