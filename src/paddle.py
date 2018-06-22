@@ -28,6 +28,17 @@ class Paddle:
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
         
+    def moveLeft(self, position):
+        # THIS IS NOT WORKING - MORE PSUEDOISH STUFF
+        self.position.x -= 5
+        if (self.position.x < 0): 
+            self.position.x = 0
+        
+    def moveRight(self, position, width):
+        # THIS IS ALSO NOT WORKING - le sigh
+        self.position.x += 5
+        if self.position.x > screen.x - self.width: # out-of-bounds
+            self.position.x = screen.x
 
 class KineticPaddle(Paddle):
     # No custom code needed here, just want to be able to differentiate
