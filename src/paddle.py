@@ -3,7 +3,7 @@ import pygame
 from pygame.math import Vector2
 from pygame import Rect
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 PADDLE_MOVE_INCREMENT = 3
 
 class Paddle:
