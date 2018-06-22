@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -16,8 +16,14 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    paddle = KineticBlock(Vector2(200,780), 80, 20, [0, 0, 255])
+    object_list.append(paddle)
+
+    for row in range(5):
+        block = KineticBlock(Vector2(200,200), 40, 40, [0, 0, 255])
+        object_list.append(block)
+
+
   
 def main():
     pygame.init()
@@ -40,6 +46,7 @@ def main():
             pass
         if keys[pygame.K_RIGHT]:
             # Do something
+            # object_list[1].move('right', SCREEN_SIZE[0])
             pass
 
         for object in object_list:
