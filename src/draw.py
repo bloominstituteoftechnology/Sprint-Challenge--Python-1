@@ -5,8 +5,9 @@ from pygame.math import Vector2
 
 from ball import *
 from block import *
+from paddle import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [800, 400]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -16,8 +17,8 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,460), 100, 25, [0, 0, 255])
-    object_list.append(block)
+    paddle = Paddle(SCREEN_SIZE[0], SCREEN_SIZE[1])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -30,23 +31,22 @@ def main():
 
     debug_create_objects(object_list)
 
-    block = object_list[1]
+    paddle = object_list[1]
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
         keys = pygame.key.get_pressed()
+        updates = {}
         if keys[pygame.K_LEFT]:
-            # Do something
-            block.update(move = 'left')
-            pass
+            updates["move"] = "left"
+
         if keys[pygame.K_RIGHT]:
-            # Do something
-            pass
+            updates["move"] = "right"
 
         for object in object_list:
-            object.update()
+            object.update(**updates)
             object.check_collision()
  
         # Draw Updates

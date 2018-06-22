@@ -19,14 +19,8 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-
     def update(self, **kwargs):
-        self.touched_by_ball = False
-
-        for key in kwargs:
-            if key == 'mov' and kwargs[key] == 'left':
-                self.rectangle.x = self.rectangle.x + 10;     
-
+        self.touched_by_ball = False  
 
     def check_collision(self):
         pass
