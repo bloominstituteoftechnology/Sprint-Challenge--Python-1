@@ -21,8 +21,6 @@ class Block:
 
 
     def update(self, **kwargs):
-        if self.touched_by_ball == True:
-            print(1)
         self.touched_by_ball = False
 
     def check_collision(self):
@@ -70,22 +68,28 @@ class Paddle(KineticBlock):
         self.right = True
 
 class Weak_Block(KineticBlock):
-    def __init__(self, position, width, height, color):
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
         self.hp = 1
         super().__init__(position, width, height, color)
     
     def update(self):
         if self.touched_by_ball == True:
-            print(self.hp)
+            self.hp -= 1
+            if self.hp < 1:
+                self.object_list.remove(self)
         super().update()
 
 class Strong_Block(KineticBlock):
-    def __init__(self, position, width, height, color):
-        self.hp = 3
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
+        self.hp = 2
         super().__init__(position, width, height, color)
-
+    
     def update(self):
         if self.touched_by_ball == True:
-            print(self.hp)
+            self.hp -= 1
+            if self.hp < 0:
+                object_list.remove(self)
         super().update()
 
