@@ -28,10 +28,26 @@ class Block:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+        
 
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    def update(self, **kwargs):
+    self.left = input['left']
+    self.right = input['right']
+    if self.left:
+        this.position.x -= SPEED
+        if this.position.X < 
 
+        if self.right:
+            self.position.x += SPEED
+            self.rectangle = pygame.Rect(
+                                   self.position.x - (width/2),
+                                    self.position.y - (height/2),
+                                    width,
+                                    height)
+            super().update()
