@@ -6,14 +6,14 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [800, 400]
 BACKGROUND_COLOR = [255, 255, 255]
 BLOCK_WIDTH = 100
 BLOCK_HEIGHT = 25
 TOTAL_BLOCKS = 8
-BLOCK_STARTING_POS = [55,25]
-BLOCK_ROWS = 1
-BLOCK_COLS = 6
+BLOCK_STARTING_POS = [85,25]
+BLOCK_ROWS = 3
+BLOCK_COLS = 7
 BLOCK_SPACING = 5
 
 def debug_create_objects(object_list):
@@ -29,8 +29,7 @@ def debug_create_objects(object_list):
     for i in range(BLOCK_ROWS):
         for j in range(BLOCK_COLS):
             rand_color = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
-            block = KineticBlock(Vector2(x, y), BLOCK_WIDTH, BLOCK_HEIGHT, rand_color)
-    
+            block = KineticBlock(Vector2(x, y), BLOCK_WIDTH, BLOCK_HEIGHT, rand_color)    
             object_list.append(block)
             x += BLOCK_WIDTH + BLOCK_SPACING
         x = BLOCK_STARTING_POS[0]
