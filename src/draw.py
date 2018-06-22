@@ -37,10 +37,10 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            print('move block left') #update block
+            #print('move block left') #update block
             pass
         if keys[pygame.K_RIGHT]:
-            print('move block right') #update block
+            #print('move block right') #update block
             pass
 
         for object in object_list:
