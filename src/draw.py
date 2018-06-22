@@ -16,7 +16,7 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(200,460), 100, 25, [0, 0, 255])
     object_list.append(block)
   
 def main():
@@ -27,8 +27,10 @@ def main():
     clock = pygame.time.Clock()
  
     object_list = [] # list of objects of all types in the toy
-    
+
     debug_create_objects(object_list)
+
+    block = object_list[1]
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
@@ -37,6 +39,7 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
+            block.update(move = 'left')
             pass
         if keys[pygame.K_RIGHT]:
             # Do something
