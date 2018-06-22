@@ -22,6 +22,11 @@ def debug_create_objects(object_list):
     object_list.append(block)
 
 
+def fill_game_board(object_list):
+    paddle = Paddle(Vector2(200, 780), 20, 5, [0, 0, 255], SCREEN_SIZE[0])
+    object_list.append(paddle)
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -31,7 +36,7 @@ def main():
 
     object_list = []  # list of objects of all types in the toy
 
-    debug_create_objects(object_list)
+    fill_game_board(object_list)
 
     while True:  # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
@@ -41,10 +46,11 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            object_list[0].moveLeft = True
+
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            object_list[0].moveRight = True
 
         for object in object_list:
             object.update()
