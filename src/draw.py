@@ -10,20 +10,20 @@ from paddle import *
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
-pygame.init()
-allsprites = pygame.sprite.Group()
-
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
                        Vector2(random.randint(
                            20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                       Vector2(4*random.random() - 2, 4*random.random() - 2),
-                       [255, 10, 0], 20)
+                       Vector2(4*random.random() - 2, 28*random.random() - 2),
+                       [255, 10, 0], 10)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(100, 0), 100, 50, [0, 0, 255])
     object_list.append(block)
+
+    block2 = KineticBlock(Vector2(200, 0), 100, 50, [0, 255, 0])
+    object_list.append(block2)
 
     paddle = Paddle()
     object_list.append(paddle)
