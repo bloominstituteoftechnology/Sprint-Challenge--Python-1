@@ -57,13 +57,8 @@ def main():
         for ball in object_list:
             if not (issubclass(type(ball), BreakableBlock) and ball.should_draw == False):
                 ball.draw(screen, pygame)
-            # if issubclass(type(ball), BreakableBlock):
-            #     if ball.should_draw == False:
-            #         print("dont draw")
-            #     else:
-            #         ball.draw(screen, pygame)    
-            # else:
-            #     ball.draw(screen, pygame)
+            else:
+                object_list.pop(object_list.index(ball))
                 
         clock.tick(60)
         pygame.display.flip()
