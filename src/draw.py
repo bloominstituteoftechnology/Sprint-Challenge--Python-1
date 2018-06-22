@@ -1,4 +1,4 @@
-import pygame  # TODO:  Fix intellisense
+import pygame
 import random
 import sys
 
@@ -43,14 +43,14 @@ def main():
 
     while True:  # TODO:  Create more elegant condition for loop
         ball = object_list[0]
-            paddle = object_list[-1]
+        paddle = object_list[-1]
 
-            if ball.dropped_count > 2:
+        if ball.dropped_count > 2:
+            sys.exit()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 sys.exit()
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
