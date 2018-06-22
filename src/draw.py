@@ -7,7 +7,7 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [400, 800]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [0, 0, 0]
 
 
 def debug_create_objects(object_list):
@@ -20,6 +20,9 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    paddle = Paddle(Vector2(200, 400), 100, 50, [57, 255, 20])
+    object_list.append(paddle)
 
 
 def main():
@@ -42,6 +45,7 @@ def main():
         if keys[pygame.K_LEFT]:
             # Do something
             pass
+            # object_list[2].
         if keys[pygame.K_RIGHT]:
             # Do something
             pass
