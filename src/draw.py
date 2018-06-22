@@ -8,11 +8,12 @@ from block import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
+DIFFICULTY = 5
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(300, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.randint(1, 2) - 2, 4*random.randint(1, 2) - 2), # velocity
+                                    Vector2(DIFFICULTY, DIFFICULTY),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
