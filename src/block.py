@@ -50,9 +50,9 @@ class Paddle(KineticBlock):
 
     def update(self, **kwargs):
         for key in kwargs:
-            print(f"{key}  {kwargs[key]}")
+            # print(f"{key}  {kwargs[key]}")
             self.position.x = kwargs[key]
-            print(self.rectangle[1])
+            # print(self.rectangle[1])
             width = self.rectangle[2] / 2
             self.rectangle[0] = self.position.x - width
             # self.rectangle = pygame.Rect(

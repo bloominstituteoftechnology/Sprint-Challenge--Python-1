@@ -49,15 +49,15 @@ def main():
 
         if keys[pygame.K_LEFT]:
             # Do something
-            print(object_list[1].position)
+            # print(object_list[1].position)
             if not object_list[1].position[0] <= 0:
                 newX = object_list[1].position[0] - 5
-                print(newX)
+                # print(newX)
                 object_list[1].update(x=newX)
 
         if keys[pygame.K_RIGHT]:
             # Do something
-            print(object_list[1].position)
+            # print(object_list[1].position)
 
             if not object_list[1].position[0] >= SCREEN_SIZE[0]:
                 newX = object_list[1].position[0] + 5
