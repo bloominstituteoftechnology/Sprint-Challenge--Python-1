@@ -5,6 +5,7 @@ from pygame.math import Vector2
 
 from ball import *
 from block import *
+from paddle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -18,6 +19,9 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    paddle = KineticPaddle(Vector2(320, 450), 100, 20, [128, 0, 128])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -37,10 +41,10 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            print('Left pressed')
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            print('Right pressed')
 
         for object in object_list:
             object.update()

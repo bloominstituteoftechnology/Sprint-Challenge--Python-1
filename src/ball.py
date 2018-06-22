@@ -4,6 +4,7 @@ from pygame.math import Vector2
 from pygame import Rect
 
 from block import KineticBlock
+from paddle import KineticPaddle
 
 class Ball:
     """
@@ -165,5 +166,10 @@ class GameBall(Ball):
             # Balls colliding with blocks
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
+                if self.collision_rectangle.colliderect(object.rectangle):
+                    self.collide_with_rectangle(object)
+            # Balls colliding with paddle
+            if issubclass(type(object), KineticPaddle) and object != self:
+                # Do a first round pass for collision (we know object is a KineticPaddle)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
