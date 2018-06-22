@@ -23,6 +23,11 @@ class Block:
     def update(self, **kwargs):
         self.touched_by_ball = False
 
+        for key in kwargs:
+            if key == 'mov' and kwargs[key] == 'left':
+                self.rectangle.x = self.rectangle.x + 10;     
+
+
     def check_collision(self):
         pass
 
