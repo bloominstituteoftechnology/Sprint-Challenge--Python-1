@@ -12,15 +12,17 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(8*random.random() - 2, 8*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,470), 100, 20, [0, 0, 255])
-    object_list.append(block)
-  
-    breakable_block = BreakableBlock(Vector2(50,30), 100, 20, [0, 255, 0])
-    object_list.append(breakable_block)
+    paddle = Paddle(Vector2(200,470), 100, 20, [0, 0, 255])
+    object_list.append(paddle)
+    
+    for i in range(6):
+        breakable_block = BreakableBlock(Vector2(50 + i*102 + 10,30), 100, 20, [0, 255, 0])
+        object_list.append(breakable_block)
+        
 
 def main():
     pygame.init()

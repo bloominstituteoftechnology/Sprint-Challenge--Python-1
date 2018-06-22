@@ -31,11 +31,7 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
-    def update(self, **kwargs):
-        self.touched_by_ball = False
-        mouse_pos = pygame.mouse.get_pos()
-        self.position.x = mouse_pos[0]
-        self.rectangle[0] = mouse_pos[0] - self.width/2
+    pass
 
 class BreakableBlock(KineticBlock):
     def __init__(self, position, width, height, color):
@@ -45,3 +41,9 @@ class BreakableBlock(KineticBlock):
     def get_hit(self):
         self.should_draw = False
 
+class Paddle(KineticBlock):
+    def update(self, **kwargs):
+        self.touched_by_ball = False
+        mouse_pos = pygame.mouse.get_pos()
+        self.position.x = mouse_pos[0]
+        self.rectangle[0] = mouse_pos[0] - self.width/2
