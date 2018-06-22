@@ -17,7 +17,6 @@ class Block:
                                     width,
                                     height)
         self.color = color
-    
         self.touched_by_ball = False
 
 
