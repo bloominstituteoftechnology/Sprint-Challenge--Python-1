@@ -19,6 +19,9 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
+    paddle = KineticPaddle(Vector2(PADDLE_X, PADDLE_Y), 100, 20, [128, 0, 128])
+    object_list.append(paddle)
+  
     x = 100
     y = 150
     for i in range(5):
@@ -29,9 +32,6 @@ def debug_create_objects(object_list):
         x = 100
         y -= 30
 
-    paddle = KineticPaddle(Vector2(PADDLE_X, PADDLE_Y), 100, 20, [128, 0, 128])
-    object_list.append(paddle)
-  
 def main():
     global PADDLE_X
     pygame.init()
@@ -45,18 +45,15 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
-        # print(PADDLE_X)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-        
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            print('left pressed')
-            PADDLE_X -= 1
+            object_list[1].move_left()
 
         if keys[pygame.K_RIGHT]:
-            print('right pressed')
-            PADDLE_X += 1
+            object_list[1].move_right()
 
         for object in object_list:
             object.update()
@@ -66,6 +63,8 @@ def main():
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
+        for paddle in object_list:
+            paddle.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()

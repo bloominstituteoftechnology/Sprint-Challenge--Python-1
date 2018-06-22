@@ -3,6 +3,9 @@ import pygame
 from pygame.math import Vector2
 from pygame import Rect
 
+SCREEN_SIZE = [640, 480]
+MOVE_INCREMENT = 2
+
 class Paddle:
     """
     Base class for square or rectangular object
@@ -18,6 +21,8 @@ class Paddle:
                                     height)
         self.color = color
         self.touched_by_ball = False
+        self.width = width
+        self.height = height
 
 
     def update(self, **kwargs):
@@ -28,6 +33,25 @@ class Paddle:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+
+    def move_left(self):
+        if self.position.x > (self.width / 2) + (MOVE_INCREMENT // 2):
+            self.position.x -= MOVE_INCREMENT
+            self.rectangle = pygame.Rect(
+                            self.position.x - (self.width/2),
+                            self.position.y - (self.height/2),
+                            self.width,
+                            self.height)
+
+
+    def move_right(self):
+        if self.position.x < SCREEN_SIZE[0] - (self.width / 2) - (MOVE_INCREMENT // 2):
+            self.position.x += MOVE_INCREMENT
+            self.rectangle = pygame.Rect(
+                            self.position.x - (self.width/2),
+                            self.position.y - (self.height/2),
+                            self.width,
+                            self.height)
 
 class KineticPaddle(Paddle):
     # No custom code needed here, just want to be able to differentiate
