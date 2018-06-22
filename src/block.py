@@ -13,7 +13,7 @@ class Block:
         # Create a rectangle centered around the x and y
         self.position = position
         self.rectangle = pygame.Rect(
-            position.x - (width),
+            position.x - (width/2),
             position.y - (height/2),
             width,
             height)
