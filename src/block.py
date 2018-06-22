@@ -46,12 +46,30 @@ class Paddle(KineticBlock):
         super().__init__(position, width, height, color)
 
 
-    def move(self, direction, width):
-        print(1)
-        if direction == 'left' and self.position.x > 0:
-            self.position = Vector2(self.position.x - 1, self.position.y)
-        if direction == 'right' and self.position.x < width:
-            self.position = Vector2(self.position.x + 1, self.position.y)
+    def update(self):
+        if self.left == True:
+            self.position.x = (self.position.x - 3) if self.position.x > 30 else 30 #TODO: dynamic min
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
+        if self.right == True:
+            self.position.x = (self.position.x + 3) if self.position.x < 370 else 370 #TODO: dynamic max
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
+        self.left = False
+        self.right = False
+        super().update()
+    
+    def move_left(self):
+        self.left = True
+
+    def move_right(self):
+        self.right = True
 
 class Weak_Block(KineticBlock):
     def __init__(self, position, width, height, color):
