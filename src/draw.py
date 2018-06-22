@@ -32,7 +32,7 @@ def fill_game_board(object_list):
     object_list.append(paddle)
 
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
-                       Vector2(int(SCREEN_SIZE[0]/2), 780),
+                       Vector2(int(SCREEN_SIZE[0]/2), SCREEN_SIZE[1]-50),
                        Vector2(ballVelocity, ballVelocity),
                        [255, 10, 0], 5)
     object_list.append(kinetic)
