@@ -13,7 +13,7 @@ class Block:
         # Create a rectangle centered around the x and y
         self.position = position
         self.rectangle = pygame.Rect(
-            position.x - (width/2),
+            position.x - (width),
             position.y - (height/2),
             width,
             height)
@@ -52,6 +52,14 @@ class Paddle(KineticBlock):
         for key in kwargs:
             print(f"{key}  {kwargs[key]}")
             self.position.x = kwargs[key]
+            print(self.rectangle[1])
+            width = self.rectangle[2] / 2
+            self.rectangle[0] = self.position.x - width
+            # self.rectangle = pygame.Rect(
+            #     position.x - (width/2),
+            #     position.y - (height/2),
+            #     width,
+            #     height)
         super().update()
 
     def check_collision(self):

@@ -43,6 +43,9 @@ def main():
                 sys.exit()
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            object_list[0].velocity[1] += 1
+
         if keys[pygame.K_LEFT]:
             # Do something
             print(object_list[1].position)
