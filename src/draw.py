@@ -23,6 +23,10 @@ def debug_create_objects(object_list):
 
 
 def fill_game_board(object_list):
+    blockWidth = 50
+    blockHeight = 20
+    buffer = 20
+
     paddle = Paddle(Vector2(200, 780), 200, 5, [0, 0, 255], SCREEN_SIZE[0])
     object_list.append(paddle)
 
@@ -32,6 +36,12 @@ def fill_game_board(object_list):
                        Vector2(4, 4),
                        [255, 10, 0], 5)
     object_list.append(kinetic)
+
+    # Generate random blocks
+    for y in range(int((SCREEN_SIZE[1] - 100)/(blockHeight+buffer))):
+        block = KineticBlock(Vector2(random.randint(
+            0, SCREEN_SIZE[0]), y*(blockHeight+buffer)), blockWidth, blockHeight, [0, 0, 255])
+        object_list.append(block)
 
 
 def main():
