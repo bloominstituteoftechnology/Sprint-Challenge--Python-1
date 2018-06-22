@@ -4,7 +4,7 @@ from pygame.math import Vector2
 from pygame import Rect
 
 SCREEN_SIZE = [640, 480]
-MOVE_INCREMENT = 2
+PADDLE_MOVE_INCREMENT = 3
 
 class Paddle:
     """
@@ -35,8 +35,8 @@ class Paddle:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
     def move_left(self):
-        if self.position.x > (self.width / 2) + (MOVE_INCREMENT // 2):
-            self.position.x -= MOVE_INCREMENT
+        if self.position.x > (self.width / 2) + (PADDLE_MOVE_INCREMENT // 2):
+            self.position.x -= PADDLE_MOVE_INCREMENT
             self.rectangle = pygame.Rect(
                             self.position.x - (self.width/2),
                             self.position.y - (self.height/2),
@@ -45,8 +45,8 @@ class Paddle:
 
 
     def move_right(self):
-        if self.position.x < SCREEN_SIZE[0] - (self.width / 2) - (MOVE_INCREMENT // 2):
-            self.position.x += MOVE_INCREMENT
+        if self.position.x < SCREEN_SIZE[0] - (self.width / 2) - (PADDLE_MOVE_INCREMENT // 2):
+            self.position.x += PADDLE_MOVE_INCREMENT
             self.rectangle = pygame.Rect(
                             self.position.x - (self.width/2),
                             self.position.y - (self.height/2),

@@ -1,5 +1,6 @@
 import pygame #TODO:  Fix intellisense
 import random
+from random import randint
 
 from pygame.math import Vector2
 
@@ -10,27 +11,39 @@ from paddle import *
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 PADDLE_X = 320
-PADDLE_Y = 450
+PADDLE_Y = 460
+PADDLE_WIDTH = 70
+PADDLE_HEIGHT = 16
+PADDLE_COLOR = [randint(64,255), randint(64,255), randint(64,255)]
+BALL_RADIUS = 10
+BRICKS_PER_ROW = 5
+BRICKS_PER_COLUMN = 6
+BRICK_WIDTH = 100
+BRICK_HEIGHT = 25
+BRICK_SPACING = 5
+BRICK_START_X = 100
+BRICK_START_Y = BRICK_SPACING + (BRICKS_PER_COLUMN * (BRICK_HEIGHT + BRICK_SPACING))
+BRICK_COLOR = [randint(64,255), randint(64,255), randint(64,255)]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    Vector2(6*random.random() - 2, 6*random.random() - 2),
+                                    [255, 10, 0], BALL_RADIUS)
     object_list.append(kinetic)
 
-    paddle = KineticPaddle(Vector2(PADDLE_X, PADDLE_Y), 100, 20, [128, 0, 128])
+    paddle = KineticPaddle(Vector2(PADDLE_X, PADDLE_Y), PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_COLOR)
     object_list.append(paddle)
-  
-    x = 100
-    y = 150
-    for i in range(5):
-        for j in range(5):
-            block = KineticBlock(Vector2(x,y), 100, 25, [0, 0, 255])
-            x += 105
+    
+    x = BRICK_START_X
+    y = BRICK_START_Y
+    for i in range(BRICKS_PER_COLUMN):
+        for j in range(BRICKS_PER_ROW):
+            block = KineticBlock(Vector2(x,y), BRICK_WIDTH, BRICK_HEIGHT, BRICK_COLOR)
+            x += BRICK_WIDTH + BRICK_SPACING
             object_list.append(block)
-        x = 100
-        y -= 30
+        x = BRICK_START_X
+        y -= (BRICK_HEIGHT + BRICK_SPACING)
 
 def main():
     global PADDLE_X
@@ -63,8 +76,8 @@ def main():
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
-        for paddle in object_list:
-            paddle.draw(screen, pygame)
+        # for paddle in object_list:
+        #     paddle.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()
