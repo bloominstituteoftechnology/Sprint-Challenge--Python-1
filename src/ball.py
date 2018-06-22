@@ -133,6 +133,8 @@ class GameBall(Ball):
                     self.position.y = object.position.y - object.rectangle.height/2 - self.radius - 1
                 else:
                     self.position.y = object.position.y + object.rectangle.height/2 + self.radius + 1
+            
+            # del self.object_list[self.object_list.index(object)]
 
         elif test == 4:
             # TODO:  Better error handling
@@ -167,3 +169,6 @@ class GameBall(Ball):
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
+                    if object.touched_by_ball:
+                        del self.object_list[self.object_list.index(object)]
+
