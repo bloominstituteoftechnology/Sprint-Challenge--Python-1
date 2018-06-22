@@ -1,3 +1,4 @@
+import sys
 import math
 
 from pygame.math import Vector2
@@ -55,6 +56,26 @@ class GameBall(Ball):
         self.object_list = object_list
         self.mass = mass
         super().__init__(bounds, position, velocity, color, radius)
+
+    def update(self, **kwargs):
+        # TODO: Look into way to remove repeated lines without affecting program
+        if self.position.x <= 0 + self.radius: # screen width
+            self.position.x = self.radius + 1
+            self.velocity.x *= -1
+        if self.position.x >= self.bounds[0] - self.radius:
+            self.position.x = self.bounds[0] - self.radius - 1
+            self.velocity.x *= -1
+        if self.position.y <= 0 + self.radius: # screen height
+            self.position.y = self.radius + 1
+            self.velocity.y *= -1
+
+        # If GameBall reaches screen bottom, exit game
+        if self.position.y >= self.bounds[1] - self.radius:
+            self.velocity.y = 0
+            sys.exit()
+
+        self.position += self.velocity
+        self.collision_rectangle = self.update_rectangle()
 
     def collide_with_ball(self, object, relative_vector):
 
