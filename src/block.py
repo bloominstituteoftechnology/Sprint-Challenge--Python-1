@@ -19,6 +19,8 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
+    def move_left(self): 
+        self.position.x += 5
 
     def update(self, **kwargs):
         self.touched_by_ball = False
