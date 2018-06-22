@@ -6,10 +6,8 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
-WIDTH = 400
-HEIGHT = 800
 VELOCITY = 4
 X = 200
 Y = 200
@@ -25,6 +23,7 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
   
+  paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1] -50), 100, 25, [128,128,128])
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -44,7 +43,7 @@ def main():
         if keys[pygame.K_LEFT]:
             # Do something
     
-             X -= VELOCITY
+             
            pass
         if keys[pygame.K_RIGHT]:
             # Do something         
