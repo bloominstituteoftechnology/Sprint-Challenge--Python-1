@@ -37,7 +37,7 @@ def main():
 
     debug_create_objects(object_list)
 
-    while True:  # TODO:  Create more elegant condition for loop
+    while len(object_list) > 2:  # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -77,9 +77,9 @@ def main():
                     object.draw(screen, pygame)
             object.draw(screen, pygame)
 
-        if len(object_list) == 2:
-            print("Game Over! YOU WIN!")
-            pygame.quit()
+        # if len(object_list) == 2:
+        #     print("Game Over! YOU WIN!")
+        #     pygame.quit()
 
         clock.tick(60)
         pygame.display.flip()
