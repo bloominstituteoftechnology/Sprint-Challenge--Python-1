@@ -9,6 +9,13 @@ from block import *
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [0, 0, 0]
 # BALL_SPEED = 50
+GAME_BLOCK_COLOR = [50,50,50]
+
+# TODO: random RGB color generator for Blocks to be Destroyed
+def rgb_color():
+   return [random.randint(0, 255),random.randint(0, 255),random.randint(0, 255)]
+    
+
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, 
@@ -18,12 +25,35 @@ def debug_create_objects(object_list):
                                     # velocity
                                     # Two random numbers between -2 and 2 -- Why would you randomize the velocity?
                                     Vector2(-2, 2), # was `4*random.random() - 2`
-                                    [255, 255, 255], # color
+                                    rgb_color(), # color
                                     10) # radius
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,790), 100, 20, [255, 0, 0])
+    # User Block
+    block = KineticBlock(Vector2(200,790), 100, 20, rgb_color())
     object_list.append(block)
+
+    # Blocks to be Destroyed by User
+    dblock_0 = KineticBlock(Vector2(0,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_1 = KineticBlock(Vector2(25,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_2 = KineticBlock(Vector2(75,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_3 = KineticBlock(Vector2(125,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_4 = KineticBlock(Vector2(175,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_5 = KineticBlock(Vector2(225,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_6 = KineticBlock(Vector2(275,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_7 = KineticBlock(Vector2(325,10), 50, 20, GAME_BLOCK_COLOR)
+    dblock_8 = KineticBlock(Vector2(375,10), 50, 20, GAME_BLOCK_COLOR)
+    object_list.append(dblock_0)
+    object_list.append(dblock_1)
+    object_list.append(dblock_2)
+    object_list.append(dblock_3)
+    object_list.append(dblock_4)
+    object_list.append(dblock_5)
+    object_list.append(dblock_6)
+    object_list.append(dblock_7)
+    object_list.append(dblock_8)
+
+
   
 def main():
     pygame.init()
