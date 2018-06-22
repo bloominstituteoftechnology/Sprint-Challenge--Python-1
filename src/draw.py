@@ -16,7 +16,7 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    player = PlayerBlock(Vector2(200, 100), 200, 50, [0,255,0])
+    player = PlayerBlock(Vector2(200, 440), 200, 50, [0,255,0])
     print(Vector2(200,100))
     object_list.append(player)
 
@@ -42,14 +42,15 @@ def main():
         if keys[pygame.K_LEFT]:
             # Do something
             object_list[1].moveLeft(5)
-            object_list[1]
             object.update()
             object_list[1].draw(screen, pygame)
-            print(object_list[1].position)
+            print(object_list[1].__dict__)
             pass
         if keys[pygame.K_RIGHT]:
             # Do something
-            object_list[1].moveRight(50)
+            object_list[1].moveRight(5)
+            object.update()
+            print(object_list[1].__dict__)
             pass
 
         for object in object_list:

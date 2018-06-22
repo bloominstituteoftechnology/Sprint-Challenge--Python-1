@@ -52,9 +52,15 @@ class PlayerBlock(Block):
 
     def moveRight(self, position):
         self.position.x += position
+        self.rectangle[0] += position
+        return self.position.x
 
     def moveLeft(self, position):
         self.position.x -= position
+        self.rectangle[0] -= position
+        print(self.rectangle[0])
+    
+        return self.position.x
 
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
