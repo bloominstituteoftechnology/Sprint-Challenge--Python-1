@@ -89,7 +89,9 @@ class Strong_Block(KineticBlock):
     def update(self):
         if self.touched_by_ball == True:
             self.hp -= 1
-            if self.hp < 0:
-                object_list.remove(self)
+            if self.hp == 1:
+                self.color = [0, 0, 0]
+            if self.hp < 1:
+                self.object_list.remove(self)
         super().update()
 

@@ -22,7 +22,7 @@ def debug_create_objects(object_list):
     for i in range(5):
         color = [random.randint(100, 250), random.randint(100, 250), random.randint(100, 250)]
         for j in range(3):
-            block = Weak_Block(Vector2(52 + (i*74),100 + (j* 40)), 70, 30, color, object_list)
+            block = Strong_Block(Vector2(52 + (i*74),100 + (j* 40)), 70, 30, color, object_list)
             object_list.append(block)
   
 def main():
