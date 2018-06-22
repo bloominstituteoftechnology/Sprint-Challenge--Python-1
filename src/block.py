@@ -44,4 +44,48 @@ class Paddle(KineticBlock):
         if direction == 'right':
             self.position.x + 1
 '''
-    pass
+    SPEED = 3
+    def update(self, **input):
+        self.left = input['left']
+        self.right = input['right']
+
+        if self.left:
+            self.position.x -= SPEED
+            #TODO: add screen bounds
+        if self.right:
+            self.position.y += SPEED
+            #TODO: add screen bounds
+        self.rectangle = pygame.Rect(
+                                    self.position.x - (self.rectangle.width/2),
+                                    self.position.y - (self.rectangle.height/2),
+                                    self.rectangle.width,
+                                    self.rectangle.height)
+        
+        super().update()
+
+class BreakableBlock(KineticBlock):
+    # how is this different?
+    # a block that the ball bounces off of, that vanishes after the ball touches it 
+    # if touched_by_ball = true then remove from object_lists list
+    # to do this here, we need two things 1, we need to be able to see object_list
+    # two, we need a different update that will make this happen 
+
+    def update(self, **kwargs):
+        if(self.touched_by_ball):
+            # remove from the list
+            kwargs['object_list'].pop(kwargs['object_list'].index(self))
+
+class StrongBlock(BreakableBlock):
+    def __init__(self, strength, position, width, height, color):
+        self.strength = strength
+        super().__init__(position, width, height, color)
+
+    def update(self, **kwargs):
+        self.strength -= 1
+        if self.touched_by_ball:
+            self.strength -= 1
+            self.color = [255, 0, 0] #TODO: fix lazy hack 
+            if self.strength <= 0:
+                super.update(object_list=kwargs['object_list'])
+            else:
+                self.touched_by_ball = False
