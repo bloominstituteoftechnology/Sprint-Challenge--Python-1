@@ -18,15 +18,17 @@ def debug_create_objects(object_list):
                        [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    vx = 40
+    block_array = []
+    vx = 43
     vy = 25
 
-    for row in range(6):
-        vy += 25
-        for block in range(5):
-            vx += 78
-            block = KineticBlock(Vector2(vx, vy), 70, 30, [0, 0, 255])
-            object_list.append(block)
+    for i in range(30):
+        block = KineticBlock(Vector2(vx, vy), 70, 30, [0, 0, 255])
+        object_list.append(block)
+        vx += 78
+        if vx > 360:
+            vx = 43
+            vy += 35
 
     # block = KineticBlock(Vector2(40, 25), 70, 30, [0, 0, 255])
     # object_list.append(block)
