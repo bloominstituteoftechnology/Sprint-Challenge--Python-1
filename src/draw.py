@@ -21,7 +21,7 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
-    paddle = KinecticPaddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 30), 70, 15, [255, 0, 255])
+    paddle = KineticPaddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 30), 100, 15, [255, 0, 255])
     object_list.append(paddle)
 
 def main():
@@ -41,7 +41,7 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            object_list[2].position -= 5
+            # print(object_list[2])
             pass
             
         if keys[pygame.K_RIGHT]:
