@@ -32,19 +32,24 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
+        left = False
+        right = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             #print('move block left') #update block
+            left = True
             pass
         if keys[pygame.K_RIGHT]:
             #print('move block right') #update block
+            right = True
             pass
 
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right, pygame=pygame)
             object.check_collision()
  
         # Draw Updates
