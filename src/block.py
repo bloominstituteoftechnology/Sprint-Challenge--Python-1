@@ -27,6 +27,8 @@ class Block:
         pass
 
     def draw(self, screen, pygame):
+        #screen.fill((255, 255, 255))
+        #self.rect = self.rect.move(width=self.dist, height=self.dist)
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
