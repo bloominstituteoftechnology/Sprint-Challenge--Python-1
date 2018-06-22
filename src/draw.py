@@ -23,8 +23,15 @@ def debug_create_objects(object_list):
 
 
 def fill_game_board(object_list):
-    paddle = Paddle(Vector2(200, 780), 20, 5, [0, 0, 255], SCREEN_SIZE[0])
+    paddle = Paddle(Vector2(200, 780), 200, 5, [0, 0, 255], SCREEN_SIZE[0])
     object_list.append(paddle)
+
+    kinetic = GameBall(1, object_list, SCREEN_SIZE,
+                       Vector2(random.randint(
+                           20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                       Vector2(4, 4),
+                       [255, 10, 0], 5)
+    object_list.append(kinetic)
 
 
 def main():
@@ -37,7 +44,7 @@ def main():
     object_list = []  # list of objects of all types in the toy
 
     fill_game_board(object_list)
-
+    # debug_create_objects(object_list)
     while True:  # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

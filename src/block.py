@@ -32,17 +32,11 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 
-class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
-    pass
-
-
 class Paddle(Block):
     def __init__(self, position, width, height, color, canvasWidth):
         self.moveLeft = False
         self.moveRight = False
-        self.speed = 10
+        self.speed = 5
         self.canvasWidth = canvasWidth
         super().__init__(position, width, height, color)
 
@@ -61,3 +55,11 @@ class Paddle(Block):
             self.width,
             self.height)
         super().update()
+
+
+class KineticBlock(Block):
+    # No custom code needed here, just want to be able to differentiate
+    # KineticBall will handle the collison
+    # def __init__(self, position, width, height, color):
+    #     super().__init__(position, width, height, color)
+    pass
