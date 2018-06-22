@@ -23,8 +23,8 @@ def debug_create_objects(object_list):
 
     object_list.append(kinetic)
 
-    for y in range(12):
-        for x in range(12):
+    for y in range(10):
+        for x in range(15):
             block = KineticBlock(Vector2(x * 30, y * 30),
                                  20, 20, [0, 0, 255])
             object_list.append(block)
@@ -43,7 +43,7 @@ def main():
 
     debug_create_objects(object_list)
 
-    print(object_list[0].__dict__)
+    # print(object_list[0].__dict__)
 
     while True:  # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
