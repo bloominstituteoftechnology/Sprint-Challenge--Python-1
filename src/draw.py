@@ -18,6 +18,8 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+    # paddle = Paddle(Vector2(100, 770), 100, 20, [0, 255, 255]) # what does vector2 do?
+    # object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -30,18 +32,26 @@ def main():
     
     debug_create_objects(object_list)
 
-    paddle = Block(Vector2(100, 770), 100, 20, [0, 255, 255]) # what does vector2 do?
+    paddle = Paddle(Vector2(100, 770), 100, 20, [0, 255, 255]) # what does vector2 do?
     object_list.append(paddle)
- 
+
+    print(paddle.position.x)
+
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.paddle.move_ip(0, -1) # paddle is made in a different function, not available
+            #paddle.move_ip(0, -1)
+            paddle.position.x -= 5
+            print(paddle.position.x) # This is working (changes the x coordinate) but the paddle is not updating
+            # pass
         if keys[pygame.K_RIGHT]:
-            self.paddle.move_ip(0, 1)
+            #paddle.move_ip(0, 1)
+            paddle.position.x += 5
+            print(paddle.position.x) # This is working (changes the x coordinate) but the paddle is not updating
+            # pass
 
         for object in object_list:
             object.update()
@@ -51,6 +61,8 @@ def main():
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
+        for paddle in object_list:
+            paddle.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()

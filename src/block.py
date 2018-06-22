@@ -34,4 +34,9 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(Block):
+    # def move(self, x,):
+    #     self.rect.x = x
+    #     self.rect.y = y
+    pass
 
