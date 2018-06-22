@@ -1,3 +1,7 @@
+import pygame
+
+from pygame.math import Vector2
+from pygame import Rect
 class Paddle:
     def __init__(self, x, y, clr, vel):
         self.x = x
