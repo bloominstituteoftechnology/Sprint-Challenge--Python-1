@@ -69,7 +69,10 @@ def main():
             # Do something
             object_list[0].moveRight = True
 
-        for object in object_list:
+        for index, object in enumerate(object_list):
+            if hasattr(object, 'touched_by_ball'):
+                if object.touched_by_ball:
+                    del object_list[index]
             object.update()
             object.check_collision()
 
