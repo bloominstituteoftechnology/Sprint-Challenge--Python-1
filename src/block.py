@@ -8,7 +8,7 @@ class Block:
     Base class for square or rectangular object
     """
 
-    def __init__(self, position, width, height, color):
+    def __init__(self, position, width, height, color, paddle):
         # Create a rectangle centered around the x and y
         self.position = position
         self.rectangle = pygame.Rect(
@@ -17,6 +17,7 @@ class Block:
                                     width,
                                     height)
         self.color = color
+        self.paddle = paddle
         self.touched_by_ball = False
 
 
@@ -27,7 +28,9 @@ class Block:
         pass
 
     def draw(self, screen, pygame):
-        pygame.draw.rect(screen, self.color, self.rectangle)
+        paddle = pygame.rect.Rect((self.rectangle))
+        pygame.draw.rect(screen, self.color, self.rectangle, paddle)
+
 
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
