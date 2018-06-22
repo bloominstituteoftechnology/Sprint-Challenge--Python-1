@@ -8,6 +8,10 @@ from block import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
+#PAD_HEIGHT = 80
+#PAD_WIDTH = 8
+#HALF_PAD_HEIGHT = PAD_HEIGHT / 2
+#HALF_PAD_WIDTH = PAD_WIDTH / 2
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -18,6 +22,8 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    #pygame.draw.polygon(canvas, GREEN, [[paddle1_pos[0] - HALF_PAD_WIDTH, paddle1_pos[1] - HALF_PAD_HEIGHT], [paddle1_pos[0] - HALF_PAD_WIDTH, paddle1_pos[1] + HALF_PAD_HEIGHT], [paddle1_pos[0] + HALF_PAD_WIDTH, paddle1_pos[1] + HALF_PAD_HEIGHT], [paddle1_pos[0] + HALF_PAD_WIDTH, paddle1_pos[1] - HALF_PAD_HEIGHT]], 0)
   
 def main():
     pygame.init()
@@ -37,10 +43,24 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            if count == 10:
+                location -= 1
+                count = 0
+            else:
+                count += 1
+            if location == -1:
+                location = 0
+            # pass
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            if count == 10: 
+                location += 1
+                count = 0
+            else:
+                count += 1
+            if location == 5:
+                location = 4
+            # pass
 
         for object in object_list:
             object.update()
