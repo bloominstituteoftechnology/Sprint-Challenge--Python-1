@@ -34,3 +34,43 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
+
+class Paddle(KineticBlock):
+    def move_left(self):
+        pace = 10
+
+        # Update x position
+        # Check for bounds conflict
+        if self.position.x - pace < pace:
+            return
+
+        self.position.x -= pace
+
+        # Update rectangle
+        self.rectangle[0] = self.position.x
+
+    def move_right(self):
+        pace = 10
+
+        # Update x position
+        # Check for bounds conflict
+        if self.position.x + pace > 450:
+            return
+
+        self.position.x += pace
+
+        # Update rectangle
+        self.rectangle[0] = self.position.x
+
+
+class one_hit_block(KineticBlock):
+    def __init__(self, position, width, height, color):
+        self.hits = 1
+        super().__init__(position, width, height, color)
+
+
+class multiple_hit_Block(KineticBlock):
+    def __init__(self, position, width, height, color):
+        self.hits = 4
+        super().__init__(position, width, height, color)

@@ -11,6 +11,10 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
+    # my actions
+    paddle = Paddle(Vector2(200, 790), 80, 10, [0, 255, 0])
+    object_list.append(paddle)
+
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
                        Vector2(random.randint(
                            20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
@@ -19,15 +23,11 @@ def debug_create_objects(object_list):
 
     object_list.append(kinetic)
 
-    for y in range(15):
-        for x in range(15):
+    for y in range(12):
+        for x in range(12):
             block = KineticBlock(Vector2(x * 30, y * 30),
                                  20, 20, [0, 0, 255])
             object_list.append(block)
-
-    # my actions
-    paddle = KineticBlock(Vector2(200, 790), 80, 10, [0, 255, 0])
-    object_list.append(paddle)
 
     # print(object_list)
 
@@ -43,6 +43,8 @@ def main():
 
     debug_create_objects(object_list)
 
+    print(object_list[0].__dict__)
+
     while True:  # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -51,10 +53,13 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            object_list[0].move_left()
+
+            # pass
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            # pass
+            object_list[0].move_right()
 
         for object in object_list:
             object.update()
