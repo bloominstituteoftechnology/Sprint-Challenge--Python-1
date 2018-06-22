@@ -1,12 +1,13 @@
 import pygame #TODO:  Fix intellisense
 import random
+import sys
 
 from pygame.math import Vector2
 
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -36,10 +37,10 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
+            #print('move block left') #update block
             pass
         if keys[pygame.K_RIGHT]:
-            # Do something
+            #print('move block right') #update block
             pass
 
         for object in object_list:
