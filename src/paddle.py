@@ -2,6 +2,9 @@ import pygame
 
 from pygame.math import Vector2
 from pygame import Rect
+
+from block import KineticBlock
+from ball import GameBall
 class Paddle:
     def __init__(self, x, y, clr, vel):
         self.x = x
