@@ -42,11 +42,9 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            object_list[1].move('left', SCREEN_SIZE[0])
-            pass
+            object_list[1].move_left()
         if keys[pygame.K_RIGHT]:
-            object_list[1].move('right', SCREEN_SIZE[0])
-            pass
+            object_list[1].move_right()
 
         for object in object_list:
             object.update()
