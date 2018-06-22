@@ -3,7 +3,7 @@ import math
 from pygame.math import Vector2
 from pygame import Rect
 
-from block import KineticBlock
+from block import *
 from paddle import KineticPaddle
 
 class Ball:
@@ -168,3 +168,4 @@ class GameBall(Ball):
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
+                    return True
