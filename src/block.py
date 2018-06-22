@@ -18,7 +18,7 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
-
+        self.width = width
 
     def update(self, **kwargs):
         self.touched_by_ball = False
@@ -32,6 +32,8 @@ class Block:
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
+
+  pass  
+
+class Paddle(Block):
     pass
-
-
