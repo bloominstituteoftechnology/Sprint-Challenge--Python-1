@@ -20,11 +20,9 @@ class Block:
         )
         self.color = color
         self.touched_by_ball = False
-        self.key_stroke = False
 
     def update(self, **kwargs):
         self.touched_by_ball = False
-        self.key_stroke = False
 
     def check_collision(self):
         pass
@@ -40,11 +38,39 @@ class KineticBlock(Block):
 
 
 class Paddle(KineticBlock):
-    # TODO allow control of the paddle by player
-    def update(self):
+    def paddle_left(self):
+        pace = 10
 
-        if self.key_stroke == True:
-            print(self.position)
-            self.position.move(-1, 0)
-            self.key_stroke = False
-        super().update()
+        # Update x position
+        # Check for bounds conflict
+        if self.position.x - pace < pace:
+            return
+
+        self.position.x -= pace
+
+        # Update rectangle
+        self.rectangle[0] = self.position.x
+
+    def paddle_right(self):
+        pace = 10
+
+        # Update x position
+        # Check for bounds conflict
+        if self.position.x + pace > 450:
+            return
+
+        self.position.x += pace
+
+        # Update rectangle
+        self.rectangle[0] = self.position.x
+
+
+class Single_Hit_Block(KineticBlock):
+
+    def __init__(self, position, width, height, color):
+        self.hits = 1
+        super().__init__(position, width, height, color)
+
+    def check_collision(self):
+        if self.touched_by_ball == True:
+            self.hits -= 1

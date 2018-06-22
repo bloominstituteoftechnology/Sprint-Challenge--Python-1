@@ -18,34 +18,31 @@ print(BRICK_LIST)
 
 
 def debug_create_objects(object_list):
+
     kinetic = GameBall(
         1,
-        object_list, SCREEN_SIZE,
+        object_list,
+        SCREEN_SIZE,
         Vector2(random.randint(20, SCREEN_SIZE[0] - 20),
                 random.randint(20, SCREEN_SIZE[1] - 20)),
-        Vector2(4*random.random() - 2, 4*random.random() - 2),
-        [255, 10, 0], 20
+        Vector2(16*random.random() - 2, 16*random.random() - 2),
+        [255, 10, 0],
+        20
     )
-
-    object_list.append(kinetic)
-
-    # for i in range(BLOCK_COUNT):
-    #     block = KineticBlock(Vector2
-    #                          (
-    #                              # postion on screen
-    #                              ,
-    #                              ,
-    #                          50,  # width
-    #                          50,  # height
-    #                          [random.randint(0, 255), random.randint(
-    #                              0, 255), random.randint(0, 255)]  # color
-    #                          )
-
-    # object_list.append(block)
 
     paddle = Paddle(Vector2(300, 460), 175, 25, [0, 0, 255])
 
+    object_list.append(kinetic)
     object_list.append(paddle)
+
+    # for y in range(5):
+    #     for x in range(5):
+    #         block = KineticBlock(Vector2(x * 25, y * 25),
+    #                              20, 20, [0, 0, 255])
+    #         object_list.append(block)
+
+    block = Single_Hit_Block(Vector2(300, 100), 100, 100, [0, 0, 255])
+    object_list.append(block)
 
 
 def main():
@@ -65,17 +62,22 @@ def main():
                 sys.exit()
 
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_LEFT]:
-            # Do something
-            object_list[1].key_stroke = True
-            pass
+            # object_list[0].position[0] -= 1
+            object_list[1].paddle_left()
+
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            # object_list[0].position[0] += 1
+            object_list[1].paddle_right()
 
         for object in object_list:
             object.update()
             object.check_collision()
+            if hasattr(object, 'hits'):
+                if getattr(object, 'hits') <= 0:
+                    object_list.remove(object)
 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
