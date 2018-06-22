@@ -61,7 +61,7 @@ def main():
         for ball in object_list:
             ball.draw(screen, pygame)
  
-        clock.tick(200)
+        clock.tick(300)
         pygame.display.flip()
  
     # Close everything down
