@@ -28,6 +28,7 @@ class Block:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+        
 
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate

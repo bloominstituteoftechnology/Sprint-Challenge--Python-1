@@ -8,6 +8,12 @@ from block import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
+WIDTH = 400
+HEIGHT = 800
+VELOCITY = 4
+X = 200
+Y = 200
+
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -37,9 +43,13 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+    
+             X -= VELOCITY
+           pass
         if keys[pygame.K_RIGHT]:
-            # Do something
+            # Do something         
+
+            Y += VELOCITY
             pass
 
         for object in object_list:
