@@ -19,6 +19,9 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200,470), 100, 20, [0, 0, 255])
     object_list.append(block)
   
+    breakable_block = BreakableBlock(Vector2(50,30), 100, 20, [0, 255, 0])
+    object_list.append(breakable_block)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -44,8 +47,11 @@ def main():
             pass
 
         for object in object_list:
-            object.update()
-            object.check_collision()
+            if issubclass(type(object), BreakableBlock) and object.should_draw == False:
+                print('do nothing')
+            else: 
+                object.update()
+                object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)

@@ -23,8 +23,7 @@ class Block:
 
     def update(self, **kwargs):
         self.touched_by_ball = False
-        print('its happening')
-
+        
     def check_collision(self):
         pass
 
@@ -37,5 +36,14 @@ class KineticBlock(Block):
         mouse_pos = pygame.mouse.get_pos()
         self.position.x = mouse_pos[0]
         self.rectangle[0] = mouse_pos[0] - self.width/2
+
+class BreakableBlock(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.should_draw = True
+
+    def get_hit(self):
+        self.should_draw = False
+
 
 
