@@ -8,6 +8,13 @@ from block import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
+BLOCK_WIDTH = 100
+BLOCK_HEIGHT = 25
+TOTAL_BLOCKS = 8
+BLOCK_STARTING_POS = [55,25]
+BLOCK_ROWS = 1
+BLOCK_COLS = 6
+BLOCK_SPACING = 5
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -16,8 +23,18 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    # Create blocks
+    x = BLOCK_STARTING_POS[0]
+    y = BLOCK_STARTING_POS[1]
+    for i in range(BLOCK_ROWS):
+        for j in range(BLOCK_COLS):
+            rand_color = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
+            block = KineticBlock(Vector2(x, y), BLOCK_WIDTH, BLOCK_HEIGHT, rand_color)
+    
+            object_list.append(block)
+            x += BLOCK_WIDTH + BLOCK_SPACING
+        x = BLOCK_STARTING_POS[0]
+        y += BLOCK_HEIGHT + BLOCK_SPACING
   
 def main():
     pygame.init()
