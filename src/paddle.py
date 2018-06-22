@@ -25,6 +25,8 @@ class Paddle:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+        # self.rectangle.center = pygame.mouse.get_pos()
+        # pygame.mouse.set_visible(False)
 
 
 class KineticBlock(Paddle):

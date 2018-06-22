@@ -29,6 +29,7 @@ def debug_create_objects(object_list):
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption("Lambda Breakout")
 
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
@@ -44,11 +45,9 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
-            pass
+            object_list.append(paddle[x])
         if keys[pygame.K_RIGHT]:
-            # Do something
-            pass
+            print('right')
 
         for object in object_list:
             object.update()
