@@ -3,9 +3,9 @@ import pygame
 from pygame.math import Vector2
 from pygame import Rect
 
-class Block:
+class Paddle:
     """
-    Base class for square or rectangular object
+    Base class for Paddle
     """
 
     def __init__(self, position, width, height, color):
@@ -29,7 +29,9 @@ class Block:
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
 
-class KineticBlock(Block):
+class KinecticPaddle(Paddle):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
+

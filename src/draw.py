@@ -6,6 +6,7 @@ from pygame.math import Vector2
 
 from ball import *
 from block import *
+from paddle import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -20,7 +21,7 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
-    paddle = KineticBlock(Vector2(200, 200), 100, 100, [255, 0, 255])
+    paddle = KinecticPaddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 30), 70, 15, [255, 0, 255])
     object_list.append(paddle)
 
 def main():
