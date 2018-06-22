@@ -64,17 +64,23 @@ def main():
         
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            #TODO: key input is recognized but paddle isn't changing positions
-            paddle.position[0] -= 5
+            paddle.position.x -= 5
+            paddle.rectangle = pygame.Rect(
+                                    paddle.position.x,
+                                    paddle.position.y,
+                                    PADDLE_WIDTH,
+                                    PADDLE_HEIGHT)
             print(paddle.position)
-            # paddle.update()
-            # paddle.draw(screen, pygame)
             
         if keys[pygame.K_RIGHT]:
             # Do something
-            paddle.position[0] += 5
+            paddle.position.x += 5
+            paddle.rectangle = pygame.Rect(
+                                    paddle.position.x,
+                                    paddle.position.y,
+                                    PADDLE_WIDTH,
+                                    PADDLE_HEIGHT)
             print(paddle.position)
-
 
         for object in object_list:
             object.update()
