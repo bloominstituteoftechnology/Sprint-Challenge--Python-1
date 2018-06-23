@@ -34,21 +34,21 @@ def debug_create_objects(object_list):
     for i in range(5):
         block=StrongBlock(3, Vector2(20 + i * 80, 20), 40, 40, BLOCK_COLOR)
         object_list.append(block)
-    # for i in range(5):
-    #     block=StrongBlock(3, Vector2(60 + i * 80, 60), 40, 40, BLOCK_COLOR)
-    #     object_list.append(block)
-    # for i in range(5):
-    #     block=StrongBlock(3, Vector2(20 + i * 80, 100), 40, 40, BLOCK_COLOR)
-    #     object_list.append(block)
-    # for i in range(5):
-    #     block=StrongBlock(3, Vector2(60 + i * 80, 140), 40, 40, BLOCK_COLOR)
-    #     object_list.append(block)
-    # for i in range(5):
-    #     block=StrongBlock(3, Vector2(20 + i * 80, 180), 40, 40, BLOCK_COLOR)
-    #     object_list.append(block)
-    # for i in range(5):
-    #     block=StrongBlock(3, Vector2(60 + i * 80, 220), 40, 40, BLOCK_COLOR)
-    #     object_list.append(block)
+    for i in range(5):
+        block=StrongBlock(3, Vector2(60 + i * 80, 60), 40, 40, BLOCK_COLOR)
+        object_list.append(block)
+    for i in range(5):
+        block=StrongBlock(3, Vector2(20 + i * 80, 100), 40, 40, BLOCK_COLOR)
+        object_list.append(block)
+    for i in range(5):
+        block=StrongBlock(3, Vector2(60 + i * 80, 140), 40, 40, BLOCK_COLOR)
+        object_list.append(block)
+    for i in range(5):
+        block=StrongBlock(3, Vector2(20 + i * 80, 180), 40, 40, BLOCK_COLOR)
+        object_list.append(block)
+    for i in range(5):
+        block=StrongBlock(3, Vector2(60 + i * 80, 220), 40, 40, BLOCK_COLOR)
+        object_list.append(block)
             
 
     paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-50),
