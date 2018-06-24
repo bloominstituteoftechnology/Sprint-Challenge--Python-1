@@ -53,16 +53,24 @@ class Paddle(KineticBlock):
     # We need to be able to see keypresses here
 
     # Override update and make use of keyword arguements aspect:
-    SPEED = 7 # 
+    SPEED = 10 # 
     def update(self, **input): # Look into this - **kwargs and **input options???
         self.left = input['left']
         self.right = input['right']
+        self.up = input['up']
+        self.down = input['down']
         if self.left:
             self.position.x -= self.SPEED # Since this is a `class level variable`, you need `self`
             # TODO: Add screen bounds
         if self.right: 
             self.position.x += self.SPEED
             # TODO: Add screen bounds
+        if self.up:
+                self.position.y -= self.SPEED # Since this is a `class level variable`, you need `self`
+            # TODO: Add screen bounds
+        if self.down: 
+            self.position.y += self.SPEED
+            # TODO: Add screen bounds 
         self.rectangle = pygame.Rect( # move the actual rectangle.
                                     self.position.x - (self.rectangle.width/2),
                                     self.position.y - (self.rectangle.height/2),

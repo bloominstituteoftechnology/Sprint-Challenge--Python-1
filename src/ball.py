@@ -1,7 +1,7 @@
 import math
 
 from pygame.math import Vector2
-from pygame import Rect
+from pygame import Rect, mixer
 
 from block import KineticBlock
 

@@ -2,6 +2,7 @@ import pygame #TODO:  Fix intellisense
 import random
 
 from pygame.math import Vector2
+from pygame import mixer
 
 from ball import *
 from block import *
@@ -11,6 +12,8 @@ BACKGROUND_COLOR = [245, 245, 245]
 PADDLE_COLOR = [179,120,211]
 BLOCK_COLOR = [0,0,0]
 BALL_COLOR = [210,105,30]
+
+import time, sys 
 
 # TODO: random RGB color generator for Blocks to be Destroyed
 def rgb_color():
@@ -22,11 +25,12 @@ def debug_create_objects(object_list):
     
     kinetic = GameBall(1, object_list, 
                                     SCREEN_SIZE, # bounds
-                                    # randomized starting position 
-                                    Vector2(random.randint(30, SCREEN_SIZE[0] - 10), random.randint(10, SCREEN_SIZE[1] - 10)),
+                                    # Can randomized starting position:
+                                    # random.randint(30, SCREEN_SIZE[0] - 10)
+                                    Vector2(random.randint(30, SCREEN_SIZE[0] - 100), random.randint(10, SCREEN_SIZE[1] - 100)),
                                     # velocity
                                     # Two random numbers between -2 and 2 -- Why would you randomize the velocity?
-                                    Vector2(-8, 8), # was `4*random.random() - 2`
+                                    Vector2(-4, 4), # was `4*random.random() - 2`
                                     BALL_COLOR, # color
                                     10) # radius
     object_list.append(kinetic)
@@ -49,11 +53,30 @@ def debug_create_objects(object_list):
     for i in range(5):
         block=StrongBlock(3, Vector2(60 + i * 80, 220), 40, 40, BLOCK_COLOR)
         object_list.append(block)
-            
 
-    paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-50),
-                         200, 
+# ============= PADDLES ============ #
+
+    paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-280),
+                         100, 
                          20, 
+                         PADDLE_COLOR)
+    object_list.append(paddle)
+
+    paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-200),
+                         100, 
+                         20, 
+                         PADDLE_COLOR)
+    object_list.append(paddle)
+
+    paddle = Paddle(Vector2(SCREEN_SIZE[0] - 260, SCREEN_SIZE[1]-240),
+                         20, 
+                         100, 
+                         PADDLE_COLOR)
+    object_list.append(paddle)
+
+    paddle = Paddle(Vector2(SCREEN_SIZE[0] - 140, SCREEN_SIZE[1]-240),
+                         20, 
+                         100, 
                          PADDLE_COLOR)
     object_list.append(paddle)
   
@@ -71,6 +94,8 @@ def main():
     while len(object_list) > 2: # TODO:  Create more elegant condition for loop
         right = False
         left = False
+        up = False
+        down = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -98,8 +123,16 @@ def main():
             # TODO: Figure out how to implement super().update() .. like in OOP-Toy            
             pass
 
+        if keys[pygame.K_UP]:
+            up = True
+            pass
+            
+        if keys[pygame.K_DOWN]:
+            down = True
+            pass
+
         for object in object_list:
-            object.update(left= left, right=right, pygame = pygame, object_list = object_list)
+            object.update(left = left, right = right, up = up, down = down, pygame = pygame, object_list = object_list)
             object.check_collision()
  
         # Draw Updates
