@@ -6,15 +6,19 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
+
+PADDLE_SIZE = [100, 15]
+PADDLE_COLOR = [100, 100, 100]
+
+GAME_BALL_SIZE = 15
+
 BRICK_LIST = []
 BRICK_COUNT = 5
-
-for i in range(BRICK_COUNT):
-    BRICK_LIST.append(i)
-
-print(BRICK_LIST)
+KINETIC_BLOCK_COLOR = [0, 0, 255]
+BREAKABLE_BLOCK_COLOR = [0, 255, 0]
+STRONG_BLOCK_COLOR = [255, 0, 0]
 
 
 def debug_create_objects(object_list):
@@ -23,26 +27,29 @@ def debug_create_objects(object_list):
         1,
         object_list,
         SCREEN_SIZE,
-        Vector2(random.randint(20, SCREEN_SIZE[0] - 20),
-                random.randint(20, SCREEN_SIZE[1] - 20)),
-        Vector2(16*random.random() - 2, 16*random.random() - 2),
+        Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2),
+        Vector2(0, 0),
         [255, 10, 0],
-        20
+        GAME_BALL_SIZE
     )
 
-    paddle = Paddle(Vector2(300, 460), 175, 25, [0, 0, 255])
+    paddle = Paddle(
+        Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1] - 10), PADDLE_SIZE[0], PADDLE_SIZE[1], PADDLE_COLOR)
 
     object_list.append(kinetic)
     object_list.append(paddle)
 
-    # for y in range(5):
-    #     for x in range(5):
-    #         block = KineticBlock(Vector2(x * 25, y * 25),
-    #                              20, 20, [0, 0, 255])
-    #         object_list.append(block)
+    for x in range(6):
+        for y in range(6):
+            block = BreakableBlock(Vector2(x * 65 + SCREEN_SIZE[0]/10, y * 20 + 20),
+                                   55, 15, BREAKABLE_BLOCK_COLOR)
 
-    block = Single_Hit_Block(Vector2(300, 100), 100, 100, [0, 0, 255])
-    object_list.append(block)
+            block_2 = StrongBlock(Vector2(x * 65 + SCREEN_SIZE[
+                0]/10, y * 20 + 140),
+                55, 15, STRONG_BLOCK_COLOR, 2)
+
+            object_list.append(block)
+            object_list.append(block_2)
 
 
 def main():
@@ -56,7 +63,10 @@ def main():
 
     debug_create_objects(object_list)
 
-    while True:  # TODO:  Create more elegant condition for loop
+    while len(object_list) > 2:  # TODO:  Create more elegant condition for loop
+        left = False
+        right = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -64,20 +74,15 @@ def main():
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LEFT]:
-            # object_list[0].position[0] -= 1
-            object_list[1].paddle_left()
+            left = True
 
         if keys[pygame.K_RIGHT]:
-            # Do something
-            # object_list[0].position[0] += 1
-            object_list[1].paddle_right()
+            right = True
 
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right, pygame=pygame,
+                          object_list=object_list)
             object.check_collision()
-            if hasattr(object, 'hits'):
-                if getattr(object, 'hits') <= 0:
-                    object_list.remove(object)
 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)

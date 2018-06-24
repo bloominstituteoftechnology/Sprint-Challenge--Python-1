@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -38,39 +39,58 @@ class KineticBlock(Block):
 
 
 class Paddle(KineticBlock):
-    def paddle_left(self):
-        pace = 10
 
-        # Update x position
-        # Check for bounds conflict
-        if self.position.x - pace < pace:
-            return
+    SPEED = 5
 
-        self.position.x -= pace
+    def update(self, **kwargs):
+        self.left = kwargs["left"]
+        self.right = kwargs["right"]
 
-        # Update rectangle
-        self.rectangle[0] = self.position.x
+        # keeps paddle in bounds on left
+        if self.left and self.position.x - self.rectangle.width/2 - 10 >= 0:  # -10 gives left gutter
+            self.position.x -= self.SPEED
 
-    def paddle_right(self):
-        pace = 10
+        # keeps paddle in bounds on right
+        if self.right and self.position.x + self.rectangle.width/2 + 10 <= 400:  # +10 gives right gutter
+            self.position.x += self.SPEED
 
-        # Update x position
-        # Check for bounds conflict
-        if self.position.x + pace > 450:
-            return
-
-        self.position.x += pace
-
-        # Update rectangle
-        self.rectangle[0] = self.position.x
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.rectangle.width/2),
+            self.position.y - (self.rectangle.height/2),
+            self.rectangle.width,
+            self.rectangle.height
+        )
+        super().update()
 
 
-class Single_Hit_Block(KineticBlock):
+class BreakableBlock(KineticBlock):
 
-    def __init__(self, position, width, height, color):
-        self.hits = 1
-        super().__init__(position, width, height, color)
+    def update(self, **kwargs):
 
-    def check_collision(self):
-        if self.touched_by_ball == True:
-            self.hits -= 1
+        if self.touched_by_ball:
+            kwargs['object_list'].pop(kwargs['object_list'].index(self))
+
+
+class StrongBlock(BreakableBlock):
+
+    random_color = [random.randint(0, 255), random.randint(
+        0, 255), random.randint(0, 255)]
+
+    def __init__(self, position, width, height, color, strength):
+        self.strength = strength
+        self.block_deduction = 1/strength
+        super().__init__(position, width, height, color,)
+
+    def update(self, **kwargs):
+        if self.touched_by_ball:
+            self.strength -= 1
+            self.color = self.random_color
+            # decrease block's height by amount of strength everytime the block is hit
+            self.rectangle.height = self.rectangle.height - \
+                self.rectangle.height * self.block_deduction
+
+            if self.strength <= 0:
+                super().update(object_list=kwargs['object_list'])
+
+            else:
+                self.touched_by_ball = False

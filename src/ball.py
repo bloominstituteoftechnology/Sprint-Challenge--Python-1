@@ -35,8 +35,12 @@ class Ball:
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
-            self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            # if ball hits bottom bonds
+            # TODO build in alerts message to the user
+            self.velocity.y = 0
+            self.velocity.x = 0
+            print("\n === You loose ===\n")
+            kwargs['pygame'].quit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
