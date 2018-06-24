@@ -1,7 +1,7 @@
 import math
 
 from pygame.math import Vector2
-from pygame import Rect
+from pygame import Rect, mixer
 
 from block import KineticBlock
 
@@ -23,6 +23,7 @@ class Ball:
                                         self.radius*2, self.radius*2)
 
     def update(self, **kwargs):
+        # This is the fix for sticky borders
         if self.position.x <= 0 + self.radius: # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
@@ -32,9 +33,12 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+        # If ball collides with bottom of screen:
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            # Consequence for failure
+            kwargs['pygame'].quit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -113,8 +117,14 @@ class GameBall(Ball):
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
-
+            
+        # print("left:", left)    
+        # print("right:", right)
+        # print("top:", top)
+        # print("bottom:", bottom)
         test = left + right + top + bottom
+        # print("test:", test)
+        
         
         if test == 1:
             object.touched_by_ball = True
