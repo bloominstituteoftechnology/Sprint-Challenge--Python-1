@@ -13,7 +13,7 @@ PADDLE_COLOR = [179,120,211]
 BLOCK_COLOR = [0,0,0]
 BALL_COLOR = [210,105,30]
 
-import time, sys 
+import time, sys
 
 # TODO: random RGB color generator for Blocks to be Destroyed
 def rgb_color():
@@ -90,6 +90,10 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
+
+    pygame.init()
+    sound = pygame.mixer.Sound('test.ogg')
+    sound.play()
  
     while len(object_list) > 2: # TODO:  Create more elegant condition for loop
         right = False
