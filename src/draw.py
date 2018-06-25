@@ -9,10 +9,12 @@ from block import *
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
-PADDLE_SIZE = [100, 15]
+PADDLE_SIZE = [75, 15]  # 75
 PADDLE_COLOR = [100, 100, 100]
 
 GAME_BALL_SIZE = 15
+GAME_BALL_COLOR = [255, 10, 0]
+GAME_BALL_VELOCITY = [0, 0]
 
 BRICK_LIST = []
 BRICK_COUNT = 5
@@ -27,9 +29,10 @@ def debug_create_objects(object_list):
         1,
         object_list,
         SCREEN_SIZE,
-        Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2),
-        Vector2(0, 0),
-        [255, 10, 0],
+        Vector2(random.randint(
+            0, SCREEN_SIZE[0]/2), random.randint(200, SCREEN_SIZE[1]/2)),
+        Vector2(GAME_BALL_VELOCITY[0], GAME_BALL_VELOCITY[1]),
+        GAME_BALL_COLOR,
         GAME_BALL_SIZE
     )
 
@@ -40,16 +43,28 @@ def debug_create_objects(object_list):
     object_list.append(paddle)
 
     for x in range(6):
-        for y in range(6):
-            block = BreakableBlock(Vector2(x * 65 + SCREEN_SIZE[0]/10, y * 20 + 20),
+        for y in range(1):
+
+            block = BreakableBlock(Vector2(x * 65 + SCREEN_SIZE[0]/10, y * 20 + 10),
                                    55, 15, BREAKABLE_BLOCK_COLOR)
 
             block_2 = StrongBlock(Vector2(x * 65 + SCREEN_SIZE[
-                0]/10, y * 20 + 140),
-                55, 15, STRONG_BLOCK_COLOR, 2)
+                0]/10, y * 20 + 100),
+                55, 15, STRONG_BLOCK_COLOR, 3)
 
             object_list.append(block)
             object_list.append(block_2)
+
+
+# def add_new_ball(object_list):
+#     kinetic_2 = Ball(
+#         SCREEN_SIZE,
+#         Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]/2),
+#         Vector2(6, 6),
+#         [255, 10, 0],
+#         GAME_BALL_SIZE
+#     )
+#     object_list.append(kinetic_2)
 
 
 def main():
@@ -60,12 +75,13 @@ def main():
     clock = pygame.time.Clock()
 
     object_list = []  # list of objects of all types in the toy
-
     debug_create_objects(object_list)
 
     while len(object_list) > 2:  # TODO:  Create more elegant condition for loop
         left = False
         right = False
+        up = False
+        down = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -79,9 +95,18 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
 
+        if keys[pygame.K_UP]:
+            up = True
+
+        if keys[pygame.K_DOWN]:
+            down = True
+
         for object in object_list:
+            # if len(object_list) == 73:
+            #     add_new_ball(object_list)
+
             object.update(left=left, right=right, pygame=pygame,
-                          object_list=object_list)
+                          object_list=object_list, up=up, down=down)
             object.check_collision()
 
         # Draw Updates

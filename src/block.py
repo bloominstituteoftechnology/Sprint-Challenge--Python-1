@@ -45,6 +45,14 @@ class Paddle(KineticBlock):
     def update(self, **kwargs):
         self.left = kwargs["left"]
         self.right = kwargs["right"]
+        self.up = kwargs["up"]
+        self.down = kwargs["down"]
+
+        if self.up:
+            self.SPEED += 1
+
+        if self.down:
+            self.SPEED -= 1
 
         # keeps paddle in bounds on left
         if self.left and self.position.x - self.rectangle.width/2 - 10 >= 0:  # -10 gives left gutter
@@ -78,17 +86,26 @@ class StrongBlock(BreakableBlock):
 
     def __init__(self, position, width, height, color, strength):
         self.strength = strength
+        self.block_addition_flag = True
+        self.block_addition = strength
         self.block_deduction = 1/strength
         super().__init__(position, width, height, color,)
 
     def update(self, **kwargs):
+        # increases block's height base on strength of block
+        if self.block_addition_flag:
+            addition = (self.block_addition * .40) * self.rectangle.height
+            self.rectangle.height = self.rectangle.height + addition
+            self.block_addition_flag = False
+
         if self.touched_by_ball:
             self.strength -= 1
             self.color = self.random_color
-            # decrease block's height by amount of strength everytime the block is hit
+            # decrease block's height base on strength everytime the block is hit
             self.rectangle.height = self.rectangle.height - \
                 self.rectangle.height * self.block_deduction
 
+            # once strength reaches zero or below we call update and remove the instances of the block
             if self.strength <= 0:
                 super().update(object_list=kwargs['object_list'])
 
