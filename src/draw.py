@@ -31,17 +31,18 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
+        left = False
+        right = False
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
+        #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # Do something
-            pass
+            left = True
         if keys[pygame.K_RIGHT]:
-            # Do something
-            pass
-
+            right = True
         for object in object_list:
             object.update()
             object.check_collision()
