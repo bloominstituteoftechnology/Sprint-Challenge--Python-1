@@ -7,21 +7,22 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [400, 800]
-BACKGROUND_COLOR = [0, 0, 0]
+BACKGROUND_COLOR = [0, 0, 70]
 
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
                        Vector2(random.randint(
                            20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                       Vector2(4*random.random() - 2, 4*random.random() - 2),
+                       Vector2(4, -4),
                        [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
+    block = MultiHitBlock(3, Vector2(200, 200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
-    paddle = Paddle(Vector2(200, 400), 100, 50, [57, 255, 20])
+    paddle = Paddle(
+        Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1] - 50), 100, 25, [57, 255, 20])
     object_list.append(paddle)
 
 
@@ -37,6 +38,9 @@ def main():
     debug_create_objects(object_list)
 
     while True:  # TODO:  Create more elegant condition for loop
+        left = False
+        right = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -44,14 +48,15 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             # Do something
-            pass
+            left = True
             # object_list[2].
         if keys[pygame.K_RIGHT]:
             # Do something
-            pass
+            right = True
 
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right, pygame=pygame,
+                          object_list=object_list)
             object.check_collision()
 
         # Draw Updates
