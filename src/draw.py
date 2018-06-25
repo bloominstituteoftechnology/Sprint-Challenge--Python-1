@@ -64,7 +64,7 @@ def main():
                 object_list[1].update(x=newX)
 
         for object in object_list:
-            object.update()
+            object.update(pygame=pygame)
             object.check_collision()
 
         # Draw Updates

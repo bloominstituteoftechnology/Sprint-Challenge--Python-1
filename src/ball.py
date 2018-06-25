@@ -34,7 +34,7 @@ class Ball:
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            kwargs['pygame'].quit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
