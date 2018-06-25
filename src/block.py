@@ -41,6 +41,7 @@ class KineticBlock(Block):
 class Paddle(KineticBlock):
 
     SPEED = 5
+    GUTTER = 10
 
     def update(self, **kwargs):
         self.left = kwargs["left"]
@@ -51,15 +52,16 @@ class Paddle(KineticBlock):
         if self.up:
             self.SPEED += 1
 
-        if self.down:
+        if self.down and self.SPEED > 1:
             self.SPEED -= 1
+            print(self.SPEED)
 
         # keeps paddle in bounds on left
-        if self.left and self.position.x - self.rectangle.width/2 - 10 >= 0:  # -10 gives left gutter
+        if self.left and self.position.x - self.rectangle.width/2 - self.GUTTER >= 0:
             self.position.x -= self.SPEED
 
         # keeps paddle in bounds on right
-        if self.right and self.position.x + self.rectangle.width/2 + 10 <= 400:  # +10 gives right gutter
+        if self.right and self.position.x + self.rectangle.width/2 + self.GUTTER <= 400:
             self.position.x += self.SPEED
 
         self.rectangle = pygame.Rect(

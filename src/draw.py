@@ -12,20 +12,23 @@ BACKGROUND_COLOR = [255, 255, 255]
 PADDLE_SIZE = [75, 15]  # 75
 PADDLE_COLOR = [100, 100, 100]
 
-GAME_BALL_SIZE = 15
+GAME_BALL_MASS = 100
+GAME_BALL_SIZE = 10
 GAME_BALL_COLOR = [255, 10, 0]
 GAME_BALL_VELOCITY = [0, 0]
 
 BRICK_COUNT = 5
 KINETIC_BLOCK_COLOR = [0, 0, 255]
 BREAKABLE_BLOCK_COLOR = [0, 255, 0]
+
 STRONG_BLOCK_COLOR = [255, 0, 0]
+BLOCK_STRENGTH = 3
 
 
 def debug_create_objects(object_list):
 
     kinetic = GameBall(
-        1,
+        GAME_BALL_MASS,
         object_list,
         SCREEN_SIZE,
         Vector2(random.randint(
@@ -49,7 +52,7 @@ def debug_create_objects(object_list):
 
             block_2 = StrongBlock(Vector2(x * 65 + SCREEN_SIZE[
                 0]/10, y * 20 + 100),
-                55, 15, STRONG_BLOCK_COLOR, 3)
+                55, 15, STRONG_BLOCK_COLOR, BLOCK_STRENGTH)
 
             object_list.append(block)
             object_list.append(block_2)
