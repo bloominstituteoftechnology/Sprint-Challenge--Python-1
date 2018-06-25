@@ -57,7 +57,6 @@ def debug_create_objects(object_list):
             object_list.append(block)
             object_list.append(block_2)
 
-
 # def add_new_ball(object_list):
 #     kinetic_2 = Ball(
 #         SCREEN_SIZE,

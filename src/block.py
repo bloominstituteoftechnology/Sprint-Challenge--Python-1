@@ -52,7 +52,7 @@ class Paddle(KineticBlock):
         if self.up:
             self.SPEED += 1
 
-        if self.down and self.SPEED > 1:
+        if self.down and self.SPEED > 5:
             self.SPEED -= 1
             print(self.SPEED)
 
