@@ -5,10 +5,12 @@ from pygame import Rect
 
 from block import KineticBlock
 
+
 class Ball:
     """
     base class for bouncing objects
     """
+
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
         self.velocity = velocity
@@ -19,22 +21,24 @@ class Ball:
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
-                                        self.position.y - self.radius,
-                                        self.radius*2, self.radius*2)
+                    self.position.y - self.radius,
+                    self.radius*2, self.radius*2)
 
     def update(self, **kwargs):
-        if self.position.x <= 0 + self.radius: # screen width
+        if self.position.x <= 0 + self.radius:  # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
         if self.position.x >= self.bounds[0] - self.radius:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
-        if self.position.y <= 0 + self.radius: # screen height
+        if self.position.y <= 0 + self.radius:  # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            # pygame.quit()  # comment out for testing purposes
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            kwargs['pygame'].quit()  # comment out for testing purposes
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -45,12 +49,15 @@ class Ball:
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
-        pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
+        pygame.draw.circle(screen, self.color, [int(
+            self.position.x), int(self.position.y)], self.radius)
+
 
 class GameBall(Ball):
     """
     A ball that collides with blocks
     """
+
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
         self.mass = mass
@@ -58,7 +65,7 @@ class GameBall(Ball):
 
     def collide_with_ball(self, object, relative_vector):
 
-        #TODO:  Calculate the correct position and move there directly
+        # TODO:  Calculate the correct position and move there directly
         while relative_vector.length() <= self.radius + object.radius:
             self.position += relative_vector.normalize()
             object.position -= relative_vector.normalize()
@@ -78,44 +85,44 @@ class GameBall(Ball):
 
     def collide_with_rectangle(self, object):
         # This function is called after a first-pass test, that is the collision
-        # rectangles overlap. 
-        
+        # rectangles overlap.
+
         left, right, top, bottom = False, False, False, False
         # TODO:  This can probably be optimized
         if (
             object.position.x > self.position.x and
-            object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and
+            self.position.y <= object.position.y+object.rectangle.height/2 and
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             left = True
 
         if (
             object.position.x < self.position.x and
-            object.position.x + object.rectangle.width/2 >= self.position.x - self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            object.position.x + object.rectangle.width/2 >= self.position.x - self.radius and
+            self.position.y <= object.position.y+object.rectangle.height/2 and
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             right = True
 
         if (
             object.position.y > self.position.y and
-            object.position.y - object.rectangle.height/2 <= self.position.y + self.radius and 
-            self.position.x <= object.position.x+object.rectangle.width/2 and 
+            object.position.y - object.rectangle.height/2 <= self.position.y + self.radius and
+            self.position.x <= object.position.x+object.rectangle.width/2 and
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             top = True
 
         if (
             object.position.y < self.position.y and
-            object.position.y + object.rectangle.width/2 >= self.position.y - self.radius and 
-            self.position.x <= object.position.x+object.rectangle.width/2 and 
+            object.position.y + object.rectangle.width/2 >= self.position.y - self.radius and
+            self.position.x <= object.position.x+object.rectangle.width/2 and
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
 
         test = left + right + top + bottom
-        
+
         if test == 1:
             object.touched_by_ball = True
             # the ball has collided with an edge
@@ -141,10 +148,14 @@ class GameBall(Ball):
         elif test == 0:
             # We are at a corner.  Either it narrowly missed, or it hit the corner
             corners = [
-                Vector2(object.position.x - object.rectangle.width/2, object.position.y - object.rectangle.height/2),
-                Vector2(object.position.x + object.rectangle.width/2, object.position.y - object.rectangle.height/2),
-                Vector2(object.position.x - object.rectangle.width/2, object.position.y + object.rectangle.height/2),
-                Vector2(object.position.x + object.rectangle.width/2, object.position.y + object.rectangle.height/2)
+                Vector2(object.position.x - object.rectangle.width/2,
+                        object.position.y - object.rectangle.height/2),
+                Vector2(object.position.x + object.rectangle.width/2,
+                        object.position.y - object.rectangle.height/2),
+                Vector2(object.position.x - object.rectangle.width/2,
+                        object.position.y + object.rectangle.height/2),
+                Vector2(object.position.x + object.rectangle.width/2,
+                        object.position.y + object.rectangle.height/2)
             ]
 
             for corner in corners:
@@ -154,7 +165,8 @@ class GameBall(Ball):
                     # Create a dummy object to make use of ball to ball collision, because the math is the same
                     # Give it a velocity of the same magnitude as the current ball to cause it to reflect at
                     # the same speed
-                    stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
+                    stand_in = Ball(self.bounds, corner, Vector2(
+                        0, self.velocity.length()), [0, 0, 0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
 
     def check_collision(self):
