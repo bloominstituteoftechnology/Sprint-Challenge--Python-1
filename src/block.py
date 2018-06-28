@@ -18,11 +18,12 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
+        self.width = width
 
 
     def update(self, **kwargs):
         self.touched_by_ball = False
-
+        
     def check_collision(self):
         pass
 
@@ -30,8 +31,35 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
     pass
 
+class BreakableBlock(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.should_draw = True
 
+    def get_hit(self):
+        self.should_draw = False
+
+class Multi_hit_block(BreakableBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.hit_count = 0
+
+    def get_hit(self):
+        self.hit_count += 1
+        if self.hit_count >= 3:
+            self.should_draw = False
+        else:
+            if self.hit_count == 1:
+                self.color=[255, 0, 0]
+            if self.hit_count == 2:
+                self.color = [0, 0, 255]
+
+
+class Paddle(KineticBlock):
+    def update(self, **kwargs):
+        self.touched_by_ball = False
+        mouse_pos = pygame.mouse.get_pos()
+        self.position.x = mouse_pos[0]
+        self.rectangle[0] = mouse_pos[0] - self.width/2
