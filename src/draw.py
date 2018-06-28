@@ -5,8 +5,9 @@ from pygame.math import Vector2
 
 from ball import *
 from block import *
+from paddle import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
