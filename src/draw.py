@@ -10,7 +10,7 @@ from block import KineticBlock, Paddle
 class GameManager:
     def __init__(self):
         # Game settings
-        self.SCREEN_SIZE = [952, 480]
+        self.SCREEN_SIZE = [400, 800]
         self.BACKGROUND_COLOR = [0, 0, 0]
         self.GAMEBALL_START_POS = Vector2(
             random.randint(20, self.SCREEN_SIZE[0] - 20),
@@ -26,7 +26,7 @@ class GameManager:
         self.object_list = []
 
     def build_level(self):
-        # TODO: Create paddle, blocks and ball
+        # TODO: Create game blocks: reg block, multi hit block
         gameball = GameBall(1, self.object_list, self.SCREEN_SIZE, self.GAMEBALL_START_POS,
                             self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
         paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
@@ -46,7 +46,6 @@ class GameManager:
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-            #TODO:  Feed input variables into update for objects that need it.
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
                 left = True
@@ -56,7 +55,6 @@ class GameManager:
                 object.update(left=left, right=right)
                 object.check_collision()
 
-            # Draw Updates
             screen.fill(self.BACKGROUND_COLOR)
             for ball in self.object_list:
                 ball.draw(screen, pygame)
