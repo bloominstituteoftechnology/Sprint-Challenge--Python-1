@@ -60,7 +60,7 @@ def main():
 
     object_list = []  # list of objects of all types in the toy
     paddle = None
-    ball = None
+    mainBall = None
 
     while True:  # TODO:  Create more elegant condition for loop
         left = False
@@ -75,9 +75,11 @@ def main():
                     print(event)
                 if event.key == pygame.K_s:
                     debug_create_objects(object_list)
+                    for i in range(len(object_list)):
+                        print(i, object_list[i])
+                    mainBall = object_list[0]
                     paddle = object_list[1]
-                    ball = object_list[0]
-                    print('paddle', paddle, 'ball', ball.lives)
+                    print('paddle', paddle, 'mainBall', mainBall.lives)
                 if event.key == pygame.K_q:
                     pygame.quit()
                 if event.key == pygame.K_RIGHT:
@@ -95,9 +97,11 @@ def main():
             left = True
         if keys[pygame.K_RIGHT]:
             right = True
-        # if ball.lives == 0:
-        #     pygame.quit()
-        #     pass
+            # pass
+
+        if len(object_list):
+            if object_list[0].lives == 0:
+                pygame.quit()
         for object in object_list:
             object.update()
             object.check_collision()

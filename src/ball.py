@@ -18,7 +18,6 @@ class Ball:
         self.color = color
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
-        self.lives = 3
         self.visible = True
 
     def update_rectangle(self):
@@ -63,6 +62,7 @@ class GameBall(Ball):
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
         self.mass = mass
+        self.lives = 3
         super().__init__(bounds, position, velocity, color, radius)
 
     def collide_with_ball(self, object, relative_vector):
