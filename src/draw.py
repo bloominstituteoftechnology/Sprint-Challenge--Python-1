@@ -40,39 +40,39 @@ def debug_create_objects(object_list):
     paddle = PaddleBlock(object_list, Vector2(150, 749), 120, 15, [104, 104, 104])
     object_list.append(paddle)
         
-    gameblock_red = GameBlock(5, object_list, Vector2(0, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
+    gameblock_red = GameBlock(3, 5, object_list, Vector2(0, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
     object_list.append(gameblock_red)
-    gameblock_red = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
+    gameblock_red = GameBlock(3, 5, object_list, Vector2(WIDTH_GAME_BLOCK, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
     object_list.append(gameblock_red)
 
-    gameblock_redorange = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
+    gameblock_redorange = GameBlock(3, 2, object_list, Vector2(0, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
     object_list.append(gameblock_redorange)
     
-    gameblock_redorange = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
+    gameblock_redorange = GameBlock(3, 2, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
     object_list.append(gameblock_redorange)
 
-    gameblock_orange = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
+    gameblock_orange = GameBlock(3, 2, object_list, Vector2(0, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
     object_list.append(gameblock_orange)
     
-    gameblock_orange = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
+    gameblock_orange = GameBlock(3, 2, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
     object_list.append(gameblock_orange)
 
-    gameblock_yellow = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
+    gameblock_yellow = GameBlock(3, 2, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
     object_list.append(gameblock_yellow)
 
-    gameblock_yellow = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
+    gameblock_yellow = GameBlock(3, 2, object_list, Vector2(0, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
     object_list.append(gameblock_yellow)
 
-    gameblock_green = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
+    gameblock_green = GameBlock(3, 2, object_list, Vector2(0, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
     object_list.append(gameblock_green)
 
-    gameblock_green = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
+    gameblock_green = GameBlock(3, 2, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
     object_list.append(gameblock_green)
 
-    gameblock_blue = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
+    gameblock_blue = GameBlock(3, 2, object_list, Vector2(0, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
     object_list.append(gameblock_blue)
 
-    gameblock_blue = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
+    gameblock_blue = GameBlock(3, 2, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
     object_list.append(gameblock_blue)
         
 
@@ -95,7 +95,7 @@ def main():
  
     done = False
 
-    while not done: # TODO:  Create more elegant condition for loop xx
+    while not done: 
         left = False
         right = False
         for event in pygame.event.get():

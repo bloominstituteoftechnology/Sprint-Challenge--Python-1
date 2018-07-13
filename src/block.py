@@ -49,13 +49,18 @@ class PaddleBlock(KineticBlock):
             self.position.x += 5
 
 class GameBlock(PaddleBlock, KineticBlock):
-    def __init__(self, margin, object_list, position, width, height, color):
+    def __init__(self, margin, difficulty, object_list, position, width, height, color):
         self.margin = margin
+        self.difficulty = difficulty
         super().__init__(object_list, position, width, height, color)
 
     def update(self, **kwargs):
         if self.touched_by_ball == True:
-            self.object_list.remove(self)
+            if self.difficulty == 0:
+                self.object_list.remove(self)
+            else:
+                self.difficulty -= 1
+                print(self.difficulty)
         self.touched_by_ball = False
 
 

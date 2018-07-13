@@ -38,7 +38,8 @@ class Ball:
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            print("That's a Winner!")
+            sys.exit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             print("Game Over!")
