@@ -12,14 +12,14 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(12*random.random() - 2, 12*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
-    player_paddle = PlayerPaddle(SCREEN_SIZE, Vector2(100,750), 30, 30, [255, 255, 0])
+    player_paddle = PlayerPaddle(SCREEN_SIZE, Vector2(250,750), 200, 30, [255, 255, 0])
     object_list.append(player_paddle)
 
 def main():
@@ -32,7 +32,7 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
- 
+
     while True: # TODO:  Create more elegant condition for loop
         left = False
         right = False
