@@ -7,29 +7,30 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [700, 700]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
+NUM_OF_BRICKS = True
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    [200, 10, 0], 20)
     object_list.append(kinetic)
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
-    block2 = breakBlock(Vector2(100, 20), 60, 50, [255, 0, 0], 1)
+    block2 = BreakBlock(Vector2(100, 20), 60, 50, [255, 0, 0], 1)
     object_list.append(block2)
 
-    block3 = breakBlock(Vector2(180, 20), 60, 50, [255, 0, 0], 1)
+    block3 = BreakBlock(Vector2(180, 20), 60, 50, [255, 0, 0], 1)
     object_list.append(block3)
 
-    block4 = breakBlock(Vector2(260, 20), 60, 50, [255, 0, 0], 1)
+    block4 = BreakBlock(Vector2(260, 20), 60, 50, [255, 0, 0], 1)
     object_list.append(block4)
 
-    block5 = breakBlock(Vector2(340, 20), 60, 50, [255, 0, 0], 1)
+    block5 = BreakBlock(Vector2(340, 20), 60, 50, [255, 0, 0], 1)
     object_list.append(block5)
   
 def main():
