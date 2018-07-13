@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -16,8 +16,20 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(200,200), 50, 50, [0, 0, 255])
     object_list.append(block)
+
+    block = KineticBlock(Vector2(100,100), 50, 50, [0, 0, 255])
+    object_list.append(block)
+
+    block = KineticBlock(Vector2(300,100), 50, 50, [0, 0, 255])
+    object_list.append(block)
+
+    vanishingBlock1 = VanishingBlock(Vector2(200, 300), 50, 50, [124,123,122])
+    object_list.append(block)
+
+    paddle = Paddle(SCREEN_SIZE, Vector2(200, 500), 150, 30, [0,255,0])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -31,8 +43,28 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
-        left = False
-        right = False
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            left = False
+            for object in object_list:
+                if isinstance(object, block):
+                    object.update(left, right)
+                    object.check_collision()
+                else:
+                    object.update()
+                    object.check_collision()
+        if keys[pygame.K_RIGHT]:
+            right = False
+        for object in object_list:
+            object.update()
+            object,check_collision()
+            for object in object_list:
+                if isinstance(object, block):
+                    object.update(left, right)
+                    object.check_collision()
+                else:
+                    object.update()
+                    object.check_collision()
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -44,8 +76,13 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
+        if object_list[0].ball_hit_bottom():
+            exit()
+        if object_list[0].passes_top():
+            exit()
+
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
