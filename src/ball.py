@@ -37,7 +37,7 @@ class Ball:
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
-            # sys.exit() #Lose Condition
+            sys.exit() #Lose Condition
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
