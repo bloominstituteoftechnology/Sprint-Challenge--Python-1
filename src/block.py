@@ -36,6 +36,18 @@ class KineticBlock(Block):
     pass
 
 class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color)
+    super().__init__(position, width, height, color)
+    
+    def move(self):
+        keys = pygame.key.get_pressed()
+        print("update")
+        self.position.x += 1
+
+    super().update()
     pass
+
+
+
 
 
