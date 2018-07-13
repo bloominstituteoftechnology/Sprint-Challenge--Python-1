@@ -37,6 +37,17 @@ class GameManager:
         self.object_list.append(gameball)
         self.object_list.append(paddle)
         self.object_list.append(test_brick)
+    
+    def build_row(self, num_bricks, brick_type):
+        pos_x = 25
+        pos_y = 2
+
+        for i in range(num_bricks):
+            game_brick = brick_type(self.object_list, 1, Vector2(
+                pos_x, pos_y), 50, 4, [255, 50, 50])
+            self.object_list.append(game_brick)
+            pos_x += 50
+
 
     def start_game(self):
         screen = pygame.display.set_mode(self.SCREEN_SIZE)
