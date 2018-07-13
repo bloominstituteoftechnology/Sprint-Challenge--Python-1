@@ -21,6 +21,12 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
+    block = KineticBlock(Vector2(60, 200), 100, 100, [255, 255, 0])
+    object_list.append(block)
+
+    block = paddle(Vector2(0, 480), 100, 15, [255, 255, 0])
+    object_list.append(block)
+
 
 def main():
     pygame.init()

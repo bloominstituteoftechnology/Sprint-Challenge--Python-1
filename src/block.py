@@ -34,3 +34,13 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
+
+class paddle (KineticBlock):
+    # def __init__(self, position, width, height, color):
+        # self.object_list = object_list
+        # KineticBlock.__init__(position, width, height, color)
+
+    def update(self):
+        pos = pygame.mouse.get_pos()
+        self.rectangle.x = pos[0]
