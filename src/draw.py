@@ -4,26 +4,35 @@ import sys
 
 from pygame.math import Vector2
 from ball import GameBall
-from block import KineticBlock
+from block import KineticBlock, Paddle
 
 
 class GameManager:
     def __init__(self):
-        self.SCREEN_SIZE = [640, 480]
-        self.BACKGROUND_COLOR = [255, 255, 255]
+        # Game settings
+        self.SCREEN_SIZE = [952, 480]
+        self.BACKGROUND_COLOR = [0, 0, 0]
+        self.GAMEBALL_START_POS = Vector2(
+            random.randint(20, self.SCREEN_SIZE[0] - 20),
+            random.randint(20, self.SCREEN_SIZE[1] - 20)
+        )
+        self.GAMEBALL_VELOCITY = Vector2(5, 5)
+        self.GAMEBALL_SIZE = 20
+        self.GAMEBALL_COLOR = [255, 10, 0]
+        self.PADDLE_START_POS = Vector2(459, 400)
+        self.PADDLE_SPEED = 5
+        self.PADDLE_SIZE = [34, 8]
+
         self.object_list = []
 
     def build_level(self):
         # TODO: Create paddle, blocks and ball
-        kinetic = GameBall(1, self.object_list, self.SCREEN_SIZE,
-                           Vector2(random.randint(
-                               20, self.SCREEN_SIZE[0] - 20), random.randint(20, self.SCREEN_SIZE[1] - 20)),
-                           Vector2(4*random.random() - 2,
-                                   4*random.random() - 2),
-                           [255, 10, 0], 20)
-        block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
-        self.object_list.append(kinetic)
-        self.object_list.append(block)
+        gameball = GameBall(1, self.object_list, self.SCREEN_SIZE, self.GAMEBALL_START_POS,
+                            self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
+        paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
+                        self.PADDLE_SIZE[0], self.PADDLE_SIZE[1], [0, 0, 255])
+        self.object_list.append(gameball)
+        self.object_list.append(paddle)
 
     def start_game(self):
         screen = pygame.display.set_mode(self.SCREEN_SIZE)
@@ -44,7 +53,7 @@ class GameManager:
             if keys[pygame.K_RIGHT]:
                 right = True
             for object in self.object_list:
-                object.update()
+                object.update(left=left, right=right)
                 object.check_collision()
 
             # Draw Updates

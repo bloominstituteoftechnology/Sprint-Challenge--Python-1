@@ -2,7 +2,7 @@ import math
 
 from pygame.math import Vector2
 from pygame import Rect
-from block import KineticBlock
+from block import KineticBlock, Paddle
 
 
 class Ball:
@@ -171,7 +171,7 @@ class GameBall(Ball):
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
-            if issubclass(type(object), KineticBlock) and object != self:
+            if issubclass(type(object), (KineticBlock, Paddle)) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
