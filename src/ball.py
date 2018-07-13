@@ -16,6 +16,7 @@ class Ball:
         self.color = color
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
+        self.lives = 3
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
