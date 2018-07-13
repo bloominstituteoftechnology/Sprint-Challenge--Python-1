@@ -134,9 +134,12 @@ class GameBall(Ball):
                 else:
                     self.position.y = object.position.y + object.rectangle.height/2 + self.radius + 1
 
+            self.object_list.remove(object)
+
         elif test == 4:
             # TODO:  Better error handling
             print('error:  ball inside rectangle')
+            self.object_list.remove(object)
 
         elif test == 0:
             # We are at a corner.  Either it narrowly missed, or it hit the corner
@@ -156,6 +159,7 @@ class GameBall(Ball):
                     # the same speed
                     stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
+                    self.object_list.remove(object)
 
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
