@@ -34,5 +34,5 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
-class BreakingBlock(Block):
+class BreakingBlock(KineticBlock):
     pass

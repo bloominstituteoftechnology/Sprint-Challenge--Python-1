@@ -12,11 +12,40 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(3, 3),
                                     [255, 10, 0], 7)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(400,380), 80, 20, [0, 0, 255])
+    #PADDLE
+    block = KineticBlock(Vector2(400,380), 100, 20, [0, 0, 255])
+    object_list.append(block)
+
+    #GREEN ROW
+    block = BreakingBlock(Vector2(40, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(130, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(220, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(310, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(400, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(490, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(580, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = BreakingBlock(Vector2(670, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+    
+    block = BreakingBlock(Vector2(760, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
   
 def main():
