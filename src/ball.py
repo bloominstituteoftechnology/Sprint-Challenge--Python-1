@@ -120,6 +120,7 @@ class GameBall(Ball):
         
         if test == 1:
             object.touched_by_ball = True
+            print('true')
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
             if left or right:
