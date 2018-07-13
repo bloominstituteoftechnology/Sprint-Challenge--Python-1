@@ -39,17 +39,19 @@ class GameManager:
         self.BRICKS_PER_ROW = int(self.SCREEN_SIZE[0]/self.BRICK_SIZE[0])
 
         self.levels = levels
+        self.gameball = None
+        self.paddle = None
         self.object_list = []
 
     def build_level(self):
         # TODO: Create game blocks: multi hit block
-        gameball = GameBall(1, self.object_list, self.SCREEN_SIZE, self.GAMEBALL_START_POS,
-                            self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
-        paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
-                        self.PADDLE_SIZE[0], self.PADDLE_SIZE[1], [0, 0, 255])
+        self.gameball = GameBall(1, self.object_list, self.SCREEN_SIZE, self.GAMEBALL_START_POS,
+                                 self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
+        self.paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
+                             self.PADDLE_SIZE[0], self.PADDLE_SIZE[1], [0, 0, 255])
         
-        self.object_list.append(gameball)
-        self.object_list.append(paddle)
+        self.object_list.append(self.gameball)
+        self.object_list.append(self.paddle)
 
         for level in self.levels:
             for row in level:
@@ -69,7 +71,7 @@ class GameManager:
         screen = pygame.display.set_mode(self.SCREEN_SIZE)
         clock = pygame.time.Clock()
 
-        while True:
+        while not self.gameball.out_of_bounds:
             left = False
             right = False
 
@@ -92,6 +94,8 @@ class GameManager:
 
             clock.tick(60)
             pygame.display.flip()
+
+
 
     def main(self):
         pygame.init()

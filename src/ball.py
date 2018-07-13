@@ -58,6 +58,7 @@ class GameBall(Ball):
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
         self.mass = mass
+        self.out_of_bounds = False
         super().__init__(bounds, position, velocity, color, radius)
 
     def collide_with_ball(self, object, relative_vector):
@@ -175,3 +176,8 @@ class GameBall(Ball):
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
+
+    def update(self, **kwargs):
+        super().update()
+        if self.position.y >= self.bounds[1] - self.radius:
+            self.out_of_bounds = True
