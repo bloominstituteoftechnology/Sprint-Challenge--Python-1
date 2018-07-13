@@ -46,9 +46,15 @@ class Ball:
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
+class BouncingBall(Ball):
+    GRAVITY = .1
 
+    def update(self):
+        self.velocity.y += self.Gravity
+        super().update()
+        
 class GameBall(Ball):
-    """
+    """   
     A ball that collides with blocks
     """
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
