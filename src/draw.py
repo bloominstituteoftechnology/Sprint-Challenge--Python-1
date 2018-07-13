@@ -24,8 +24,9 @@ def debug_create_objects(object_list):
     # start for
     for block in range(1, 10):
         rand = random.randint
+        game_ball = kinetic
 
-        block = BreakableBlock(Vector2(posX,200), 100, 100, [rand(0, 255), rand(0, 255), rand(0, 255)])
+        block = BreakableBlock(Vector2(posX,200), 100, 100, [rand(0, 255), rand(0, 255), rand(0, 255)], game_ball)
         object_list.append(block)
 
         posX += 100

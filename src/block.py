@@ -38,4 +38,9 @@ class PlayerBlock(KineticBlock):
     pass
 
 class BreakableBlock(KineticBlock):
-    pass
+    def __init__(self, position, width, height, color, game_ball):
+        super().__init__(position, width, height, color, game_ball)
+        self.game_ball = game_ball
+
+    def update(self):
+        print(game_ball)
