@@ -8,14 +8,15 @@ from block import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
+VELOCITY = 5
 
 def debug_create_objects(object_list):
     ball = GameBall(1, object_list, SCREEN_SIZE, 
-                            Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                            Vector2(4*random.random() - 2, 4*random.random() - 2),
-                            [255, 10, 0], 20)
+                            Vector2(random.randint(20, SCREEN_SIZE[0] - 150), random.randint(20, SCREEN_SIZE[1] - 150)),
+                            Vector2(random.randint(70,100)*0.01*VELOCITY  , random.randint(70,100)*0.01*VELOCITY ),
+                            [255, 10, 0], 10)
     
-    paddle = Paddle(Vector2(150, 700), 50, 10, [255, 0, 0] )
+    paddle = Paddle(Vector2(150, 700), 70, 10, [255, 0, 0] )
 
     row_1 = []
     row_2 = []
@@ -73,7 +74,10 @@ def main():
                 mouse_pos = pygame.mouse.get_pos()
                 for object in object_list:
                     if hasattr(object, "paddle"):
-                        object.rectangle.x = mouse_pos[0]
+                        if mouse_pos[0] > 330:
+                            object.rectangle.x = 330
+                        else:
+                            object.rectangle.x = mouse_pos[0]
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
