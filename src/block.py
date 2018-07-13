@@ -44,3 +44,9 @@ class Paddle(KineticBlock):
         if kwargs["right"]:
             self.rectangle.x += self.SPEED
         super().update()
+
+class DisappearBlock(KineticBlock):
+    def check_collision(self):
+        if self.touched_by_ball:
+            print('touched')
+            self.rectangle = None

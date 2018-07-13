@@ -19,6 +19,12 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
+    block = DisappearBlock(Vector2(1,5), 100, 100, [45, 56, 100])
+    object_list.append(block)
+
+    block = DisappearBlock(Vector2(450,5), 100, 100, [100, 67, 255])
+    object_list.append(block)
+
     block = Paddle(Vector2(320,480), 100, 50, [40, 0, 255])
     object_list.append(block)
   
