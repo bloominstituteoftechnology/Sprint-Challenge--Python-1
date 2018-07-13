@@ -10,11 +10,11 @@ SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
-    ball = GameBall(1, object_list, SCREEN_SIZE, 
+    kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
                                     [255, 10, 0], 20)
-    object_list.append(ball)
+    object_list.append(kinetic)
 
     paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 100, 50, [0, 0, 255])
     object_list.append(paddle)
@@ -27,9 +27,8 @@ def debug_create_objects(object_list):
 
     rainbowblock = RainbowBlock(Vector2(200, 250), 200, 50, [255, 0, 0], object_list)
     object_list.append(rainbowblock)
-
-    object_list += [ball, paddle, regularblock, rainbowblock]
-
+    
+    object_list += [kinetic, paddle, regularblock, rainbowblock]
   
 def main():
     pygame.init()
@@ -37,9 +36,9 @@ def main():
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
+
+    object_list = []
  
-    object_list = [] # list of objects of all types in the toy
-    
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop

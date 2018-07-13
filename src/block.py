@@ -41,7 +41,7 @@ class RegularBlock(KineticBlock):
         self.object_list = object_list
         super().__init__(position, width, height, color)
         self.hit = 0
-    
+
     def check_collision(self):
         if self.touched_by_ball == True:
             self.object_list.remove(self)
