@@ -20,8 +20,6 @@ def debug_create_objects(object_list):
                                     [255, 0, 0], 20)
     object_list.append(kinetic)
 
-    # block = BreakableBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    # object_list.append(block)
     less_breakable = lambda i, j: LessBreakableBlock(Vector2(40+(i*80), j * 50),80,50,[255,215,0])
     breakable_block = lambda i, j: BreakableBlock(Vector2(40+(i*80), j * 50),80,50,[255,69,0])
 
@@ -39,16 +37,7 @@ def debug_create_objects(object_list):
                     breakableblocks.append(less_breakable(i, j))
                 else:
                     breakableblocks.append(breakable_block(i, j))
-    # for i in range(0,5):
-    #     if i % 2 != 0:
-    #         breakableblocks.append(BreakableBlock(Vector2(40+(i*80),150),80,50,[255,69,0]))
-    #     else:
-    #         breakableblocks.append(LessBreakableBlock(Vector2(40+(i*80),150),80,50,[255,215,0]))
-    # for i in range(0,5):
-    #     if i % 2 != 0:
-    #         breakableblocks.append(LessBreakableBlock(Vector2(40+(i*80),200),80,50,[255,215,0]))
-    #     else:
-    #         breakableblocks.append(BreakableBlock(Vector2(40+(i*80),200),80,50,[255,69,0]))
+
     object_list.extend(breakableblocks)
 
     player_paddle = PlayerPaddle(SCREEN_SIZE, Vector2(200,750), 150, 30, [255, 255, 0])
@@ -57,8 +46,7 @@ def debug_create_objects(object_list):
 def break_breakables(object_list):
     def is_ball_touched(object):
         if hasattr(object, 'touched_by_ball'):
-            if object.touched_by_ball: return True
-        return False
+            return object.touched_by_ball
 
     global NUM_OF_BREAKABLES
     NUM_OF_BREAKABLES = len([object for object in object_list if hasattr(object, 'breakable')])
