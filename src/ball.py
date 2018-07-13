@@ -1,7 +1,9 @@
 import math
+import pygame
 
 from pygame.math import Vector2
 from pygame import Rect
+
 
 from block import KineticBlock
 

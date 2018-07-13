@@ -27,6 +27,12 @@ def debug_create_objects(object_list):
     # object_list.append(block)
     x = 25
     for i in range(0,7):
+        block = Breakable(Vector2(x,5), 50, 10, [0, 50, 255])
+        object_list.append(block)
+        x += 60
+
+    x = 25
+    for i in range(0,7):
         block = Breakable(Vector2(x,200), 50, 10, [0, 50, 255])
         object_list.append(block)
         x += 60
