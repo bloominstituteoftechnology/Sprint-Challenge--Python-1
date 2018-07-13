@@ -4,7 +4,7 @@ import sys
 
 from pygame.math import Vector2
 from ball import GameBall
-from block import KineticBlock, Paddle
+from block import KineticBlock, Paddle, Brick
 
 
 class GameManager:
@@ -31,8 +31,12 @@ class GameManager:
                             self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
         paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
                         self.PADDLE_SIZE[0], self.PADDLE_SIZE[1], [0, 0, 255])
+        
+        test_brick = Brick(self.object_list, 1, Vector2(200, 200), 100, 100, [255, 50, 50])
+
         self.object_list.append(gameball)
         self.object_list.append(paddle)
+        self.object_list.append(test_brick)
 
     def start_game(self):
         screen = pygame.display.set_mode(self.SCREEN_SIZE)
@@ -56,8 +60,8 @@ class GameManager:
                 object.check_collision()
 
             screen.fill(self.BACKGROUND_COLOR)
-            for ball in self.object_list:
-                ball.draw(screen, pygame)
+            for object in self.object_list:
+                object.draw(screen, pygame)
 
             clock.tick(60)
             pygame.display.flip()

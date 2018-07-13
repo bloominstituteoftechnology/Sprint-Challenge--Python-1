@@ -55,3 +55,18 @@ class Paddle(KineticBlock):
             self.position.y = self.rectangle.centery
 
         super().update()
+
+
+class Brick(KineticBlock):
+    def __init__(self, object_list, value, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.object_list = object_list
+        self.value = value
+    
+    def update(self, **kwargs):
+        if self.touched_by_ball:
+            self.destroy()
+        super().update()
+    
+    def destroy(self):
+        self.object_list.remove(self)
