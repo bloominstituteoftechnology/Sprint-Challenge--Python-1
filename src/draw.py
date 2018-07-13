@@ -18,6 +18,10 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    # player block
+    block = PlayerBlock(Vector2(320, 465), 100, 15, [0, 0, 255])
+    object_list.append(block)
   
 def main():
     pygame.init()
