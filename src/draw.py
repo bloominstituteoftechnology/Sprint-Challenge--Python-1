@@ -13,14 +13,14 @@ def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(300, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    [200, 10, 0], 20)
     object_list.append(kinetic)
 
     paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 70, 15, [0, 0, 0])
     object_list.append(paddle)
 
     for i in range(5):
-        color = [random.randint(100, 250), random.randint(100, 250), random.randint(100, 250)]
+        color = [random.randint(10, 250), random.randint(10, 250), random.randint(10, 250)]
         for j in range(3):
             block = KineticBlock(Vector2(52 + (i*74),100 + (j* 40)), 70, 30, color)
             object_list.append(block)
