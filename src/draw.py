@@ -36,7 +36,7 @@ def debug_create_objects(object_list):
 
     # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     # object_list.append(block)
-
+    #TODO: implement a grid using for in range loops:
     paddle = PaddleBlock(object_list, Vector2(150, 749), 120, 15, [104, 104, 104])
     object_list.append(paddle)
         
