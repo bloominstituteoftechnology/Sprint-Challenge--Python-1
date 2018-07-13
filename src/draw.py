@@ -44,7 +44,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left = left, right = right)
             object.check_collision()
  
         # Draw Updates
