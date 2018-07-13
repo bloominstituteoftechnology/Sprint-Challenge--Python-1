@@ -27,10 +27,15 @@ def debug_create_objects(object_list):
     # object_list.append(block)
     x = 25
     for i in range(0,7):
-        block = Breakable(Vector2(x - 10,200), 50, 10, [0, 50, 255])
+        block = Breakable(Vector2(x,200), 50, 10, [0, 50, 255])
         object_list.append(block)
         x += 60
 
+    x = 25
+    for i in range(0,7):
+        block = HarderToBreak(Vector2(x,220), 50, 10, [0, 50, 0])
+        object_list.append(block)
+        x += 60
 
     paddle = Paddle(Vector2(200,700), 100, 10, [0, 0, 0])
     object_list.append(paddle)
