@@ -1,5 +1,6 @@
 import pygame #TODO:  Fix intellisense
 import random
+import sys
 
 from pygame.math import Vector2
 
@@ -30,12 +31,16 @@ def main():
     
     debug_create_objects(object_list)
  
-    while True: # TODO:  Create more elegant condition for loop
+    done = False
+
+    while not done: # TODO:  Create more elegant condition for loop
         left = False
         right = False
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.QUIT: 
+                print("Thank you for playing!")
+                sys.exit()
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
