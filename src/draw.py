@@ -9,6 +9,7 @@ from block import *
 SCREEN_SIZE = [640, 700]
 BACKGROUND_COLOR = [255, 255, 255]
 
+
 def debug_create_objects(obj_list):
     kinetic = GameBall(1, obj_list, SCREEN_SIZE, Vector2(300, 300), Vector2(7, -7), [255, 10, 0], 20)
     obj_list.append(kinetic)
@@ -26,6 +27,9 @@ def debug_create_objects(obj_list):
   
 def main():
     pygame.init()
+    pygame.font.init()
+    game_font = pygame.font.SysFont('', 28)
+    pygame.display.set_caption("Breakout")
     screen = pygame.display.set_mode(SCREEN_SIZE)
  
     clock = pygame.time.Clock()
@@ -35,6 +39,7 @@ def main():
     debug_create_objects(obj_list)
  
     while True:
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
 
