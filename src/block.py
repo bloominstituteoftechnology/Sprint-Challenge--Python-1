@@ -53,3 +53,11 @@ class PlayerBlock(KineticBlock):
             self.rectangle.width,
             self.rectangle.height)
         super().update()   
+
+class SingleHit(KineticBlock):
+    pass
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+
+    
+                

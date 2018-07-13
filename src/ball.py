@@ -1,5 +1,5 @@
 import math
-
+import sys
 from pygame.math import Vector2
 from pygame import Rect
 
@@ -32,9 +32,11 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            sys.exit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            sys.exit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -113,6 +115,7 @@ class GameBall(Ball):
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
+           
 
         test = left + right + top + bottom
         
