@@ -8,8 +8,9 @@ class Block:
     Base class for square or rectangular object
     """
 
-    def __init__(self, position, width, height, color):
+    def __init__(self, position, width, height, color, obj_list):
         # Create a rectangle centered around the x and y
+        self.obj_list = obj_list
         self.position = position
         self.rectangle = pygame.Rect(
                                     position.x - (width/2),
