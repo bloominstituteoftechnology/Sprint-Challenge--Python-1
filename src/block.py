@@ -20,6 +20,7 @@ class Block:
         self.color = color
         self.touched_by_ball = False
         self.steps = 20
+        self.visible = True
 
     def update(self, **kwargs):
         self.touched_by_ball = False
@@ -34,6 +35,7 @@ class Block:
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
+
     def movePaddle(self, direction, SCREEN_WIDTH):
         print('movePaddle METHOD', direction)
         print(self.rectangle[0], SCREEN_WIDTH)
@@ -50,3 +52,17 @@ class KineticBlock(Block):
                 self.rectangle[0] = SCREEN_WIDTH
             else:
                 self.rectangle[0] -= self.steps
+
+
+class Brick(KineticBlock):
+    def __init__(self, position, width, height, color):
+        # Create a rectangle centered around the x and y
+        self.position = position
+        self.rectangle = pygame.Rect(
+            position.x,
+            position.y,
+            width,
+            height)
+        self.color = color
+        self.touched_by_ball = False
+        self.steps = 20

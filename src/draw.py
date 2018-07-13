@@ -1,5 +1,6 @@
 import pygame  # TODO:  Fix intellisense
 import random
+import math
 
 from pygame.math import Vector2
 
@@ -9,18 +10,47 @@ from block import *
 SCREEN_SIZE = [400, 600]
 BACKGROUND_COLOR = [255, 255, 255]
 
+BRICKS = []
+BRICKS_WIDTH = 40
+BRICKS_HEIGHT = 20
+BRICKS_PADDING = 19
+BRICKS_COLUMNS = math.floor(
+    ((SCREEN_SIZE[0] - BRICKS_PADDING) / (BRICKS_WIDTH + BRICKS_PADDING)))
+BRICKS_ROWS = math.floor(
+    ((SCREEN_SIZE[1] / 2) / (BRICKS_HEIGHT + BRICKS_PADDING)))
+
 
 def debug_create_objects(object_list):
-    block = KineticBlock(
-        Vector2(SCREEN_SIZE[0] / 2, SCREEN_SIZE[1]), 90, 15, [0, 0, 255])
-    object_list.append(block)
 
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
                        Vector2(random.randint(
-                           20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                       Vector2(4*random.random() - 2, 4*random.random() - 2),
-                       [255, 10, 0], 20)
+                           20, SCREEN_SIZE[0] - 20), SCREEN_SIZE[1] * 1/3),
+                       Vector2(4*random.random() * -1, 4*random.random() * -1),
+                       [255, 10, 0], 10)
     object_list.append(kinetic)
+
+    block = KineticBlock(
+        Vector2(SCREEN_SIZE[0] / 2, SCREEN_SIZE[1]), 90, 21, [0, 0, 255])
+    object_list.append(block)
+
+    createBricksMatrix(object_list)
+
+
+def createBricksMatrix(object_list):
+    print(math.floor(
+        ((SCREEN_SIZE[0] - BRICKS_PADDING) / (BRICKS_WIDTH + BRICKS_PADDING))))
+    print(math.floor(
+        ((SCREEN_SIZE[1] / 2) / (BRICKS_HEIGHT + BRICKS_PADDING))))
+
+    for r in range(BRICKS_ROWS):
+        BRICKS.append([])
+        # print(BRICKS)
+        for c in range(BRICKS_COLUMNS):
+            BRICKS[r].append([])
+            BRICKS[r][c] = KineticBlock(
+                Vector2(BRICKS_PADDING + (c * BRICKS_WIDTH + BRICKS_PADDING), BRICKS_PADDING + (r * BRICKS_HEIGHT + BRICKS_PADDING)), BRICKS_WIDTH, BRICKS_HEIGHT, [0, 0, 255])
+            object_list.append(BRICKS[r][c])
+        print('\n\n Row number:', r, 'colums in row:', c, '\n', BRICKS[r])
 
 
 def main():
@@ -47,8 +77,9 @@ def main():
                     print(event)
                 if event.key == pygame.K_s:
                     debug_create_objects(object_list)
-                    paddle = object_list[0]
-                    ball = object_list[1]
+                    paddle = object_list[1]
+                    ball = object_list[0]
+                    print('paddle', paddle, 'ball', ball.lives)
                 if event.key == pygame.K_q:
                     pygame.quit()
                 if event.key == pygame.K_RIGHT:
@@ -66,9 +97,10 @@ def main():
             left = True
         if keys[pygame.K_RIGHT]:
             right = True
+        # if ball.lives == 0:
+        #     pygame.quit()
+        #     pass
         for object in object_list:
-            if ball.lives == 0:
-                pygame.quit()
             object.update()
             object.check_collision()
 

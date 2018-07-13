@@ -19,6 +19,7 @@ class Ball:
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
         self.lives = 3
+        self.visible = True
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
@@ -87,7 +88,11 @@ class GameBall(Ball):
     def collide_with_rectangle(self, object):
         # This function is called after a first-pass test, that is the collision
         # rectangles overlap.
+        print(object.visible)
+        if object.visible == False:
+            return None
 
+        object.visible = False
         left, right, top, bottom = False, False, False, False
         # TODO:  This can probably be optimized
         if (
