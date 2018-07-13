@@ -1,4 +1,6 @@
 import math
+import pygame
+import sys
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -17,12 +19,17 @@ class Ball:
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
 
-    def update_rectangle(self):
+    def update_rectangle(self): #method
         return Rect(self.position.x - self.radius,
                                         self.position.y - self.radius,
                                         self.radius*2, self.radius*2)
 
-    def update(self, **kwargs):
+    def update(self, **kwargs): #method 
+        '''
+            **kwargs are keyword arguments. 
+            You can define the arguments outside the function and then use
+            `**kwargs` as the placeholder in the func
+        '''
         if self.position.x <= 0 + self.radius: # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
@@ -31,11 +38,12 @@ class Ball:
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            print("That's a Winner!")
+            sys.exit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
-
+            print("Game Over!")
+            sys.exit()
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
 
@@ -165,5 +173,5 @@ class GameBall(Ball):
             # Balls colliding with blocks
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
-                if self.collision_rectangle.colliderect(object.rectangle):
-                    self.collide_with_rectangle(object)
+                if self.collision_rectangle.colliderect(object.rectangle): #broad phase - we can do this test super fast
+                    self.collide_with_rectangle(object) ##if rectangles overlap....
