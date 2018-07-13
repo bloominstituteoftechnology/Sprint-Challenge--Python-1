@@ -52,7 +52,19 @@ class BouncingBall(Ball):
     def update(self):
         self.velocity.y += self.Gravity
         super().update()
-        
+
+
+class RainbowBall(Ball):
+    def update(self):
+        r = (self.color[0] + 4) % 256
+        g = (self.color[1] + 12) % 256
+        b = (self.color[2]) - 6) % 256
+        self.color = [r, g, b]
+        super().update()
+
+class BouncingRainbow(BouncingBall, RainbowBall):
+    pass        
+
 class GameBall(Ball):
     """   
     A ball that collides with blocks
@@ -170,6 +182,18 @@ class GameBall(Ball):
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
             if issubclass(type(object), KineticBlock) and object != self:
+              relative_vector = self.position - object.position
+                if relative_vector.length() <= self.radius + object.radius:
+                    # Objects are in collision range, so collide
+                    self.collide_with_ball(object, relative_vector)
+            # Balls colliding with rectangles
+            elif issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
+
+class KineticBouncing(BouncingBall, KineticBall):
+    pass
+
+class AllTheThings(BouncingBall, KineticBall, RainbowBall):
+    pass
