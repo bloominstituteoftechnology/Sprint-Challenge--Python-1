@@ -30,8 +30,9 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class Paddle():
-    def __init__(self, position, width, height, color):
+    def __init__(self, bounds, position, width, height, color):
         # Create a rectangle centered around the x and y
+        self.bounds = bounds
         self.position = position
         self.width = width
         self.height = height
@@ -46,21 +47,26 @@ class Paddle():
     def update(self):
         self.touched_by_ball = False
         if pygame.key.get_pressed()[pygame.K_LEFT] == True:
-            print("left pressed")
-            self.position.x += -3
-            self.rectangle = pygame.Rect(
-                                    self.position.x - 3 - (self.width/2),
-                                    self.position.y - (self.height/2),
-                                    self.width,
-                                    self.height)
+            if self.position.x <= 0 + self.width/2:
+                self.position.x += 1
+            else:
+                self.position.x += -3
+                self.rectangle = pygame.Rect(
+                                        self.position.x - 3 - (self.width/2),
+                                        self.position.y - (self.height/2),
+                                        self.width,
+                                        self.height)
+        
         if pygame.key.get_pressed()[pygame.K_RIGHT] == True:
-            print("right pressed")
-            self.position.x += 3
-            self.rectangle = pygame.Rect(
-                                    self.position.x + 3 - (self.width/2),
-                                    self.position.y - (self.height/2),
-                                    self.width,
-                                    self.height)
+            if self.position.x >= self.bounds[0] - self.width/2:
+                self.position.x += -1
+            else:
+                self.position.x += 3
+                self.rectangle = pygame.Rect(
+                                        self.position.x + 3 - (self.width/2),
+                                        self.position.y - (self.height/2),
+                                        self.width,
+                                        self.height)
 
     def check_collision(self):
         pass
