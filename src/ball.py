@@ -17,6 +17,7 @@ class Ball:
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
         self.game_over = False
+        self.points = 0
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
@@ -30,9 +31,13 @@ class Ball:
         if self.position.x >= self.bounds[0] - self.radius:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
+
+        # Ball has reached the top of the screen, points awarded
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            self.points += 1
+            print("POINTS: ", self.points)
 
         # Ball has hit the bottom - game over
         if self.position.y >= self.bounds[1] - self.radius:
