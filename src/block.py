@@ -36,7 +36,20 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
-class PlayerBlock(Block):
-    def __init__ (self):
-        super().__init__(self, color, x, y)
-       
+class PlayerBlock(KineticBlock):
+    VEL = 7
+
+    def update(self, left, right):
+        self.left = left
+        self.right = right
+
+        if self.left:
+            self.position.x -= self.VEL
+        if self.right:
+            self.position.x += self.VEL
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.rectangle.width/2),
+            self.position.y - (self.rectangle.height/2),
+            self.rectangle.width,
+            self.rectangle.height)
+        super().update()   

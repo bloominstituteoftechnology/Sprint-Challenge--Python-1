@@ -6,6 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
+
 SCREEN_SIZE = [800, 400]
 BACKGROUND_COLOR = [255, 255, 255]
 
@@ -13,18 +14,25 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(10*random.random() - 2, 10*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
-    player_block = PlayerBlock()
+    player_block = PlayerBlock(Vector2(200,400), 150, 50, [0, 0, 0])
+    block7 = KineticBlock(Vector2(149,100), 50, 50, [0, 0, 255])
+    block6 = KineticBlock(Vector2(149,100), 50, 50, [0, 0, 255])
     block = KineticBlock(Vector2(200,100), 50, 50, [0, 0, 255])
     block1 = KineticBlock(Vector2(251,100), 50, 50, [0, 0, 255])
     block2 = KineticBlock(Vector2(302,100), 50, 50, [0, 0, 255])
     block3 = KineticBlock(Vector2(353,100), 50, 50, [0, 0, 255])
+    block4 = KineticBlock(Vector2(404,100), 50, 50, [0, 0, 255])
+    block5 = KineticBlock(Vector2(455,100), 50, 50, [0, 0, 255])
     object_list.append(block)
     object_list.append(block1)
     object_list.append(block2)
     object_list.append(block3)
+    object_list.append(block4)
+    object_list.append(block5)
+    object_list.append(block6)
     object_list.append(player_block)
   
 def main():
@@ -52,7 +60,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates
