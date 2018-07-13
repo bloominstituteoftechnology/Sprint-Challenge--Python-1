@@ -39,5 +39,9 @@ class Paddle(KineticBlock):
         self.paddle = True
         super().__init__(position, width, height, color)
 
+class BlockOne(KineticBlock):
+    pass
 
+class BlockThree(KineticBlock):
+    pass
 
