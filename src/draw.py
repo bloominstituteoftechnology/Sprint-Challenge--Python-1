@@ -16,22 +16,22 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-#blocks
-    block = KineticBlock(Vector2(50, 70), 50, 50, [200, 200, 255])
+#blocks **turnn into list
+    block = KineticBlock(Vector2(50, 35), 50, 50, [200, 200, 255])
     object_list.append(block)
 
-    block2 = KineticBlock(Vector2(125, 70), 50, 50, [0, 0, 255])
+    block2 = KineticBlock(Vector2(125, 35), 50, 50, [255, 100, 25])
     object_list.append(block2)
 
-    block3 = KineticBlock(Vector2(200, 70), 50, 50, [0, 0, 255])
+    block3 = KineticBlock(Vector2(200, 35), 50, 50, [175, 80, 100])
     object_list.append(block3)
 
-    block4 = KineticBlock(Vector2(275, 70), 50, 50, [0, 0, 255])
+    block4 = KineticBlock(Vector2(275, 35), 50, 50, [150, 100, 150])
     object_list.append(block4)
 
-    block5 = KineticBlock(Vector2(350, 70), 50, 50, [0, 0, 255])
+    block5 = KineticBlock(Vector2(350, 35), 50, 50, [175, 255, 175])
     object_list.append(block5)
-
+    
 #paddle
     paddle = KineticBlock(Vector2(200,750), 100, 50, [255, 255, 0])
     object_list.append(paddle)
