@@ -18,8 +18,8 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
-
-
+        
+        
     def update(self, **kwargs):
         self.touched_by_ball = False
 
@@ -30,8 +30,60 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
-    pass
+    """
+    Has a difficulty property that tells how many times 
+    it needs to be hit before it disappears (from 1-5)
+    """
 
+    def __init__(self, position, width, height, color, difficulty):
+        super().__init__(position, width, height, color)
+        self.hits_left = difficulty
+        self.defeated = False
+        self.colors = [[255, 0, 0], [255,140,0], [255, 215, 0], [0, 255, 0]]
+        self.color = self.colors[-difficulty]
 
+    def check_collision(self):
+        if self.touched_by_ball:
+            self.hits_left -= 1
+            self.color = self.colors[-self.hits_left]
+        if self.hits_left == 0:
+            self.defeated = True
+
+class UnbreakableBlock(Block):
+    """
+    Block that the ball can bounce off of, but not destroy
+    """
+
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.color = [80, 80, 80]
+
+class GhostBlock(Block):
+    """
+    Block that is destroyed on contact, but the ball does
+    not bounce off of
+    """
+
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.color = [200, 200, 200]
+        self.defeated = False
+
+    def check_collision(self):
+        if self.touched_by_ball:
+            self.defeated = True
+
+class Paddle(Block):
+    """ 
+    Player controlled paddle at the bottom of the screen
+    """
+
+    def update(self, **kwargs):
+        distance = 2
+        for k, v in kwargs.items():
+            if k == "left" and v == True:
+                self.rectangle = self.rectangle.move(-distance, 0)
+                self.position.x -= distance 
+            if k == "right" and v == True:
+                self.rectangle = self.rectangle.move(distance, 0)
+                self.position.x += distance
