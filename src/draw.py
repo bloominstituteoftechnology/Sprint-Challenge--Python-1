@@ -13,7 +13,7 @@ def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    [255, 10, 0], 7)
     object_list.append(kinetic)
 
     block = KineticBlock(Vector2(320,460), 80, 20, [0, 0, 255])
@@ -29,19 +29,23 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
+
+    run_game = True
  
-    while True: # TODO:  Create more elegant condition for loop
+    while run_game == True: # TODO:  Create more elegant condition for loop
         left = False
         right = False
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.QUIT: run_game = False
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            left = True
+            object_list[1].position.x = object_list[1].position.x - 0.1
+            print(object_list[1].position.x)
         if keys[pygame.K_RIGHT]:
+            object_list[1].position.x = object_list[1].position.x + 0.1
             right = True
         for object in object_list:
             object.update()
