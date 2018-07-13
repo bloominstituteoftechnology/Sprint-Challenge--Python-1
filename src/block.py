@@ -45,7 +45,7 @@ class Paddle(KineticBlock):
 
     def update(self):
         if self.touched_by_ball == True:
-            self.color = [0,0,62]
+            self.color = [0,0,0]
 
         self.touched_by_ball = False
         if self.left == True:

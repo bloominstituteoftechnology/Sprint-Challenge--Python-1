@@ -40,20 +40,18 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
-        left = False
-        right = False
-        
+    
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            left = True
-            # object_list[2].rectangle.move_ip(-6,0)
+            object_list[1].move_left()
+            pass
         if keys[pygame.K_RIGHT]:
-            right = True
-            # object_list[2].rectangle.move_ip(6,0)
+            object_list[1].move_right()
+            pass
             
         for object in object_list:
             object.update()
