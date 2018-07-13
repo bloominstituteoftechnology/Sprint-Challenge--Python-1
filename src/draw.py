@@ -31,6 +31,8 @@ def main():
     clock = pygame.time.Clock()
 
     object_list = []  # list of objects of all types in the toy
+    paddle = None
+    ball = None
 
     while True:  # TODO:  Create more elegant condition for loop
         left = False
@@ -45,16 +47,18 @@ def main():
                     print(event)
                 if event.key == pygame.K_s:
                     debug_create_objects(object_list)
+                    paddle = object_list[0]
+                    ball = object_list[1]
                 if event.key == pygame.K_q:
                     pygame.quit()
                 if event.key == pygame.K_RIGHT:
                     print("\nRight pressed")
                     print(object_list[0].position.x)
-                    object_list[0].movePaddle('RIGHT', SCREEN_SIZE[0])
+                    paddle.movePaddle('RIGHT', SCREEN_SIZE[0])
                 if event.key == pygame.K_LEFT:
                     print("\nLeft pressed")
                     print(object_list[0].position.x)
-                    object_list[0].movePaddle('LEFT', SCREEN_SIZE[0])
+                    paddle.movePaddle('LEFT', SCREEN_SIZE[0])
 
         # TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
@@ -63,6 +67,8 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
+            if ball.lives == 0:
+                pygame.quit()
             object.update()
             object.check_collision()
 
