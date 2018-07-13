@@ -16,9 +16,13 @@ BACKGROUND_COLOR = [255, 255, 255]
 PADDLE_WIDTH = 120
 PADDLE_HEIGHT = 30
 
-NUMBER_OF_BLOCKS = 6
+NUMBER_OF_BLOCKS = 3
 BLOCK_WIDTH = S_WIDTH / NUMBER_OF_BLOCKS
 BLOCK_HEIGHT = BLOCK_WIDTH / 2
+
+
+def Rnd_Num_gen():  # Random color blocks every game
+    return random.randint(0, 256)
 
 
 def debug_create_objects(object_list):
@@ -42,12 +46,12 @@ def debug_create_objects(object_list):
     object_list.append(paddle)
     # CREATE BLOCKS
 
-    for i in range(3):
-        blocks = []  # WIP
-        color = [104, 237, 126]
+    for i in range(NUMBER_OF_BLOCKS):
+        blocks = []
+        color = [Rnd_Num_gen(), Rnd_Num_gen(), Rnd_Num_gen()]
         for x in range(3):
             block = KineticBlock(
-                Vector2(72 + (i * 124), 100 + (x * 40)), 120, 30, color
+                Vector2(74 + (i * 124), 100 + (x * 40)), 120, 30, color
             )
             object_list.append(block)
 

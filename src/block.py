@@ -41,3 +41,8 @@ class Paddle(KineticBlock):
         if right:
             self.rectangle.x -= 3
         self.touched_by_ball = False
+
+
+class D_Blocks(KineticBlock):
+    # TODO
+    pass
