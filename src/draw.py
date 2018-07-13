@@ -6,9 +6,22 @@ from pygame.math import Vector2
 from ball import GameBall
 from block import KineticBlock, Paddle, Brick
 
+# TODO: Break levels out to own class
+level_1 = [
+    {"row": 1, "color": [255, 0, 0]},
+    {"row": 2, "color": [255, 0, 0]},
+    {"row": 3, "color": [255, 153, 51]},
+    {"row": 4, "color": [255, 153, 51]},
+    {"row": 5, "color": [0, 204, 0]},
+    {"row": 6, "color": [0, 204, 0]},
+    {"row": 7, "color": [255, 255, 0]},
+    {"row": 8, "color": [255, 255, 0]}
+]
+
+levels = [level_1]
 
 class GameManager:
-    def __init__(self):
+    def __init__(self, levels):
         # Game settings
         self.SCREEN_SIZE = [800, 400]
         self.BACKGROUND_COLOR = [0, 0, 0]
@@ -20,34 +33,37 @@ class GameManager:
         self.GAMEBALL_SIZE = 8
         self.GAMEBALL_COLOR = [255, 10, 0]
         self.PADDLE_START_POS = Vector2(459, 380)
-        self.PADDLE_SPEED = 5
+        self.PADDLE_SPEED = 6
         self.PADDLE_SIZE = [34, 8]
+        self.BRICK_SIZE = [50, 20]
+        self.BRICKS_PER_ROW = int(self.SCREEN_SIZE[0]/self.BRICK_SIZE[0])
 
+        self.levels = levels
         self.object_list = []
 
     def build_level(self):
-        # TODO: Create game blocks: reg block, multi hit block
+        # TODO: Create game blocks: multi hit block
         gameball = GameBall(1, self.object_list, self.SCREEN_SIZE, self.GAMEBALL_START_POS,
                             self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
         paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
                         self.PADDLE_SIZE[0], self.PADDLE_SIZE[1], [0, 0, 255])
         
-        test_brick = Brick(self.object_list, 1, Vector2(200, 200), 100, 100, [255, 50, 50])
-
         self.object_list.append(gameball)
         self.object_list.append(paddle)
-        self.object_list.append(test_brick)
+
+        for level in self.levels:
+            for row in level:
+                self.build_row(self.BRICKS_PER_ROW, Brick, row["row"], row["color"])
     
-    def build_row(self, num_bricks, brick_type):
-        pos_x = 25
-        pos_y = 2
+    def build_row(self, num_bricks, brick_type, row, color):
+        pos_x = self.BRICK_SIZE[0]/2
+        pos_y = self.BRICK_SIZE[1] * row
 
         for i in range(num_bricks):
             game_brick = brick_type(self.object_list, 1, Vector2(
-                pos_x, pos_y), 50, 4, [255, 50, 50])
+                pos_x, pos_y), self.BRICK_SIZE[0], self.BRICK_SIZE[1], color)
             self.object_list.append(game_brick)
             pos_x += 50
-
 
     def start_game(self):
         screen = pygame.display.set_mode(self.SCREEN_SIZE)
@@ -85,5 +101,5 @@ class GameManager:
 
 
 if __name__ == "__main__":
-    breakout = GameManager()
+    breakout = GameManager(levels)
     breakout.main()
