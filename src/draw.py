@@ -1,14 +1,17 @@
 import pygame  # TODO:  Fix intellisense
 import random
+import sys
 
 from pygame.math import Vector2
 
 from ball import *
 from block import *
 
-SCREEN_SIZE = [400, 800]
 S_WIDTH = 400
 S_HEIGHT = 800
+
+SCREEN_SIZE = [S_WIDTH, S_HEIGHT]
+
 BACKGROUND_COLOR = [255, 255, 255]
 PADDLE_WIDTH = 120
 PADDLE_HEIGHT = 30
@@ -33,10 +36,10 @@ def debug_create_objects(object_list):
     )
     object_list.append(kinetic)
 
-    block = KineticBlock(
+    paddle = Paddle(
         Vector2(S_WIDTH / 2, S_HEIGHT - 20), PADDLE_WIDTH, PADDLE_HEIGHT, [0, 0, 255]
     )
-    object_list.append(block)
+    object_list.append(paddle)
     # CREATE BLOCKS
 
     for i in range(3):
@@ -75,7 +78,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            if isinstance(object, Block):
+            if isinstance(object, Paddle):
                 object.update(right, left)
                 object.check_collision()
             else:
@@ -86,8 +89,6 @@ def main():
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
-        # for i in range(len(blocks)):
-        #     blocks[i].draw(display)
         clock.tick(60)
         pygame.display.flip()
 

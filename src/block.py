@@ -18,11 +18,7 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-    def update(self, left, right):
-        if left:
-            self.rectangle.x += 3
-        if right:
-            self.rectangle.x -= 3
+    def update(self, **kwargs):
         self.touched_by_ball = False
 
     def check_collision(self):
@@ -37,3 +33,11 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+
+class Paddle(KineticBlock):
+    def update(self, left, right):
+        if left:
+            self.rectangle.x += 3
+        if right:
+            self.rectangle.x -= 3
+        self.touched_by_ball = False
