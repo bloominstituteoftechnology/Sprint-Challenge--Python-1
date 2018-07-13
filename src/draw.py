@@ -19,11 +19,14 @@ def debug_create_objects(object_list):
     paddle = KineticBlock(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 100, 50, [0, 0, 255])
     object_list.append(paddle)
 
-    regularblock = RegularBlock(Vector2(200,200), 100, 100, [255, 0, 0])
-    object_list.append(regularblock)
+    for i in range(5):
+        color = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
+        for j in range(3):
+            block = RainbowBlock(Vector2(25 + (i*75), 100 + (j * 40)), 70, 30, color, object_list)
+            object_list.append(block)
 
-    rainbowblock = RainbowBlock(Vector2(200,200), 100, 100, [255, 255, 255])
-    object_list.append(rainbowblock)    
+    regularblock = RegularBlock(Vector2(200, 0), 100, 100, [255, 0, 0], object_list)
+    object_list.append(regularblock)
 
   
 def main():
@@ -51,7 +54,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates

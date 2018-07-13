@@ -35,7 +35,8 @@ class KineticBlock(Block):
     pass
 
 class RegularBlock(KineticBlock):
-    def __init__(self, position, width, height, color):
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
         super().__init__(position, width, height, color)
         self.should_draw = True
 
@@ -43,8 +44,9 @@ class RegularBlock(KineticBlock):
         self.should_draw = False
 
 class RainbowBlock(RegularBlock):
-    def __init__(self, position, width, height, color):
-        super().__init__(position, width, height, color)
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
+        super().__init__(position, width, height, color, object_list)
         self.collisioncount = 0
 
     def collision(self):
@@ -54,31 +56,31 @@ class RainbowBlock(RegularBlock):
 
 # The above allows the Rainbow Block to take a certain number of hits before vanishing
 
-        else:
-            if self.collisioncount == 1 or self.collisioncount == 3:
-                self.color = [0, 255, 0]
-            if self.collisioncount == 2 or self.collisioncount == 4:
-                self.color = [0, 0, 255]
+#        else:
+#            if self.collisioncount == 1 or self.collisioncount == 3:
+#                self.color = [0, 255, 0]
+#            if self.collisioncount == 2 or self.collisioncount == 4:
+#                self.color = [0, 0, 255]
 
 # This makes the Rainbow Block change colors upon being hit
 
 class Paddle(KineticBlock):
     def __init__(self, position, width, height, color):
         super().__init__(position, width, height, color)
-        self.left = False
-        self.right = False
-        self.height = height
-        self.width = width
+        self.bounds = bounds
 
-    def update(self):
-        if self.left == True:
+    def update(self, **kwargs):
+        left = kwargs['left']
+        right = kwargs['right']
+
+        if left:
             self.position.x = (self.position.x - 2) if self.position.x > 30 else 30
             self.rectangle = pygame.Rect(
                                     self.position.x - (self.width/2),
                                     self.position.y - (self.height/2),
                                     self.width,
                                     self.height)
-        if self.right == True:
+        if right:
             self.position.x = (self.position.x + 2) if self.position.x < 370 else 370
             self.rectangle = pygame.Rect(
                                     self.position.x - (self.width/2),
