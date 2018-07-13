@@ -17,12 +17,17 @@ class Ball:
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
 
-    def update_rectangle(self):
+    def update_rectangle(self): #method
         return Rect(self.position.x - self.radius,
                                         self.position.y - self.radius,
                                         self.radius*2, self.radius*2)
 
-    def update(self, **kwargs):
+    def update(self, **kwargs): #method 
+        '''
+            **kwargs are keyword arguments. 
+            You can define the arguments outside the function and then use
+            `**kwargs` as the placeholder in the func
+        '''
         if self.position.x <= 0 + self.radius: # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
