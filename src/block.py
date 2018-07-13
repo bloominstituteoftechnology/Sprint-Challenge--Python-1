@@ -64,3 +64,28 @@ class Paddle(KineticBlock):
             self.right = False
 
         super().update()
+
+class RegularBlock(KineticBlock):
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
+        super().__init__(position, width, height, color)
+
+    def update(self):
+        if self.touched_by_ball == True:
+            self.object_list.remove(self)
+        super().update()
+
+
+class StrongBlock(KineticBlock):
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
+        self.hp = 5
+        super().__init__(position, width, height, color)
+
+    def update(self):
+        if self.touched_by_ball == true:
+            self.hp--
+            self.color = [random.randint(100, 250), random.randint(100, 250), random.randint(100, 250)]
+            if self.hp == 0:
+                self.object_list.remove(self)
+        super().update()
