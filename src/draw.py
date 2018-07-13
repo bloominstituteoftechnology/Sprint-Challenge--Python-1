@@ -18,6 +18,15 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    block = DisappearBlock(Vector2(1,5), 100, 100, [45, 56, 100])
+    object_list.append(block)
+
+    block = DisappearBlock(Vector2(450,5), 100, 100, [100, 67, 255])
+    object_list.append(block)
+
+    block = Paddle(Vector2(320,480), 100, 50, [40, 0, 255])
+    object_list.append(block)
   
 def main():
     pygame.init()
@@ -44,8 +53,12 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
-            object.check_collision()
+            if isinstance(object, Block):           
+                object.update(left = left, right = right)
+                object.check_collision()
+            else:
+                object.update()
+                object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
