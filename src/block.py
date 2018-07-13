@@ -34,4 +34,32 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color):
+        self.position = position
+        self.width = width
+        self.height = height
+        self.color = color
+        self.direction = 0
+        self.speed = 5
+        self.rectangle = pygame.Rect(
+                                    position.x - (width/2),
+                                    position.y - (height/2),
+                                    width,
+                                    height)
 
+    def update(self):
+        """
+        Move paddle if the left or right key is held down. Do not allow
+        paddle to move out of bounds.
+        """
+        # Handling movement of paddle
+        self.position.x += self.direction
+        
+        # Making sure paddle does not go out of bounds
+        if self.position.x < 0:
+            self.position.x = 0
+        if self.position.x > 300:
+            self.position.x = 300
+
+        super().update()
