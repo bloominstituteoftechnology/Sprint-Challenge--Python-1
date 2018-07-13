@@ -1,3 +1,4 @@
+# Start
 # Sprint Challenge Python 1
 
 # CRITICAL INFORMATION
