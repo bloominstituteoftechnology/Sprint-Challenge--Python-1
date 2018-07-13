@@ -35,4 +35,21 @@ class KineticBlock(Block):
     pass
 
 class BreakingBlock(KineticBlock):
-    pass
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
+        self.touched_by_ball = False
+        self.color = color
+        self.rectangle = pygame.Rect(
+                                    position.x - (width/2),
+                                    position.y - (height/2),
+                                    width,
+                                    height)
+        self.position = position
+
+    def update(self, *args):
+        if self.touched_by_ball:
+            for object in self.object_list:
+                if object == self:
+                    self.object_list.remove(object)
+                else:
+                    continue

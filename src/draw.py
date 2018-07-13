@@ -21,31 +21,31 @@ def debug_create_objects(object_list):
     object_list.append(block)
 
     #GREEN ROW
-    block = BreakingBlock(Vector2(40, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(40, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(130, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(130, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(220, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(220, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(310, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(310, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(400, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(400, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(490, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(490, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(580, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(580, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
 
-    block = BreakingBlock(Vector2(670, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(670, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
     
-    block = BreakingBlock(Vector2(760, 100), 80, 30, [0, 255, 0])
+    block = BreakingBlock(object_list, Vector2(760, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
   
 def main():
@@ -73,9 +73,10 @@ def main():
         if keys[pygame.K_LEFT]:
             object_list[1].position.x = object_list[1].position.x - 0.5
             print(object_list[1].position.x)
+            # left = True
         if keys[pygame.K_RIGHT]:
             object_list[1].position.x = object_list[1].position.x + 0.5
-            right = True
+            # right = True
         for object in object_list:
             object.update()
             object.check_collision()
