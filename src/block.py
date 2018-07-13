@@ -45,7 +45,7 @@ class Paddle(KineticBlock):
         self.width = width
         super().__init__(position, width, height, color)
 
-
+this is too make blocks
     def update(self):
         if self.left == True:
             self.position.x = (self.position.x - 3) if self.position.x > 30 else 30 #TODO: dynamic min

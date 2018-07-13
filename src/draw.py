@@ -39,7 +39,7 @@ def main():
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-        
+#this is too make the paddle move left to right
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             object_list[1].move_left()
