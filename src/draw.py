@@ -6,11 +6,16 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
+S_WIDTH = 400
+S_HEIGHT = 800
 BACKGROUND_COLOR = [255, 255, 255]
-PADDLE_WIDTH = 60
-PADDLE_HEIGHT = 15
+PADDLE_WIDTH = 120
+PADDLE_HEIGHT = 20
 
+NUMBER_OF_BLOCKS = 6
+BLOCK_WIDTH = S_WIDTH/NUMBER_OF_BLOCKS
+BLOCK_HEIGHT = BLOCK_WIDTH/2
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -19,7 +24,14 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(S_WIDTH/2,S_HEIGHT-20), PADDLE_WIDTH, PADDLE_HEIGHT, [0, 0, 255])
+    
+    blocks = KineticBlock(Vector2(S_WIDTH/2,S_HEIGHT/2), S_WIDTH/NUMBER_OF_BLOCKS, BLOCK_HEIGHT, [0, 0, 255])
+    # CREATE BLOCKS
+
+    # for x in range(0,int(S_WIDTH), int(BLOCK_WIDTH)):
+    #     blocks.append(block)
+    object_list.append(blocks)
     object_list.append(block)
   
 def main():
@@ -47,14 +59,19 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
-            object.check_collision()
+            if isinstance(object, Block):
+                object.update(right, left)
+                object.check_collision()
+            else:
+                object.update()
+                object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
- 
+        # for i in range(len(blocks)):
+        #     blocks[i].draw(display)
         clock.tick(60)
         pygame.display.flip()
  
