@@ -160,11 +160,6 @@ class GameBall(Ball):
                     stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
 
-        if issubclass(type(object), RegularBlock) and object !=self:
-            object.collision()
-
-
-
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type

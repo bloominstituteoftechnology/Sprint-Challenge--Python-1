@@ -22,11 +22,11 @@ def debug_create_objects(object_list):
     for i in range(5):
         color = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
         for j in range(3):
-            rainbowblock = RainbowBlock(Vector2(40 + (i*75), 100 + (j * 40)), 70, 30, color, object_list)
-            object_list.append(rainbowblock)
+            regularblock = RegularBlock(Vector2(40 + (i*75), 100 + (j * 40)), 70, 30, color, object_list)
+            object_list.append(regularblock)
 
-    regularblock = RegularBlock(Vector2(200, 250), 200, 50, [255, 0, 0], object_list)
-    object_list.append(regularblock)
+    rainbowblock = RainbowBlock(Vector2(200, 250), 200, 50, [255, 0, 0], object_list)
+    object_list.append(rainbowblock)
 
     object_list += [ball, paddle, rainbowblock, regularblock]
 
