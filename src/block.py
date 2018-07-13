@@ -20,8 +20,14 @@ class Block:
         self.touched_by_ball = False
 
 
-    def update(self, **kwargs):
+    def update(self, left, right):
         self.touched_by_ball = False
+        if left:
+            print("left fires")
+            self.rectangle.x += 2
+        if right:
+            print("right fires")
+            self.rectangle.x -= 2
 
     def check_collision(self):
         pass
