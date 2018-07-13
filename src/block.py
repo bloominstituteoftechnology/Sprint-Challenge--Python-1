@@ -20,6 +20,7 @@ class Block:
         self.touched_by_ball = False
 
 
+
     def update(self, **kwargs):
         self.touched_by_ball = False
 
