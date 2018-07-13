@@ -29,7 +29,8 @@ class Block:
         pass
 
     def draw(self, screen, pygame):
-        pygame.draw.rect(screen, self.color, self.rectangle)
+        if not self.visible == False:
+            pygame.draw.rect(screen, self.color, self.rectangle)
 
 
 class KineticBlock(Block):
