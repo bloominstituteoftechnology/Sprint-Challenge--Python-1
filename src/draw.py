@@ -10,14 +10,30 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
-    kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
-    object_list.append(kinetic)
+    ball = GameBall(1, object_list, SCREEN_SIZE, 
+                            Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                            Vector2(4*random.random() - 2, 4*random.random() - 2),
+                            [255, 10, 0], 20)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    kb_1 = KineticBlock(Vector2(   0, 10), 40, 10, [0, 0, 255])
+    kb_2 = KineticBlock(Vector2(  40, 10), 40, 10, [0, 0, 255])
+    kb_3 = KineticBlock(Vector2(  80, 10), 40, 10, [0, 0, 255])
+    kb_4 = KineticBlock(Vector2( 120, 10), 40, 10, [0, 0, 255])
+    kb_5 = KineticBlock(Vector2( 160, 10), 40, 10, [0, 0, 255])
+    kb_6 = KineticBlock(Vector2( 200, 10), 40, 10, [0, 0, 255])
+    kb_7 = KineticBlock(Vector2( 240, 10), 40, 10, [0, 0, 255])
+    kb_8 = KineticBlock(Vector2( 280, 10), 40, 10, [0, 0, 255])
+    kb_9 = KineticBlock(Vector2( 320, 10), 40, 10, [0, 0, 255])
+    kb_10 = KineticBlock(Vector2(360, 10), 40, 10, [0, 0, 255])
+    kb_11 = KineticBlock(Vector2(400, 10), 40, 10, [0, 0, 255])
+    kb_12 = KineticBlock(Vector2(440, 10), 40, 10, [0, 0, 255])
+    kb_13 = KineticBlock(Vector2(480, 10), 40, 10, [0, 0, 255])
+    kb_14 = KineticBlock(Vector2(520, 10), 40, 10, [0, 0, 255])
+    kb_15 = KineticBlock(Vector2(560, 10), 40, 10, [0, 0, 255])
+    kb_16 = KineticBlock(Vector2(600, 10), 40, 10, [0, 0, 255])
+    kb_17 = KineticBlock(Vector2(640, 10), 40, 10, [0, 0, 255])
+
+    object_list.extend([ball, kb_1, kb_2, kb_3, kb_4, kb_5, kb_6, kb_7, kb_8, kb_9, kb_10, kb_11, kb_12, kb_13, kb_14, kb_15, kb_16, kb_17])
   
 def main():
     pygame.init()
