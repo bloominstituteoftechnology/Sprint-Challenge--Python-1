@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -14,26 +14,32 @@ def debug_create_objects(object_list):
                             Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                             Vector2(4*random.random() - 2, 4*random.random() - 2),
                             [255, 10, 0], 20)
+    
+    paddle = Paddle(Vector2(150, 700), 50, 10, [255, 0, 0] )
 
-    kb_1 = KineticBlock(Vector2(   0, 10), 40, 10, [0, 0, 255])
-    kb_2 = KineticBlock(Vector2(  40, 10), 40, 10, [0, 0, 255])
-    kb_3 = KineticBlock(Vector2(  80, 10), 40, 10, [0, 0, 255])
-    kb_4 = KineticBlock(Vector2( 120, 10), 40, 10, [0, 0, 255])
-    kb_5 = KineticBlock(Vector2( 160, 10), 40, 10, [0, 0, 255])
-    kb_6 = KineticBlock(Vector2( 200, 10), 40, 10, [0, 0, 255])
-    kb_7 = KineticBlock(Vector2( 240, 10), 40, 10, [0, 0, 255])
-    kb_8 = KineticBlock(Vector2( 280, 10), 40, 10, [0, 0, 255])
-    kb_9 = KineticBlock(Vector2( 320, 10), 40, 10, [0, 0, 255])
-    kb_10 = KineticBlock(Vector2(360, 10), 40, 10, [0, 0, 255])
-    kb_11 = KineticBlock(Vector2(400, 10), 40, 10, [0, 0, 255])
-    kb_12 = KineticBlock(Vector2(440, 10), 40, 10, [0, 0, 255])
-    kb_13 = KineticBlock(Vector2(480, 10), 40, 10, [0, 0, 255])
-    kb_14 = KineticBlock(Vector2(520, 10), 40, 10, [0, 0, 255])
-    kb_15 = KineticBlock(Vector2(560, 10), 40, 10, [0, 0, 255])
-    kb_16 = KineticBlock(Vector2(600, 10), 40, 10, [0, 0, 255])
-    kb_17 = KineticBlock(Vector2(640, 10), 40, 10, [0, 0, 255])
+    row_1 = []
+    row_2 = []
+    row_3 = []
+    row_4 = []
+    row_5 = []
 
-    object_list.extend([ball, kb_1, kb_2, kb_3, kb_4, kb_5, kb_6, kb_7, kb_8, kb_9, kb_10, kb_11, kb_12, kb_13, kb_14, kb_15, kb_16, kb_17])
+    for i in range(0,11):
+        block = KineticBlock(Vector2(40 * i, 10), 40, 30, [0, 0, 255])
+        row_1.append(block)
+    for i in range(0,11):
+        block = KineticBlock(Vector2(40 * i, 40), 40, 30, [255, 0, 0])
+        row_2.append(block)
+    for i in range(0,11):
+        block = KineticBlock(Vector2(40 * i, 70), 40, 30, [0, 200, 100])
+        row_3.append(block)
+    for i in range(0,11):
+        block = KineticBlock(Vector2(40 * i, 100), 40, 30, [0, 100, 255])
+        row_4.append(block)
+    for i in range(0,11):
+        block = KineticBlock(Vector2(40 * i, 130), 40, 30, [255, 255, 0])
+        row_5.append(block)
+
+    object_list.extend([ball, paddle, *row_1, *row_2, *row_3, *row_4, *row_5])
   
 def main():
     pygame.init()
@@ -52,6 +58,11 @@ def main():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.MOUSEMOTION:
+                mouse_pos = pygame.mouse.get_pos()
+                for object in object_list:
+                    if hasattr(object, "paddle"):
+                        object.rectangle.x = mouse_pos[0]
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
