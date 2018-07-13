@@ -65,6 +65,10 @@ def main():
         clock.tick(60)
         pygame.display.flip()
 
+        if object_list[0].position.y > object_list[1].position.y:
+            print('YOU ARE A LOSER!')
+            pygame.quit()
+
         if object_list[0].position.y <= 0 + object_list[0].radius:
             object_list[0].position.y = object_list[0].radius + 1
             object_list[0].velocity.y *= -1
