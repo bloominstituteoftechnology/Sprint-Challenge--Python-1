@@ -19,11 +19,13 @@ def debug_create_objects(object_list):
     # block = KineticBlock(Vector2(200,200), 100, 100, [0, 255, 0])
     # object_list.append(block)
 
-    paddle = Paddle(SCREEN_SIZE, Vector2(400,500), 100, 20, [0, 0, 255])
+    paddle = Paddle(SCREEN_SIZE, Vector2(400,590), 100, 20, [0, 0, 255])
     object_list.append(paddle)
 
-    brick = Brick(SCREEN_SIZE, Vector2(400,100), 100, 100, [255, 0, 0])
-    object_list.append(brick)
+    for j in range(100, 200, 20):
+      for i in range(25, SCREEN_SIZE[0], 50):
+        brick = Brick(SCREEN_SIZE, Vector2(i,j), 50, 20, [random.randint(0,255), random.randint(0,255), random.randint(0,255)])
+        object_list.append(brick)
   
 def main():
     pygame.init()
@@ -33,9 +35,7 @@ def main():
     clock = pygame.time.Clock()
  
     object_list = [] # list of objects of all types in the toy
-    
-    debug_create_objects(object_list)
- 
+     
     done = True
 
     while done: # TODO:  Create more elegant condition for loop
@@ -43,7 +43,15 @@ def main():
         right = False
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.KEYDOWN:  #TODO:  Get working
+                if event.key == pygame.K_SPACE:
+                    # TODO: Add behavior when button pressed
+                    print(event)
+                if event.key == pygame.K_s:
+                    # TODO: Add behavior when button pressed
+                    debug_create_objects(object_list)
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()

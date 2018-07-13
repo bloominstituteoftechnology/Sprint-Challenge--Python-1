@@ -25,7 +25,6 @@ class Block:
         if self.rectangle.x < 0:
           self.rectangle.x = 0
         if self.rectangle.x > self.bounds[0] - self.rectangle.width:
-          print(self.rectangle.x)
           self.rectangle.x = self.bounds[0] - self.rectangle.width
         self.position.x = self.rectangle.x + self.rectangle.width/2
 
@@ -45,7 +44,6 @@ class Paddle(KineticBlock):
     def update(self, **kwargs):
       for direction, value in kwargs.items():
         if value == True:
-          print(self.rectangle)
           if direction == 'left':
             self.rectangle.x -=10
           else:
@@ -55,13 +53,7 @@ class Paddle(KineticBlock):
 class Brick(KineticBlock):
 
     def update(self, **kwargs):
-      for direction, value in kwargs.items():
-        if value == True:
-          print(self.rectangle)
-          if direction == 'left':
-            self.rectangle.x -=10
-          else:
-            self.rectangle.x +=10
+      # for key, value in kwargs.items():
       super().update()
 
 
