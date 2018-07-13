@@ -19,19 +19,13 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-
-    def update(self, **kwargs):
-        self.touched_by_ball = False
-
-    def check_collision(self):
-        pass
-
-    def draw(self, screen, pygame):
-        pygame.draw.rect(screen, self.color, self.rectangle)
+""" moved to paddle.py
+"""
 
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
 
 
