@@ -47,8 +47,12 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
-            object.check_collision()
+            if isinstance(object, Block):           
+                object.update(left = left, right = right)
+                object.check_collision()
+            else:
+                object.update()
+                object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)

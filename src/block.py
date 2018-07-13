@@ -35,4 +35,12 @@ class KineticBlock(Block):
     pass
 
 class Paddle(KineticBlock):
-    pass
+
+    SPEED = 5
+
+    def update(self, **kwargs):
+        if kwargs["left"]:
+            self.rectangle.x -= self.SPEED
+        if kwargs["right"]:
+            self.rectangle.x += self.SPEED
+        super().update()
