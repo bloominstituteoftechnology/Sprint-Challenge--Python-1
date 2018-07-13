@@ -14,7 +14,7 @@ class Ball:
         self.velocity = velocity
         self.bounds = bounds
         self.color = color
-        self.radius = radius
+        self.radius = radius -8
         self.collision_rectangle = self.update_rectangle()
 
     def update_rectangle(self):
