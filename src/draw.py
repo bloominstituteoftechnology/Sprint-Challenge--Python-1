@@ -6,17 +6,17 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [400, 800]
+SCREEN_SIZE = [400, 600]
 BACKGROUND_COLOR = [255, 255, 255]
 VELOCITY = 5
 
 def debug_create_objects(object_list):
     ball = GameBall(1, object_list, SCREEN_SIZE, 
-                            Vector2(random.randint(20, SCREEN_SIZE[0] - 150), random.randint(20, SCREEN_SIZE[1] - 150)),
+                            Vector2(random.randint(20, SCREEN_SIZE[0] - 200), random.randint(20, SCREEN_SIZE[1] - 150)),
                             Vector2(random.randint(70,100)*0.01*VELOCITY  , random.randint(70,100)*0.01*VELOCITY ),
                             [255, 10, 0], 10)
     
-    paddle = Paddle(Vector2(150, 700), 70, 10, [255, 0, 0] )
+    paddle = Paddle(Vector2(150, 550), 70, 30, [255, 0, 0] )
 
     row_1 = []
     row_2 = []
@@ -72,12 +72,6 @@ def main():
             if event.type == pygame.QUIT: sys.exit()
             if event.type == pygame.MOUSEMOTION:
                 mouse_pos = pygame.mouse.get_pos()
-                for object in object_list:
-                    if hasattr(object, "paddle"):
-                        if mouse_pos[0] > 330:
-                            object.rectangle.x = 330
-                        else:
-                            object.rectangle.x = mouse_pos[0]
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
@@ -86,7 +80,7 @@ def main():
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
         for object in object_list:
-            object.update()
+            object.update(position=mouse_pos[0])
             object.check_collision()
  
         # Draw Updates
