@@ -3,7 +3,7 @@ import math
 from pygame.math import Vector2
 from pygame import Rect
 
-from block import KineticBlock, Paddle, UnbreakableBlock
+from block import KineticBlock, Paddle, UnbreakableBlock, GhostBlock
 
 class Ball:
     """
@@ -162,6 +162,7 @@ class GameBall(Ball):
                 relative_vector = self.position - corner
                 if relative_vector.length() <= self.radius:
                     object.touched_by_ball = True
+                    object.check_collision()
                     # Create a dummy object to make use of ball to ball collision, because the math is the same
                     # Give it a velocity of the same magnitude as the current ball to cause it to reflect at
                     # the same speed
@@ -177,7 +178,14 @@ class GameBall(Ball):
             kinetic = issubclass(type(object), KineticBlock)
             paddle = issubclass(type(object), Paddle)
             unbreakable = issubclass(type(object), UnbreakableBlock)
+            ghost = issubclass(type(object), GhostBlock)
+
             if (kinetic or paddle or unbreakable) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
+            if ghost:
+                if self.collision_rectangle.colliderect(object.rectangle):
+                    print("passing through ghost")
+                    object.touched_by_ball = True
+                    object.check_collision()

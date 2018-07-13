@@ -50,9 +50,28 @@ class KineticBlock(Block):
             self.defeated = True
 
 class UnbreakableBlock(Block):
+    """
+    Block that the ball can bounce off of, but not destroy
+    """
+
     def __init__(self, position, width, height, color):
         super().__init__(position, width, height, color)
-        self.color = [100, 100, 100]
+        self.color = [80, 80, 80]
+
+class GhostBlock(Block):
+    """
+    Block that is destroyed on contact, but the ball does
+    not bounce off of
+    """
+
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.color = [200, 200, 200]
+        self.defeated = False
+
+    def check_collision(self):
+        if self.touched_by_ball:
+            self.defeated = True
 
 class Paddle(Block):
     """ 

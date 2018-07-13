@@ -50,6 +50,13 @@ def debug_create_objects(object_list):
         unbreakable_size, unbreakable_size, [0, 0, 0])
     object_list.append(unbreakable)
 
+    ghost_size = random.randint(40, 100)
+    ghost = GhostBlock(
+        Vector2(random.randint(int(ghost_size/2), SCREEN_SIZE[0]-int(ghost_size/2)),
+            random.randint(ghost_size, SCREEN_SIZE[1]-300)), 
+        ghost_size, ghost_size, [0, 0, 0])
+    object_list.append(ghost)
+
     paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-15), 100, 30, [0, 0, 0])
     object_list.append(paddle)
 
