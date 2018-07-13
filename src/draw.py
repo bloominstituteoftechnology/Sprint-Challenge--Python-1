@@ -17,10 +17,16 @@ def debug_create_objects(object_list):
     object_list.append(kinetic)
 
 
-    paddle = KineticBlock(Vector2(400,400), 220, 10, [0, 240, 0])
-    object_list.append(paddle)
+    # paddle = KineticBlock(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 70, 15, [0, 0, 0])
+    # object_list.append(paddle)
 
-    
+    for i in range(5):
+        block_list = []
+        color = [0,0,62]
+        for j in range(3):
+            block = KineticBlock(Vector2(52 + (i*74),100 + (j* 40)), 70, 30, color)
+            object_list.append(block)
+            print(object_list)
   
 def main():
     pygame.init()
