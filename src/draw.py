@@ -39,27 +39,16 @@ def main():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-            # elif event.type == pygame.KEYDOWN:
-            #     if(event.key == pygame.K_LEFT):
-            #         paddle.direction -= paddle.speed
-            #     elif(event.key == pygame.K_RIGHT):
-            #         paddle.direction += paddle.speed
-            # elif event.type == pygame.KEYUP:
-            #     if(event.key == pygame.K_LEFT):
-            #         paddle.direction += paddle.speed
-            #     elif(event.key == pygame.K_RIGHT):
-            #         paddle.direction -= paddle.speed
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             left = True
-            Paddle.position.x -= Paddle.speed
         if keys[pygame.K_RIGHT]:
             right = True
-            Paddle.position.x += Paddle.speed
+    
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates

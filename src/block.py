@@ -35,31 +35,31 @@ class KineticBlock(Block):
     pass
 
 class Paddle(KineticBlock):
-    def __init__(self, position, width, height, color):
-        self.position = position
-        self.width = width
-        self.height = height
-        self.color = color
-        self.direction = 0
-        self.speed = 5
-        self.rectangle = pygame.Rect(
-                                    position.x - (width/2),
-                                    position.y - (height/2),
-                                    width,
-                                    height)
-
-    def update(self):
+    SPEED = 5
+   
+    def update(self, **kwargs):
         """
         Move paddle if the left or right key is held down. Do not allow
         paddle to move out of bounds.
         """
-        # Handling movement of paddle
-        self.position.x += self.direction
+        left = kwargs['left'] if 'left' in kwargs else None
+        right = kwargs['right']if 'right' in kwargs else None
+
+        if left:
+          self.position.x -= self.SPEED
+        if right:
+          self.position.x += self.SPEED
+
+        self.rectangle = pygame.Rect(
+                                    self.position.x - (self.rectangle.width/2),
+                                    self.position.y - (self.rectangle.height/2),
+                                    self.rectangle.width,
+                                    self.rectangle.height)
         
         # Making sure paddle does not go out of bounds
-        if self.position.x < 0:
-            self.position.x = 0
-        if self.position.x > 300:
-            self.position.x = 300
+        if self.position.x < 50:
+            self.position.x = 50
+        if self.position.x > 350:
+            self.position.x = 350
 
         super().update()
