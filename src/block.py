@@ -9,7 +9,6 @@ class Block:
     """
 
     def __init__(self, position, width, height, color, obj_list):
-        # Create a rectangle centered around the x and y
         self.obj_list = obj_list
         self.position = position
         self.rectangle = pygame.Rect(
@@ -31,8 +30,42 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color, obj_list):
+        self.left = False
+        self.right = False
+        self.height = height
+        self.width = width
+        super().__init__(position, width, height, color, obj_list)
 
+
+    def update(self):
+        if self.touched_by_ball == True:
+            self.color = [0,0,0]
+
+        self.touched_by_ball = False
+        if self.left == True:
+            self.position.x = (self.position.x - 3) if self.position.x > 80 else 80
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
+        if self.right == True:
+            self.position.x = (self.position.x + 3) if self.position.x < 560 else 560
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
+        self.left = False
+        self.right = False
+        super().update()
+    
+    def move_left(self):
+        self.left = True
+
+    def move_right(self):
+        self.right = True
