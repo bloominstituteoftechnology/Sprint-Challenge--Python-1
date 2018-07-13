@@ -1,62 +1,109 @@
-import pygame #TODO:  Fix intellisense
+import pygame
 import random
+import sys
 
 from pygame.math import Vector2
+from ball import GameBall
+from block import KineticBlock, Paddle, Brick
 
-from ball import *
-from block import *
+# TODO: Break levels out to own class
+level_1 = [
+    {"row": 1, "color": [255, 0, 0]},
+    {"row": 2, "color": [255, 0, 0]},
+    {"row": 3, "color": [255, 153, 51]},
+    {"row": 4, "color": [255, 153, 51]},
+    {"row": 5, "color": [0, 204, 0]},
+    {"row": 6, "color": [0, 204, 0]},
+    {"row": 7, "color": [255, 255, 0]},
+    {"row": 8, "color": [255, 255, 0]}
+]
 
-SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+levels = [level_1]
 
-def debug_create_objects(object_list):
-    kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
-    object_list.append(kinetic)
+class GameManager:
+    def __init__(self, levels):
+        # Game settings
+        self.SCREEN_SIZE = [800, 400]
+        self.BACKGROUND_COLOR = [0, 0, 0]
+        self.GAMEBALL_START_POS = Vector2(
+            random.randint(20, self.SCREEN_SIZE[0] - 20),
+            random.randint(40, self.SCREEN_SIZE[1] - 40)
+        )
+        self.GAMEBALL_VELOCITY = Vector2(5, 5)
+        self.GAMEBALL_SIZE = 8
+        self.GAMEBALL_COLOR = [255, 10, 0]
+        self.PADDLE_START_POS = Vector2(459, 380)
+        self.PADDLE_SPEED = 6
+        self.PADDLE_SIZE = [34, 8]
+        self.BRICK_SIZE = [50, 20]
+        self.BRICKS_PER_ROW = int(self.SCREEN_SIZE[0]/self.BRICK_SIZE[0])
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
-  
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode(SCREEN_SIZE)
- 
-    # Used to manage how fast the screen updates
-    clock = pygame.time.Clock()
- 
-    object_list = [] # list of objects of all types in the toy
+        self.levels = levels
+        self.gameball = None
+        self.paddle = None
+        self.object_list = []
+
+    def build_level(self):
+        # TODO: Create game blocks: multi hit block
+        self.gameball = GameBall(1, self.object_list, self.SCREEN_SIZE, self.GAMEBALL_START_POS,
+                                 self.GAMEBALL_VELOCITY, self.GAMEBALL_COLOR, self.GAMEBALL_SIZE)
+        self.paddle = Paddle(self.SCREEN_SIZE, self.PADDLE_SPEED, self.PADDLE_START_POS,
+                             self.PADDLE_SIZE[0], self.PADDLE_SIZE[1], [0, 0, 255])
+        
+        self.object_list.append(self.gameball)
+        self.object_list.append(self.paddle)
+
+        for level in self.levels:
+            for row in level:
+                self.build_row(self.BRICKS_PER_ROW, Brick, row["row"], row["color"])
     
-    debug_create_objects(object_list)
- 
-    while True: # TODO:  Create more elegant condition for loop
-        left = False
-        right = False
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
-        
-        #TODO:  Feed input variables into update for objects that need it.
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            left = True
-        if keys[pygame.K_RIGHT]:
-            right = True
-        for object in object_list:
-            object.update()
-            object.check_collision()
- 
-        # Draw Updates
-        screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
- 
-        clock.tick(60)
-        pygame.display.flip()
- 
-    # Close everything down
-    pygame.quit()
- 
+    def build_row(self, num_bricks, brick_type, row, color):
+        pos_x = self.BRICK_SIZE[0]/2
+        pos_y = self.BRICK_SIZE[1] * row
+
+        for i in range(num_bricks):
+            game_brick = brick_type(self.object_list, 1, Vector2(
+                pos_x, pos_y), self.BRICK_SIZE[0], self.BRICK_SIZE[1], color)
+            self.object_list.append(game_brick)
+            pos_x += 50
+
+    def start_game(self):
+        screen = pygame.display.set_mode(self.SCREEN_SIZE)
+        clock = pygame.time.Clock()
+
+        while not self.gameball.out_of_bounds:
+            left = False
+            right = False
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_LEFT]:
+                left = True
+            if keys[pygame.K_RIGHT]:
+                right = True
+            for object in self.object_list:
+                object.update(left=left, right=right)
+                object.check_collision()
+
+            screen.fill(self.BACKGROUND_COLOR)
+            for object in self.object_list:
+                object.draw(screen, pygame)
+
+            clock.tick(60)
+            pygame.display.flip()
+
+
+
+    def main(self):
+        pygame.init()
+        self.build_level()
+        self.start_game()
+        pygame.quit()
+
+
 if __name__ == "__main__":
-    main()
+    breakout = GameManager(levels)
+    breakout.main()
