@@ -10,6 +10,7 @@ class Block:
 
     def __init__(self, position, width, height, color, object_list):
         # Create a rectangle centered around the x and y
+        self.object_list = object_list
         self.position = position
         self.rectangle = pygame.Rect(
                                     position.x - (width/2),
@@ -23,6 +24,16 @@ class Block:
 
 
     def update(self, **kwargs):
+        if self.collision_count == 3:
+            self.object_list.remove(self)
+
+        if self.collision_count == 2:
+            self.color = [135,206,250]
+            
+        if self.touched_by_ball == True:
+            self.color = [0,0,240]
+            self.collision_count += 1
+        
         self.touched_by_ball = False
 
     def check_collision(self):

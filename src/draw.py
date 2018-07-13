@@ -11,7 +11,7 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                    Vector2(400, 350),
                                     Vector2(9, -9),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
@@ -23,7 +23,7 @@ def debug_create_objects(object_list):
     for i in range(5):
         block_list = []
         color = [0,0,62]
-        for j in range(3):
+        for j in range(4):
             block = KineticBlock(Vector2(52 + (i*74),100 + (j* 40)), 70, 30, color, object_list)
             object_list.append(block)
             print(object_list)
