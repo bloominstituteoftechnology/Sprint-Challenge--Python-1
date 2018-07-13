@@ -85,7 +85,7 @@ class GameBall(Ball):
         if (
             object.position.x > self.position.x and
             object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             left = True
@@ -93,7 +93,7 @@ class GameBall(Ball):
         if (
             object.position.x < self.position.x and
             object.position.x + object.rectangle.width/2 >= self.position.x - self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             right = True
@@ -101,7 +101,7 @@ class GameBall(Ball):
         if (
             object.position.y > self.position.y and
             object.position.y - object.rectangle.height/2 <= self.position.y + self.radius and 
-            self.position.x <= object.position.x+object.rectangle.width/2 and 
+            self.position.x <= object.position.x + object.rectangle.width/2 and 
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             top = True
@@ -109,7 +109,7 @@ class GameBall(Ball):
         if (
             object.position.y < self.position.y and
             object.position.y + object.rectangle.width/2 >= self.position.y - self.radius and 
-            self.position.x <= object.position.x+object.rectangle.width/2 and 
+            self.position.x <= object.position.x + object.rectangle.width/2 and 
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
