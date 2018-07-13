@@ -18,6 +18,8 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
+        self.collision_count = 0
+
 
 
     def update(self, **kwargs):
