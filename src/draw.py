@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -16,17 +16,58 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    # first roll of blocks
+    # hard coded just for testing purposes
+    block = KineticBlock( Vector2(0,0),75, 20, [0, 0, 255])
     object_list.append(block)
+    block = KineticBlock( Vector2(85,0),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(170,0),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(255,0),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(340,0),75, 20, [0, 0, 255])
+    object_list.append(block)
+
+    #second roll of blocks
+    #hard coded just for testing purposes
+    block = KineticBlock( Vector2(0,30),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(85,30),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(170,30),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(255,30),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(340,30),75, 20, [0, 0, 255])
+    object_list.append(block)
+
+    block = KineticBlock( Vector2(0,60),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(85,60),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(170,60),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(255,60),75, 20, [0, 0, 255])
+    object_list.append(block)
+    block = KineticBlock( Vector2(340,60),75, 20, [0, 0, 255])
+    object_list.append(block)
+
+
+    # bar = KineticBlock(Vector2(200,700), 130, 30, [0, 0, 255])
+    # object_list.append(bar)
   
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
- 
+    # keys = pygame.key.get_pressed()
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
+    
  
     object_list = [] # list of objects of all types in the toy
+    bar = KineticBlock(Vector2(200,700), 130, 30, [0, 0, 255])
+    object_list.append(bar)
     
     debug_create_objects(object_list)
  
@@ -41,8 +82,16 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             left = True
+            print("pressed left")
+            bar.position[0] = bar.position[0] - 1
+            
+            print(bar.position[0])
         if keys[pygame.K_RIGHT]:
             right = True
+            print("press right")
+            bar.position[0] = bar.position[0] + 1
+            print(bar.position[0])
+        object_list.append(bar)
         for object in object_list:
             object.update()
             object.check_collision()

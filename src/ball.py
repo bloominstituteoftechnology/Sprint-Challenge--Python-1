@@ -89,7 +89,7 @@ class GameBall(Ball):
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             left = True
-
+            object.color = [105, 105, 105]
         if (
             object.position.x < self.position.x and
             object.position.x + object.rectangle.width/2 >= self.position.x - self.radius and 
@@ -97,6 +97,7 @@ class GameBall(Ball):
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             right = True
+            object.color = [105, 105, 105]
 
         if (
             object.position.y > self.position.y and
@@ -105,6 +106,7 @@ class GameBall(Ball):
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             top = True
+            object.color = [105, 105, 105]
 
         if (
             object.position.y < self.position.y and
@@ -113,6 +115,7 @@ class GameBall(Ball):
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
+            object.color = [105, 105, 105]
 
         test = left + right + top + bottom
         
