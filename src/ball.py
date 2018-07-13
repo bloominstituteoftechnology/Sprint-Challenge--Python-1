@@ -30,9 +30,11 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
+            pygame.quit()
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
+            pygame.quit()
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
