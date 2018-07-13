@@ -33,14 +33,27 @@ def main():
  
     done = False
 
-    while not done: # TODO:  Create more elegant condition for loop
+    while not done: # TODO:  Create more elegant condition for loop xx
         left = False
         right = False
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
+                done = True
                 print("Thank you for playing!")
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    left = True
+                    print("left arrow was pressed!")
+                elif event.key == pygame.K_RIGHT:
+                    right = True
+                    print("right arrow was pressed!")
+                elif event.key == pygame.K_ESCAPE:
+                    done = True
+                    print("You've escaped the game!")
+            else:
+                continue
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
@@ -51,7 +64,7 @@ def main():
         for object in object_list:
             object.update()
             object.check_collision()
- 
+
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
