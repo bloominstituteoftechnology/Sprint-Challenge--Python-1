@@ -30,18 +30,33 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
-    pass
+    """
+    Has a difficulty property that tells how many times 
+    it needs to be hit before it disappears (from 1-5)
+    """
 
-class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color, difficulty):
+        super().__init__(position, width, height, color)
+        self.hits_left = difficulty
+        self.defeated = False
+
+    def check_collision(self):
+        if self.touched_by_ball:
+            self.hits_left -= 1
+        if self.hits_left == 0:
+            self.defeated = True
+
+class Paddle(Block):
     """ 
     Player controlled paddle at the bottom of the screen
     """
 
-    def update(self, left, right):
+    def update(self, **kwargs):
         distance = 2
-        if left == True:
-            self.rectangle.move_ip(-distance, 0)
-        if right == True:
-            self.rectangle.move_ip(distance, 0)
+        for k, v in kwargs.items():
+            if k == "left" and v == True:
+                self.rectangle = self.rectangle.move(-distance, 0)
+                self.position.x -= distance 
+            if k == "right" and v == True:
+                self.rectangle = self.rectangle.move(distance, 0)
+                self.position.x += distance
