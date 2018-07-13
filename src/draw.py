@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -17,20 +17,20 @@ def debug_create_objects(object_list):
     object_list.append(kinetic)
 
     #position, width, height, color
-    block1 = KineticBlock(Vector2(70,50), 75, 50, [0, 0, 255])
+    block1 = KineticBlock(Vector2(40,50), 75, 50, [0, 0, 255])
     object_list.append(block1)
-    block2 = KineticBlock(Vector2(170,50), 75, 50, [255, 0, 0])
+    block2 = KineticBlock(Vector2(120,50), 75, 50, [255, 0, 0])
     object_list.append(block2)
-    block3 = KineticBlock(Vector2(270,50), 75, 50, [80, 25, 175])
+    block3 = KineticBlock(Vector2(200,50), 75, 50, [80, 25, 175])
     object_list.append(block3)
-    block4 = KineticBlock(Vector2(370,50), 75, 50, [43, 255, 1])
+    block4 = KineticBlock(Vector2(280,50), 75, 50, [43, 255, 1])
     object_list.append(block4)
-    block5 = KineticBlock(Vector2(470,50), 75, 50, [100, 35, 0])
+    block5 = KineticBlock(Vector2(360,50), 75, 50, [100, 35, 0])
     object_list.append(block5)
-    block6 = KineticBlock(Vector2(570,50), 75, 50, [34, 90, 200])
-    object_list.append(block6)
+    # block6 = KineticBlock(Vector2(490,50), 75, 50, [34, 90, 200])
+    # object_list.append(block6)
 
-    paddle = Paddle(Vector2(200,425), 75, 25, [0, 0, 0])
+    paddle = Paddle(Vector2(200,680), 75, 25, [0, 0, 0])
     object_list.append(paddle)
 
     print(object_list)
