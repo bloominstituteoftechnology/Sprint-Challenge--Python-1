@@ -20,14 +20,12 @@ class Block:
         self.touched_by_ball = False
 
 
-    def update(self, left, right):
+    def update(self, *args):
         self.touched_by_ball = False
-        if left:
-            print("left fires")
-            self.rectangle.x += 2
-        if right:
-            print("right fires")
-            self.rectangle.x -= 2
+        if args[0]:
+            self.rectangle.x -= 4
+        if args[1]:
+            self.rectangle.x += 4
 
     def check_collision(self):
         pass
@@ -40,4 +38,56 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class DestructableBlock(KineticBlock):
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
+        self.touched_by_ball = False
+        self.color = color
+        self.rectangle = pygame.Rect(
+                                    position.x - (width/2),
+                                    position.y - (height/2),
+                                    width,
+                                    height)
+        self.position = position
 
+    def update(self, *args):
+        if self.touched_by_ball:
+            for object in self.object_list:
+                if object == self:
+                    self.object_list.remove(object)
+                else:
+                    continue
+
+class NotSoDestructableBlock(DestructableBlock):
+    
+    def __init__(self, object_list, position, width, height, color):
+        self.counter = 3
+        self.rectangle = pygame.Rect(
+                                    position.x - (width/2),
+                                    position.y - (height/2),
+                                    width,
+                                    height)
+        self.touched_by_ball = False
+        self.color = color
+        self.object_list = object_list
+        self.position = position
+
+        super()
+    
+    def update(self, *args):
+        if self.touched_by_ball and self.counter == 0:
+            for object in self.object_list:
+                if object == self:
+                    self.object_list.remove(object)
+                else:
+                    continue
+        elif self.touched_by_ball and self.counter != 0:
+            print("counter -1")
+            print(self.counter)
+            self.counter -= 1
+            self.touched_by_ball = False
+
+class AbsolutelyPositivelIndustructibleBlock(KineticBlock):
+    
+    pass
+    

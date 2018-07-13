@@ -1,5 +1,5 @@
 import math
-
+import pygame
 from pygame.math import Vector2
 from pygame import Rect
 
@@ -16,6 +16,7 @@ class Ball:
         self.color = color
         self.radius = radius -10
         self.collision_rectangle = self.update_rectangle()
+        self.lives =2
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
@@ -23,16 +24,20 @@ class Ball:
                                         self.radius*2, self.radius*2)
 
     def update(self, **kwargs):
-        if self.position.x <= 0 + self.radius: # screen width
+        if self.position.x <= 0 + self.radius:  # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
         if self.position.x >= self.bounds[0] - self.radius:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
-        if self.position.y <= 0 + self.radius: # screen height
+        if self.position.y <= 0 + self.radius:  # screen height
+            print("congratz, you won!")
+            pygame.quit()
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
+            print("Loser!")
+            pygame.quit()
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
