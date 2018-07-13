@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -55,11 +56,15 @@ class GameBlock(PaddleBlock, KineticBlock):
         super().__init__(object_list, position, width, height, color)
 
     def update(self, **kwargs):
+        RANDOM_R = random.randint(125, 175)
+        RANDOM_B = random.randint(175, 255)
+        RANDOM_G = random.randint(25, 255)
         if self.touched_by_ball == True:
             if self.difficulty == 0:
                 self.object_list.remove(self)
             else:
                 self.difficulty -= 1
+                self.color = [RANDOM_R, RANDOM_G, RANDOM_B]
                 print(self.difficulty)
         self.touched_by_ball = False
 
