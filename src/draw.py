@@ -16,8 +16,20 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    # object_list.append(block)
+    b1 = HardBlock(Vector2(50, 100), 100, 75, [255, 0, 255])
+    b2 = HardBlock(Vector2(200, 100), 100, 75, [255, 0, 255])
+    b3 = HardBlock(Vector2(350, 100), 100, 75, [255, 0, 255])
+    object_list.extend([b1, b2, b3])
+
+    b4 = EzBlock(Vector2(50, 200), 100, 75, [127,255,0])
+    b5 = EzBlock(Vector2(200, 200), 100, 75, [127,255,0])
+    b6 = EzBlock(Vector2(350, 200), 100, 75, [127,255,0])
+    object_list.extend([b4, b5, b6]) 
+
+    paddle = Paddle(Vector2(200, 700), 200, 50, [0,206,209])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
