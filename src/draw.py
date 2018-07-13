@@ -46,7 +46,7 @@ def createBricksMatrix(object_list):
         for c in range(BRICKS_COLUMNS):
             BRICKS[r].append([])
             BRICKS[r][c] = Brick(
-                Vector2(BRICKS_PADDING + (c * BRICKS_WIDTH + BRICKS_PADDING), BRICKS_PADDING + (r * BRICKS_HEIGHT + BRICKS_PADDING)), BRICKS_WIDTH, BRICKS_HEIGHT, [0, 0, 255])
+                Vector2(BRICKS_PADDING + (c * (BRICKS_WIDTH + BRICKS_PADDING)), BRICKS_PADDING + (r * (BRICKS_HEIGHT + BRICKS_PADDING))), BRICKS_WIDTH, BRICKS_HEIGHT, [0, 0, 255])
             object_list.append(BRICKS[r][c])
         print('\n\n Row number:', r, 'colums in row:', c, '\n', BRICKS[r])
 
