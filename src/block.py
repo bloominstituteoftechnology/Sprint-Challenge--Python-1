@@ -35,3 +35,5 @@ class KineticBlock(Block):
     pass
 
 
+class RowsOfBlock(KineticBlock):
+    pass

@@ -16,9 +16,53 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(200,700), 100, 20, [0, 0, 255])
     object_list.append(block)
-  
+    
+    block = RowsOfBlock(Vector2(40, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(130, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(220, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(310, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(400, 100), 80, 30, [0, 255, 0])
+    object_list.append(block)
+    block = RowsOfBlock(Vector2(40, 60), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(130, 60), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(220, 60), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(310, 60), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(400, 60), 80, 30, [0, 255, 0])
+    object_list.append(block)
+    block = RowsOfBlock(Vector2(40, 140), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(130, 140), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(220, 140), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(310, 140), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    block = RowsOfBlock(Vector2(400, 140), 80, 30, [0, 255, 0])
+    object_list.append(block)
+
+    
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
