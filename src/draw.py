@@ -10,19 +10,71 @@ from block import *
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [0, 0, 0]
 
+#define colors
+RED = [255, 0, 0]
+RED_ORANGE = [255, 125, 0]
+ORANGE = [255, 185, 0]
+YELLOW = [255, 255, 0]
+GREEN = [0, 255, 0]
+BLUE = [0, 0, 255]
+
+#define width and height
+
+HEIGHT_GAME_BLOCK= 40
+WIDTH_GAME_BLOCK= 400
+
+# MARGIN?? set here if want it
+
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                    Vector2(random.randint(200, SCREEN_SIZE[0] - 200), random.randint(250, SCREEN_SIZE[1] - 250)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    [33, 120, 125], 10)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    # object_list.append(block)
 
     paddle = PaddleBlock(object_list, Vector2(150, 749), 120, 15, [104, 104, 104])
     object_list.append(paddle)
-  
+        
+    gameblock_red = GameBlock(1, object_list, Vector2(0, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
+    object_list.append(gameblock_red)
+    gameblock_red = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
+    object_list.append(gameblock_red)
+
+    gameblock_redorange = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
+    object_list.append(gameblock_redorange)
+    
+    gameblock_redorange = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
+    object_list.append(gameblock_redorange)
+
+    gameblock_orange = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
+    object_list.append(gameblock_orange)
+    
+    gameblock_orange = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
+    object_list.append(gameblock_orange)
+
+    gameblock_yellow = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
+    object_list.append(gameblock_yellow)
+
+    gameblock_yellow = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
+    object_list.append(gameblock_yellow)
+
+    gameblock_green = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
+    object_list.append(gameblock_green)
+
+    gameblock_green = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
+    object_list.append(gameblock_green)
+
+    gameblock_blue = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
+    object_list.append(gameblock_blue)
+
+    gameblock_blue = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
+    object_list.append(gameblock_blue)
+        
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
