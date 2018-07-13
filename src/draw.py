@@ -23,6 +23,8 @@ BLUE = [0, 0, 255]
 HEIGHT_GAME_BLOCK= 40
 WIDTH_GAME_BLOCK= 400
 
+
+
 # MARGIN?? set here if want it
 
 def debug_create_objects(object_list):
@@ -38,39 +40,39 @@ def debug_create_objects(object_list):
     paddle = PaddleBlock(object_list, Vector2(150, 749), 120, 15, [104, 104, 104])
     object_list.append(paddle)
         
-    gameblock_red = GameBlock(1, object_list, Vector2(0, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
+    gameblock_red = GameBlock(5, object_list, Vector2(0, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
     object_list.append(gameblock_red)
-    gameblock_red = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
+    gameblock_red = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, 0), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED)
     object_list.append(gameblock_red)
 
-    gameblock_redorange = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
+    gameblock_redorange = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
     object_list.append(gameblock_redorange)
     
-    gameblock_redorange = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
+    gameblock_redorange = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, RED_ORANGE)
     object_list.append(gameblock_redorange)
 
-    gameblock_orange = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
+    gameblock_orange = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
     object_list.append(gameblock_orange)
     
-    gameblock_orange = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
+    gameblock_orange = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*2), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, ORANGE)
     object_list.append(gameblock_orange)
 
-    gameblock_yellow = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
+    gameblock_yellow = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
     object_list.append(gameblock_yellow)
 
-    gameblock_yellow = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
+    gameblock_yellow = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*3), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, YELLOW)
     object_list.append(gameblock_yellow)
 
-    gameblock_green = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
+    gameblock_green = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
     object_list.append(gameblock_green)
 
-    gameblock_green = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
+    gameblock_green = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*4), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, GREEN)
     object_list.append(gameblock_green)
 
-    gameblock_blue = GameBlock(1, object_list, Vector2(0, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
+    gameblock_blue = GameBlock(5, object_list, Vector2(0, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
     object_list.append(gameblock_blue)
 
-    gameblock_blue = GameBlock(1, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
+    gameblock_blue = GameBlock(5, object_list, Vector2(WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK*5), WIDTH_GAME_BLOCK, HEIGHT_GAME_BLOCK, BLUE)
     object_list.append(gameblock_blue)
         
 
@@ -86,6 +88,7 @@ def main():
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
  
+
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
@@ -95,7 +98,6 @@ def main():
     while not done: # TODO:  Create more elegant condition for loop xx
         left = False
         right = False
-        motion = False        
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 done = True
@@ -124,7 +126,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
 
         # Draw Updates

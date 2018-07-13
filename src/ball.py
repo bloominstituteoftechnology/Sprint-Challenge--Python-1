@@ -1,5 +1,6 @@
 import math
 import pygame
+import sys
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -36,21 +37,12 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
-            # pygame.font.Font.render(self, "Winner Winner!", [255, 255, 255], background=None)
-
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
-            ##some sort of Font that covers the screen should go here.
-            #for now....
             print("Game Over!")
-            done = True
-            pygame.quit()
-
-            
-
+            sys.exit()
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
 
@@ -180,5 +172,5 @@ class GameBall(Ball):
             # Balls colliding with blocks
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
-                if self.collision_rectangle.colliderect(object.rectangle):
-                    self.collide_with_rectangle(object)
+                if self.collision_rectangle.colliderect(object.rectangle): #broad phase - we can do this test super fast
+                    self.collide_with_rectangle(object) ##if rectangles overlap....
