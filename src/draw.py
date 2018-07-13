@@ -81,10 +81,10 @@ def main():
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            left = True
-        if keys[pygame.K_RIGHT]:
-            right = True
+        if keys[pygame.K_q]:
+            pygame.quit()
+        if keys[pygame.K_ESCAPE]:
+            pygame.quit()
         for object in object_list:
             object.update()
             object.check_collision()
