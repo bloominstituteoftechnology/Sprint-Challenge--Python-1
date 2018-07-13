@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -83,9 +84,10 @@ class StrongBlock(KineticBlock):
         super().__init__(position, width, height, color)
 
     def update(self):
-        if self.touched_by_ball == true:
-            self.hp--
+        if self.touched_by_ball == True:
+            self.hp -= 1
             self.color = [random.randint(100, 250), random.randint(100, 250), random.randint(100, 250)]
             if self.hp == 0:
                 self.object_list.remove(self)
+            self.touched_by_ball = False
         super().update()

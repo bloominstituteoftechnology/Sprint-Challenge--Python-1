@@ -40,6 +40,9 @@ def debug_create_objects(object_list):
         # print(color)
 
     #(self, object_list, position, width, height, color)
+
+    # strongBlock = StrongBlock(object_list, Vector2(200,450), 150, 50, [10,50,250])
+    # object_list.append(strongBlock)
   
 def main():
     pygame.init()
@@ -55,6 +58,11 @@ def main():
     while True: # TODO:  Create more elegant condition for loop
         left = False
         right = False
+
+        if len(object_list) == 2:
+            print('You have cleared the board')
+            object_list[0].velocity.x = 0
+            object_list[0].velocity.y = 0
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -81,6 +89,8 @@ def main():
  
         clock.tick(60)
         pygame.display.flip()
+
+
  
     # Close everything down
     pygame.quit()
