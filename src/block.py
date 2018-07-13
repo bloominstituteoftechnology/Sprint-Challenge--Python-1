@@ -49,6 +49,11 @@ class KineticBlock(Block):
         if self.hits_left == 0:
             self.defeated = True
 
+class UnbreakableBlock(Block):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.color = [100, 100, 100]
+
 class Paddle(Block):
     """ 
     Player controlled paddle at the bottom of the screen

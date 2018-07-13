@@ -43,9 +43,23 @@ def debug_create_objects(object_list):
         block3_size, block3_size, block3_color, block3_difficulty)
     object_list.append(block3)
 
+    unbreakable_size = random.randint(40, 100)
+    unbreakable = UnbreakableBlock(
+        Vector2(random.randint(int(unbreakable_size/2), SCREEN_SIZE[0]-int(unbreakable_size/2)),
+            random.randint(unbreakable_size, SCREEN_SIZE[1]-300)), 
+        unbreakable_size, unbreakable_size, [0, 0, 0])
+    object_list.append(unbreakable)
+
     paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-15), 100, 30, [0, 0, 0])
     object_list.append(paddle)
-  
+
+def continue_playing(obj_list):
+    for obj in obj_list:
+        if isinstance(obj, KineticBlock):
+            return True
+    print("YOU WIN!")
+    return False
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -63,6 +77,8 @@ def main():
         left = False
         right = False
         
+        playing = continue_playing(object_list)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 playing = False
