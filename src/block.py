@@ -35,17 +35,24 @@ class KineticBlock(Block):
 
 
 class Vanish(KineticBlock):
-    def vanish(self, object_list):
+    def update(self, object_list):
         if self.touched_by_ball:
             for object in object_list:
                 if object == self:
                     object_list.remove
+        super().update()
 
 
 class Paddle(KineticBlock):
     def update(self, left, right):
         if left:
-            self.rectangle.move_ip(-10, 0)
+            self.position.x += 5
         if right:
-            self.rectangle.move_ip(10, 0)
-        super().update()
+            self.position.x -= 5
+
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.rectangle.width / 2),
+            self.position.y - (self.rectangle.height / 2),
+            self.rectangle.width,
+            self.rectangle.height,
+        )

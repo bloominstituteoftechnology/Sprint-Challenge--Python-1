@@ -5,7 +5,7 @@ import random
 from pygame.math import Vector2
 
 from ball import GameBall
-from block import KineticBlock, Paddle
+from block import KineticBlock, Paddle, Vanish
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -41,25 +41,17 @@ def debug_create_objects(object_list):
         Vector2(353, 20), 50, 10, [0, 0, 255]
     )  # position width height color
     object_list.append(block)
-    block = KineticBlock(
-        Vector2(50, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
+    block = Vanish(Vector2(50, 80), 50, 10, [0, 0, 255])  # position width height color
     object_list.append(block)
-    block = KineticBlock(
-        Vector2(151, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
+    block = Vanish(Vector2(151, 80), 50, 10, [0, 0, 255])  # position width height color
     object_list.append(block)
-    block = KineticBlock(
-        Vector2(252, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
+    block = Vanish(Vector2(252, 80), 50, 10, [0, 0, 255])  # position width height color
     object_list.append(block)
-    block = KineticBlock(
-        Vector2(353, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
+    block = Vanish(Vector2(353, 80), 50, 10, [0, 0, 255])  # position width height color
     object_list.append(block)
 
-    paddle = Paddle(Vector2(1, 799), 100, 100, [0, 0, 0])
-    object_list.append(paddle)
+    block = Paddle(Vector2(1, 799), 100, 100, [0, 0, 0])
+    object_list.extend((block,))
 
 
 def main():
@@ -75,23 +67,22 @@ def main():
     while True:  # TODO:  Create more elegant condition for loop
         left = False
         right = False
-        for object in object_list:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_LEFT]:
-                    left = True
-                if keys[pygame.K_RIGHT]:
-                    right = True
-            if isinstance(object, Paddle):
-                object.update(left, right)
-            # if isinstance(object, Vanish):
-            #     object.vanish(object_list)
-            #     object.check_collision()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            left = True
+        if keys[pygame.K_RIGHT]:
+            right = True
+        for item in object_list:
+            if isinstance(item, Paddle):
+                item.update(right, left)
+            elif isinstance(item, Vanish):
+                item.update(object_list)
             else:
-                object.update()
-            object.check_collision()
+                item.update()
+            item.check_collision()
 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
