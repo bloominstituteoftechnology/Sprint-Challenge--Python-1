@@ -10,14 +10,14 @@ from block import *
 SCREEN_SIZE = [800, 400]
 BACKGROUND_COLOR = [0, 0, 0]
 
-def debug_create_objects(object_list):
+def load_level(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(7, 7),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(300,380), 70, 10, [0, 255, 0])
+    block = Paddle(Vector2(300,380), 70, 10, [0, 255, 0])
     object_list.append(block)
 
     x = 25
@@ -53,7 +53,7 @@ def main():
 
     object_list = [] # list of objects of all types in the toy
     
-    debug_create_objects(object_list)
+    load_level(object_list)
 
     while True: # TODO:  Create more elegant condition for loop
         left = False
@@ -75,7 +75,7 @@ def main():
         if keys[pygame.K_ESCAPE]:
             pygame.quit()
         for object in object_list:
-            if isinstance(object, Block):
+            if isinstance(object, Paddle):
                 object.update(left, right)
                 object.check_collision()
             else:

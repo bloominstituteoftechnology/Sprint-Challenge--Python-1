@@ -22,10 +22,6 @@ class Block:
 
     def update(self, *args):
         self.touched_by_ball = False
-        if args[0]:
-            self.rectangle.x -= 4
-        if args[1]:
-            self.rectangle.x += 4
 
     def check_collision(self):
         pass
@@ -102,4 +98,16 @@ class AbsolutelyPositivelIndustructibleBlock(KineticBlock):
     def update(self, *args):
         "x"
 
-#class paddle
+class Paddle(KineticBlock):
+
+    def update(self, *args):
+        if args[0]:
+            self.position.x -= 4
+        if args[1]:
+            self.position.x += 4
+
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.rectangle.width/2),
+            self.position.y - (self.rectangle.height/2),
+            self.rectangle.width,
+            self.rectangle.height)
