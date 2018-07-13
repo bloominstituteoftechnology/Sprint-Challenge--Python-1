@@ -59,8 +59,8 @@ class Brick(KineticBlock):
         # Create a rectangle centered around the x and y
         self.position = position
         self.rectangle = pygame.Rect(
-            position.x - (width/2),
-            position.y - (height/2),
+            position.x,
+            position.y,
             width,
             height)
         self.color = color
@@ -71,3 +71,15 @@ class Brick(KineticBlock):
     def draw(self, screen, pygame):
         if not self.visible == False:
             pygame.draw.rect(screen, self.color, self.rectangle)
+
+    def handleVisibility(self):
+        if self.visible == False:
+            return False
+        else:
+            self.visible = False
+
+
+class Brick(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.resistance = 3

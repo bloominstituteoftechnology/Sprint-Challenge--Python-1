@@ -88,10 +88,10 @@ class GameBall(Ball):
     def collide_with_rectangle(self, object):
         # This function is called after a first-pass test, that is the collision
         # rectangles overlap.
-        if object.visible == False:
+        if object.handleVisibility() == False:
             return None
 
-        object.visible = False
+        object.handleVisibility()
         left, right, top, bottom = False, False, False, False
         # TODO:  This can probably be optimized
         if (
