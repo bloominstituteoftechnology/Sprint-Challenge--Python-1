@@ -82,12 +82,24 @@ class NotSoDestructableBlock(DestructableBlock):
                 else:
                     continue
         elif self.touched_by_ball and self.counter != 0:
-            print("counter -1")
-            print(self.counter)
             self.counter -= 1
             self.touched_by_ball = False
 
 class AbsolutelyPositivelIndustructibleBlock(KineticBlock):
     
-    pass
+    def __init__(self, position, width, height, color):
+        KineticBlock.__init__(self, position, width, height, color)
     
+        self.position = position
+        self.rectangle = pygame.Rect(
+                                    position.x - (width/2),
+                                    position.y - (height/2),
+                                    width,
+                                    height)
+        self.color = color
+        self.touched_by_ball = False
+    
+    def update(self, *args):
+        "x"
+
+#class paddle

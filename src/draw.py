@@ -17,7 +17,7 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(300,400), 80, 50, [0, 255, 0])
+    block = KineticBlock(Vector2(300,380), 70, 10, [0, 255, 0])
     object_list.append(block)
 
     x = 25

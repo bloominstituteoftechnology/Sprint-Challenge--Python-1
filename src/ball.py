@@ -37,7 +37,10 @@ class Ball:
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
             print("Loser!")
-            pygame.quit()
+            if self.lives == 0:
+                pygame.quit()
+            else:
+                self.lives -= 1
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
