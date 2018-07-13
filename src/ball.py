@@ -1,11 +1,8 @@
 import math
-import pygame
 from pygame.math import Vector2
 from pygame import Rect
-
 from block import KineticBlock
-# from block import PlayerPaddle
-
+ 
 class Ball:
     """
     base class for bouncing objects
@@ -31,15 +28,13 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
-            pygame.quit()
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
-            pygame.quit()
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
-        self.position += self.velocity * 2
+        self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
 
     def check_collision(self):
@@ -166,10 +161,7 @@ class GameBall(Ball):
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
-            if (issubclass(type(object), KineticBlock) or issubclass(type(object), PlayerPaddle)) and object != self:
+            if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
-
-    def ball_hit_bottom(self):
-        return self.position.y >= self.bounds[1] - self.radius

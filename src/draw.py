@@ -1,37 +1,23 @@
 import pygame #TODO:  Fix intellisense
 import random
-import math
 
 from pygame.math import Vector2
 
 from ball import *
 from block import *
 
-SCREEN_SIZE = [400, 800]
+SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
-NUM_OF_BRICKS = True
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [200, 10, 0], 20)
+                                    [255, 10, 0], 20)
     object_list.append(kinetic)
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
-
-    block2 = BreakBlock(Vector2(100, 20), 60, 50, [255, 0, 0], 1)
-    object_list.append(block2)
-
-    block3 = BreakBlock(Vector2(180, 20), 60, 50, [255, 0, 0], 1)
-    object_list.append(block3)
-
-    block4 = BreakBlock(Vector2(260, 20), 60, 50, [255, 0, 0], 1)
-    object_list.append(block4)
-
-    block5 = BreakBlock(Vector2(340, 20), 60, 50, [255, 0, 0], 1)
-    object_list.append(block5)
   
 def main():
     pygame.init()
@@ -50,10 +36,7 @@ def main():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-        
-        #TODO:  Feed input variables into update for objects that need it.
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+@@ -43,20 +72,26 @@ def main():
             left = True
         if keys[pygame.K_RIGHT]:
             right = True
