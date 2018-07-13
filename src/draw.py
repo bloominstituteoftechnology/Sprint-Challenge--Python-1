@@ -8,13 +8,18 @@ from block import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [0, 0, 0]
-BLOCK_WIDTH = 50
+
+BLOCK_WIDTH = 55
 BLOCK_HEIGHT = 25
-TOTAL_BLOCK = 8
-BLOCK_POSITION = [50,50]
-BLOCK_ROW = 5
+TOTAL_BLOCK = 6
+BLOCK_POSITION = [53,60]
+BLOCK_ROW = 1
 BLOCK_COLUMN = 6
-BLOCK_SPACING = 10
+BLOCK_SPACING = 5
+
+PADDLE_WIDTH = 100
+PADDLE_HEIGHT = 30
+PADDLE_POSITION = [200, 700]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -39,6 +44,9 @@ def debug_create_objects(object_list):
             x += BLOCK_WIDTH + BLOCK_SPACING
         x = BLOCK_POSITION[0]
         y += BLOCK_HEIGHT + BLOCK_SPACING
+
+    paddle = Paddle(Vector2(PADDLE_POSITION), PADDLE_WIDTH, PADDLE_HEIGHT, [255, 255, 255])
+    object_list.append(paddle)
 
   
 def main():
