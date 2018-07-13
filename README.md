@@ -51,5 +51,5 @@ The different types of blocks, and the paddle, can be made by creating classes t
 3.  Add scoring
 4.  Add multiple lives
 5.  Add multiple levels
-6.  Add additional features, such as varieties of blocks, powerups such as multiball, and anything else you can think of!
+6.  Add additional features, such as varieties of blocks, powerups such as multiball, and anything else you can think of!!!
 
