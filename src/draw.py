@@ -5,7 +5,7 @@ import random
 from pygame.math import Vector2
 
 from ball import GameBall
-from block import KineticBlock, Paddle, Vanish
+from block import Paddle, Vanish, SlowVanish
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -25,30 +25,30 @@ def debug_create_objects(object_list):
         20,  # radius
     )
     object_list.append(kinetic)
-    block = KineticBlock(
+    block = SlowVanish(
         Vector2(50, 20), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
+    object_list.extend((block,))
+    block = SlowVanish(
         Vector2(151, 20), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
-        Vector2(252, 20), 50, 10, [0, 0, 255]
+    object_list.extend((block,))
+    block = Vanish(Vector2(252, 20), 50, 10, [0, 0, 255])  # position width height color
+    object_list.extend((block,))
+    block = Vanish(Vector2(353, 20), 50, 10, [0, 0, 255])  # position width height color
+    object_list.extend((block,))
+    block = SlowVanish(
+        Vector2(50, 80), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
-        Vector2(353, 20), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.append(block)
-    block = Vanish(Vector2(50, 80), 50, 10, [0, 0, 255])  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
     block = Vanish(Vector2(151, 80), 50, 10, [0, 0, 255])  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
     block = Vanish(Vector2(252, 80), 50, 10, [0, 0, 255])  # position width height color
-    object_list.append(block)
-    block = Vanish(Vector2(353, 80), 50, 10, [0, 0, 255])  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
+    block = SlowVanish(
+        Vector2(353, 80), 50, 10, [0, 0, 255]
+    )  # position width height color
+    object_list.extend((block,))
 
     block = Paddle(Vector2(1, 799), 100, 100, [0, 0, 0])
     object_list.extend((block,))
@@ -78,7 +78,7 @@ def main():
         for item in object_list:
             if isinstance(item, Paddle):
                 item.update(right, left)
-            elif isinstance(item, Vanish):
+            elif isinstance(item, Vanish) or isinstance(item, SlowVanish):
                 item.update(object_list)
             else:
                 item.update()

@@ -37,9 +37,30 @@ class KineticBlock(Block):
 class Vanish(KineticBlock):
     def update(self, object_list):
         if self.touched_by_ball:
-            for object in object_list:
-                if object == self:
-                    object_list.remove
+            for item in object_list:
+                if (
+                    item == self
+                    and item.color != [0, 0, 225]
+                    and item.color != [14, 253, 0]
+                    and item.color != [14, 253, 277]
+                ):
+                    object_list.remove(self)
+        super().update()
+
+
+class SlowVanish(KineticBlock):
+    def update(self, object_list):
+        if self.touched_by_ball:
+            print("I am touched")
+            for item in object_list:
+                if item == self and item.color == [0, 0, 255]:
+                    print("I am a color and the item")
+                    self.color = [14, 253, 0]
+                    self.update()
+                if item == self and item.color == [14, 253, 0]:
+                    self.color = [14, 253, 277]
+                if item == self and item.color == [14, 253, 277]:
+                    object_list.remove(self)
         super().update()
 
 
