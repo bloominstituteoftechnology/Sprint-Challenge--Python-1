@@ -14,7 +14,7 @@ def debug_create_objects(object_list):
     #main ball in game
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(2, 2),
                                     [240, 197, 202], 20)
     object_list.append(kinetic)
     print(object_list)
@@ -50,7 +50,7 @@ def debug_create_objects(object_list):
     #paddle
     paddle = KineticBlock(Vector2(400,390), 80, 20, [234, 112, 90])
     object_list.append(paddle)
-
+    print(object_list)
 
 def main():
     pygame.init()

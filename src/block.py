@@ -25,8 +25,10 @@ class Block:
 
         if args[0]: 
             self.rectangle.x += 2
+            self.position.x += 2
         if args[1]:
             self.rectangle.x -= 2
+            self.position.x -= 2
 
 
     def check_collision(self):
