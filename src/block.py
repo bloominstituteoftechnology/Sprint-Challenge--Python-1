@@ -21,8 +21,7 @@ class Block:
 
 
     def update(self, **kwargs):
-        # self.touched_by_ball = False
-        pass
+        self.touched_by_ball = False
 
     def check_collision(self):
         pass
@@ -33,11 +32,17 @@ class Block:
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
-    def __init__(self, position, width, height, color):
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
         super().__init__(position, width, height, color)
 
-    def draw(self, screen, pygame):
-        pygame.draw.rect(screen, self.color, self.rectangle)
+    def update(self):
+        if self.touched_by_ball == True:
+            self.object_list.remove(self)
 
+class Paddle(KineticBlock):
+    def __init__(self, object_list, position, width, height, color):
+        super().__init__(object_list, position, width, height, color)
 
-
+    def update(self):
+        self.touched_by_ball = False
