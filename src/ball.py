@@ -79,7 +79,7 @@ class GameBall(Ball):
     def collide_with_rectangle(self, object):
         # This function is called after a first-pass test, that is the collision
         # rectangles overlap. 
-        
+        print(object)
         left, right, top, bottom = False, False, False, False
         # TODO:  This can probably be optimized
         if (
@@ -160,9 +160,11 @@ class GameBall(Ball):
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
+        # print(self.object_list.index(self))
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
+            
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
