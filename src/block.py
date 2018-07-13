@@ -29,8 +29,7 @@ class Block:
         pass
 
     def draw(self, screen, pygame):
-        if not self.visible == False:
-            pygame.draw.rect(screen, self.color, self.rectangle)
+        pygame.draw.rect(screen, self.color, self.rectangle)
 
 
 class KineticBlock(Block):
@@ -60,10 +59,15 @@ class Brick(KineticBlock):
         # Create a rectangle centered around the x and y
         self.position = position
         self.rectangle = pygame.Rect(
-            position.x,
-            position.y,
+            position.x - (width/2),
+            position.y - (height/2),
             width,
             height)
         self.color = color
         self.touched_by_ball = False
         self.steps = 20
+        self.visible = True
+
+    def draw(self, screen, pygame):
+        if not self.visible == False:
+            pygame.draw.rect(screen, self.color, self.rectangle)

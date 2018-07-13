@@ -13,7 +13,7 @@ BACKGROUND_COLOR = [255, 255, 255]
 BRICKS = []
 BRICKS_WIDTH = 40
 BRICKS_HEIGHT = 20
-BRICKS_PADDING = 19
+BRICKS_PADDING = 21
 BRICKS_COLUMNS = math.floor(
     ((SCREEN_SIZE[0] - BRICKS_PADDING) / (BRICKS_WIDTH + BRICKS_PADDING)))
 BRICKS_ROWS = math.floor(
@@ -37,17 +37,15 @@ def debug_create_objects(object_list):
 
 
 def createBricksMatrix(object_list):
-    print(math.floor(
-        ((SCREEN_SIZE[0] - BRICKS_PADDING) / (BRICKS_WIDTH + BRICKS_PADDING))))
-    print(math.floor(
-        ((SCREEN_SIZE[1] / 2) / (BRICKS_HEIGHT + BRICKS_PADDING))))
+    print('BRICKS_ROWS', BRICKS_ROWS)
+    print('BRICKS_COLUMNS', BRICKS_COLUMNS)
 
     for r in range(BRICKS_ROWS):
         BRICKS.append([])
         # print(BRICKS)
         for c in range(BRICKS_COLUMNS):
             BRICKS[r].append([])
-            BRICKS[r][c] = KineticBlock(
+            BRICKS[r][c] = Brick(
                 Vector2(BRICKS_PADDING + (c * BRICKS_WIDTH + BRICKS_PADDING), BRICKS_PADDING + (r * BRICKS_HEIGHT + BRICKS_PADDING)), BRICKS_WIDTH, BRICKS_HEIGHT, [0, 0, 255])
             object_list.append(BRICKS[r][c])
         print('\n\n Row number:', r, 'colums in row:', c, '\n', BRICKS[r])
