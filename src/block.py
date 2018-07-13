@@ -34,4 +34,27 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+            
+class Paddle(KineticBlock):
+    """
+    Class for the player paddle
+    """
+def move_paddle(self, direction):
+
+        if direction == "l" and self.position.x > self.width / 2:
+            self.position.x -= 3
+        elif direction == "r" and self.position.x < 400 - self.width / 2:
+            self.position.x += 3
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.width / 2),
+            self.position.y - (self.height / 2),
+            self.width,
+            self.height,
+        )
+
+        super().update();
+
+class RowsOfBlock(KineticBlock):
+    pass
+
 
