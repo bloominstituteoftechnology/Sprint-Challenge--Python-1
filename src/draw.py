@@ -16,7 +16,14 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    # kinetic = GameBall(1, object_list, SCREEN_SIZE, 
+    #                                 Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+    #                                 Vector2(4*random.random() - 2, 4*random.random() - 2),
+    #                                 [255, 10, 0], 30)
+    # object_list.append(kinetic)
+
+
+    block = KineticBlock(Vector2(200,400), 130, 30, [0, 0, 255])
     object_list.append(block)
   
 def main():
