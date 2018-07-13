@@ -18,9 +18,22 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
-
+        self.touch_count = 0
 
     def update(self, **kwargs):
+        if self.touch_count == 3:
+           self.obj_list.remove(self)
+
+        if self.touch_count == 2:
+           self.color = [111,30,200]
+           
+        if self.touched_by_ball == True:
+           self.color = [56,0,240]
+           self.touch_count += 1
+
+        if len(self.obj_list) == 2:
+            pygame.quit()
+
         self.touched_by_ball = False
 
     def check_collision(self):
