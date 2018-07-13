@@ -16,23 +16,14 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 50, 50, [0, 0, 255])
-    object_list.append(block)
-
-    block2 = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block2)
-
-    block3 = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block3)
-
-    paddle = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    paddle = KineticBlock(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 100, 50, [0, 0, 255])
     object_list.append(paddle)
 
+    regularblock = RegularBlock(Vector2(200,200), 100, 100, [255, 0, 0])
+    object_list.append(regularblock)
 
-
-
-
-
+    rainbowblock = RainbowBlock(Vector2(200,200), 100, 100, [255, 255, 255])
+    object_list.append(rainbowblock)    
 
   
 def main():

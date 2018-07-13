@@ -3,7 +3,7 @@ import math
 from pygame.math import Vector2
 from pygame import Rect
 
-from block import KineticBlock
+from block import KineticBlock, RegularBlock
 
 class Ball:
     """
@@ -156,6 +156,11 @@ class GameBall(Ball):
                     # the same speed
                     stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
+
+        if issubclass(type(object), RegularBlock) and object !=self:
+            object.collision()
+
+
 
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
