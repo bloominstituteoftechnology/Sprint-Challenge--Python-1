@@ -36,7 +36,7 @@ class Ball:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
-        self.position += self.velocity
+        self.position += self.velocity * 2
         self.collision_rectangle = self.update_rectangle()
 
     def check_collision(self):

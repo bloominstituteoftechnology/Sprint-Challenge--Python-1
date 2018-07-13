@@ -1,12 +1,13 @@
 import pygame #TODO:  Fix intellisense
 import random
+import math
 
 from pygame.math import Vector2
 
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [700, 700]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -18,6 +19,18 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    block2 = breakBlock(Vector2(100, 20), 60, 50, [255, 0, 0], 1)
+    object_list.append(block2)
+
+    block3 = breakBlock(Vector2(180, 20), 60, 50, [255, 0, 0], 1)
+    object_list.append(block3)
+
+    block4 = breakBlock(Vector2(260, 20), 60, 50, [255, 0, 0], 1)
+    object_list.append(block4)
+
+    block5 = breakBlock(Vector2(340, 20), 60, 50, [255, 0, 0], 1)
+    object_list.append(block5)
   
 def main():
     pygame.init()
