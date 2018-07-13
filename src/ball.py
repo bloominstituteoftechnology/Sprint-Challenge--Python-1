@@ -1,7 +1,9 @@
 import math
+import time
 
 from pygame.math import Vector2
 from pygame import Rect
+
 
 from block import KineticBlock
 
@@ -32,9 +34,17 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            print("top")
+            print("Ball has touched the top. The program will now quit in 3 seconds")
+            time.sleep(3)
+            pygame.quit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            print("Ball has touched the bottom. The program will now quit in 3 seconds")
+            time.sleep(3)
+            pygame.quit()
+            
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -57,7 +67,6 @@ class GameBall(Ball):
         super().__init__(bounds, position, velocity, color, radius)
 
     def collide_with_ball(self, object, relative_vector):
-
         #TODO:  Calculate the correct position and move there directly
         while relative_vector.length() <= self.radius + object.radius:
             self.position += relative_vector.normalize()

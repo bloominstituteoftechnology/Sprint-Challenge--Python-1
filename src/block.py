@@ -32,6 +32,22 @@ class Block:
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
+
     pass
+
+class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+    
+    def move(self):
+        keys = pygame.key.get_pressed()
+        print("update")
+        self.position.x += 1
+
+    #super().update()
+    pass
+
+
+
 
 
