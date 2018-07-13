@@ -19,7 +19,6 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-
     def update(self, **kwargs):
         self.touched_by_ball = False
 
@@ -38,9 +37,4 @@ class PlayerBlock(KineticBlock):
     pass
 
 class BreakableBlock(KineticBlock):
-    def __init__(self, position, width, height, color, game_ball):
-        super().__init__(position, width, height, color, game_ball)
-        self.game_ball = game_ball
-
-    def update(self):
-        print(game_ball)
+    pass

@@ -75,6 +75,10 @@ def main():
                     object.rectangle.x += 5
                     object.position[0] += 5
             
+            if isinstance(object, BreakableBlock):
+                if object.touched_by_ball:
+                    object_list.remove(object)
+            
             object.update()
             object.check_collision()
  
