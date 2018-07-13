@@ -16,8 +16,11 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 10)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(100,750), 70, 15, [0, 0, 255]) # PADDLE
-    object_list.append(block)
+    # block = KineticBlock(Vector2(100,750), 70, 15, [0, 0, 255]) # PADDLE
+    # object_list.append(block)
+
+    paddle = Paddle(Vector2(100,750), 70, 15, [0, 0, 255])
+    object_list.append(paddle)
 
     for i in range(6):
         blue_bricks =KineticBlock(Vector2(120*i/2,100), 40, 20, [0, 0, 255])
@@ -52,21 +55,21 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-            if event.type == pygame.KEYDOWN: 
-                if event.key == pygame.K_LEFT:
-                    paddle.position.x += 5
-                if event.key == pygame.K_RIGHT:
-                    paddle.position.x += 5
+            # if event.type == pygame.KEYDOWN: 
+            #     if event.key == pygame.K_LEFT:
+            #         paddle.position.x += 5
+            #     if event.key == pygame.K_RIGHT:
+            #         paddle.position.x += 5
                 
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            # left = True
+            left = True
 
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates
