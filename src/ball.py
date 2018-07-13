@@ -1,9 +1,10 @@
 import math
+import pygame 
 
 from pygame.math import Vector2
 from pygame import Rect
 
-from block import KineticBlock
+from block import KineticBlock, TopBlock
 
 class Ball:
     """
@@ -14,7 +15,7 @@ class Ball:
         self.velocity = velocity
         self.bounds = bounds
         self.color = color
-        self.radius = radius
+        self.radius = radius -10
         self.collision_rectangle = self.update_rectangle()
 
     def update_rectangle(self):
@@ -30,9 +31,13 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
-            self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            print("WINNER!") #if it touches the top of the screen you win
+            pygame.quit()
+            # self.position.y = self.radius + 1
+            # self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
+            print("You lost - Try again!") #if it touches the bottom of the screen you lose
+            # pygame.quit() # took this out momentarily because it's annoying for testing
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
