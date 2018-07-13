@@ -18,7 +18,8 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
-
+        self.width = width
+        self.height = height
 
     def update(self, **kwargs):
         self.touched_by_ball = False
@@ -35,8 +36,14 @@ class KineticBlock(Block):
     pass
 
 class Paddle(KineticBlock):
+    def update(self, **kwargs):
+        self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
 
-    pass
+
 
 
 
