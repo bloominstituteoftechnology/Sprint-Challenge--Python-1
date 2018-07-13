@@ -22,7 +22,22 @@ class Block:
 
     def update(self, **kwargs):
         self.touched_by_ball = False
-
+        if kwargs is not None:
+            print(kwargs)
+            print(self.position.x)
+            if kwargs["left"] == True:
+                self.position.x = self.position.x - 5    
+            elif kwargs["right"] == True:
+                self.position.x = self.position.x + 5
+            else:
+                pass
+            
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (50/2),
+                                    self.position.y - (25/2),
+                                    50,
+                                    25)
+            
     def check_collision(self):
         pass
 
@@ -33,5 +48,3 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
-
-
