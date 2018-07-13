@@ -39,8 +39,20 @@ class Paddle(KineticBlock):
         self.paddle = True
         super().__init__(position, width, height, color)
 
+    def update(self, **kwargs):
+        position = kwargs['position']
+        if position > 330:
+            self.position.x = 330
+            self.rectangle.x = 330
+        else:
+            self.position.x = position
+            self.rectangle.x = position
+
+
 class BlockOne(KineticBlock):
-    pass
+    def __init__(self, position, width, height, color):
+        self.hp = 1
+        super().__init__(position, width, height, color)
 
 class BlockThree(KineticBlock):
     pass
