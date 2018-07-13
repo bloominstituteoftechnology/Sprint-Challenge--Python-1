@@ -34,4 +34,25 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class PlayBlock(KineticBlock):
+    
+    # def moveLeft(self, pixels):
+    #     self.rect.x -= pixels
+        
+    def update(self, **kwargs):
+        self.touched_by_ball = False
+        mouse_pos = pygame.mouse.get_pos()
+        self.position.x = mouse_pos[0]
+        self.rectangle[0] = mouse_pos[0] - self.rectangle.width/2
 
+    def check_collision(self):
+        pass
+
+class breakBlock(KineticBlock):
+
+    def __init__(self, position, width, height, color, hits):
+        self.hits = hits
+        super().__init__(position, width, height, color)
+
+        if self.hits == hits:
+            self.touched_by_ball = True 
