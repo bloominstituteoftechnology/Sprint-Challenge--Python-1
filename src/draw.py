@@ -71,15 +71,18 @@ def main():
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            object_list[1].position.x = object_list[1].position.x - 0.5
-            print(object_list[1].position.x)
-            # left = True
+            # object_list[1].position.x = object_list[1].position.x - 0.5
+            left = True
         if keys[pygame.K_RIGHT]:
-            object_list[1].position.x = object_list[1].position.x + 0.5
-            # right = True
+            # object_list[1].position.x = object_list[1].position.x + 0.5
+            right = True
         for object in object_list:
-            object.update()
-            object.check_collision()
+            if isinstance(object, Block):
+                object.update(left, right)
+                object.check_collision()
+            else:
+                object.update()
+                object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
