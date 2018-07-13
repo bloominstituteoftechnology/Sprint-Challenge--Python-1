@@ -25,7 +25,8 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(300,100), 50, 50, [0, 0, 255])
     object_list.append(block)
 
-    vanishingBlock = lambda i, j : VanishingBlock(Vector2(50+(i*50), j * 50), 50, 50, [255, 0, 223])
+    vanishingBlock1 = VanishingBlock(Vector2(200, 300), 50, 50, [124,123,122])
+    object_list.append(block)
 
     paddle = Paddle(SCREEN_SIZE, Vector2(200, 500), 150, 30, [0,255,0])
     object_list.append(paddle)
@@ -42,8 +43,28 @@ def main():
     debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
-        left = False
-        right = False
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            left = False
+            for object in object_list:
+                if isinstance(object, block):
+                    object.update(left, right)
+                    object.check_collision()
+                else:
+                    object.update()
+                    object.check_collision()
+        if keys[pygame.K_RIGHT]:
+            right = False
+        for object in object_list:
+            object.update()
+            object,check_collision()
+            for object in object_list:
+                if isinstance(object, block):
+                    object.update(left, right)
+                    object.check_collision()
+                else:
+                    object.update()
+                    object.check_collision()
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -59,8 +80,8 @@ def main():
             object.check_collision()
         if object_list[0].ball_hit_bottom():
             exit()
-        # if object_list[0].passes_top():
-        #     exit()
+        if object_list[0].passes_top():
+            exit()
 
  
         # Draw Updates

@@ -119,6 +119,7 @@ class GameBall(Ball):
         
         if test == 1:
             object.touched_by_ball = True
+            print('collision!')
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
             if left or right:
@@ -161,7 +162,7 @@ class GameBall(Ball):
         return self.position.y >= self.bounds[1] - self.radius
 
     def passes_top(self):
-        return self.bounds[1] - self.radius >= self.position.y
+        return self.position.y <= 0
 
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection

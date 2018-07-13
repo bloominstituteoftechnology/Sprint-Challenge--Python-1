@@ -29,7 +29,7 @@ class Block:
     def update(self, **kwargs):
         self.touched_by_ball = False
         self.update_rectangle()
-        
+
     def check_collision(self):
         pass
 
@@ -42,11 +42,25 @@ class KineticBlock(Block):
     pass
 
 class VanishingBlock(KineticBlock):
-    def __init__(self, position, width, height, color):
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
         super().__init__(position, width, height, color)
-        self.breakable = True
+        self.position = position
+        self.rectangle = pygame.Rect(
+            position.x - (width/2),
+            position.y - (width/2),
+            width,
+            height
+        )
+        self.color = color
+        self.touched_by_ball = False
     def update(self, **kwargs):
-        pass
+        if self.touched_by_ball:
+            for object in self.object_list:
+                if object == self:
+                    self.object_list.remove(object)
+                else:
+                    continue
 
 class Paddle(KineticBlock):
     def __init__(self, bounds, position, width, height, color):
