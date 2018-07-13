@@ -53,20 +53,22 @@ class RainbowBlock(RegularBlock):
     def __init__(self, position, width, height, color, object_list):
         self.object_list = object_list
         super().__init__(position, width, height, color, object_list)
-        self.hit = 2
+        self.hit = 3
 
     def update(self):
         if self.touched_by_ball == True:
             self.hit -= 1
+        if self.hit == 2:
+            self.color = [255, 0, 255]
         if self.hit == 1:
-            self.color = [0, 0, 0]
+            self.color = [255, 255, 0]
         if self.hit < 1:
             self.object_list.remove(self)
         super().update()
 
 # The above allows the Rainbow Block to take a certain number of hits before vanishing
-# I was making this way too complicated. I tried using self.should_draw but it wasn't working so I figured the base Block hase a self.touched_by_ball, so maybe I ought to use that.
-# I could count whether it got hit and then change color once before removing. Not working 100% but I feel very close. 
+# I was making this way too complicated. I tried using self.should_draw but it wasn't working so I figured the base Block has a self.touched_by_ball, so maybe I ought to use that.
+# Then maybe I could count whether it got hit and then change color once before removing. Not working 100% but I feel very close. 
 
 class Paddle(KineticBlock):
     def __init__(self, position, width, height, color):

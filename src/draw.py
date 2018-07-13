@@ -28,7 +28,7 @@ def debug_create_objects(object_list):
     rainbowblock = RainbowBlock(Vector2(200, 250), 200, 50, [255, 0, 0], object_list)
     object_list.append(rainbowblock)
 
-    object_list += [ball, paddle, rainbowblock, regularblock]
+    object_list += [ball, paddle, regularblock, rainbowblock]
 
   
 def main():
