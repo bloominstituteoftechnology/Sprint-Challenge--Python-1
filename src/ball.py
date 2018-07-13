@@ -37,7 +37,7 @@ class Ball:
             # self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
             print("You lost - Try again!") #if it touches the bottom of the screen you lose
-            pygame.quit()
+            # pygame.quit() # took this out momentarily because it's annoying for testing
             # self.position.y = self.bounds[1] - self.radius - 1
             # self.velocity.y *= -1
 
