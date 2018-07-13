@@ -6,8 +6,8 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+SCREEN_SIZE = [400, 800]
+BACKGROUND_COLOR = [0, 0, 70]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
@@ -16,8 +16,12 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = HardBlock(4, Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+paddle = Paddle(
+    Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1] - 50), 100, 25 [55, 255, 20] ))
+object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -44,7 +48,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left = left, right = right, pygame = pygame, object_list = objectlist)
             object.check_collision()
  
         # Draw Updates
