@@ -54,8 +54,8 @@ def debug_create_objects(object_list):
     object_list.append(block)
 
 
-    bar = KineticBlock(Vector2(200,700), 130, 30, [0, 0, 255])
-    object_list.append(bar)
+    # bar = KineticBlock(Vector2(200,700), 130, 30, [0, 0, 255])
+    # object_list.append(bar)
   
 def main():
     pygame.init()
@@ -63,8 +63,11 @@ def main():
     # keys = pygame.key.get_pressed()
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
+    
  
     object_list = [] # list of objects of all types in the toy
+    bar = KineticBlock(Vector2(200,700), 130, 30, [0, 0, 255])
+    object_list.append(bar)
     
     debug_create_objects(object_list)
  
@@ -80,9 +83,15 @@ def main():
         if keys[pygame.K_LEFT]:
             left = True
             print("pressed left")
+            bar.position[0] = bar.position[0] - 1
+            
+            print(bar.position[0])
         if keys[pygame.K_RIGHT]:
             right = True
             print("press right")
+            bar.position[0] = bar.position[0] + 1
+            print(bar.position[0])
+        object_list.append(bar)
         for object in object_list:
             object.update()
             object.check_collision()
