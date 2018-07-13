@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [400, 800]
+SCREEN_SIZE = [400, 600]
 BACKGROUND_COLOR = [255, 255, 255]
 
 
@@ -18,7 +18,8 @@ def debug_create_objects(object_list):
                        [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
+    block = KineticBlock(
+        Vector2(SCREEN_SIZE[0] / 2, SCREEN_SIZE[1]), 90, 15, [0, 0, 255])
     object_list.append(block)
 
 
@@ -30,8 +31,6 @@ def main():
     clock = pygame.time.Clock()
 
     object_list = []  # list of objects of all types in the toy
-
-    debug_create_objects(object_list)
 
     while True:  # TODO:  Create more elegant condition for loop
         left = False
@@ -45,12 +44,7 @@ def main():
                     # TODO: Add behavior when button pressed
                     print(event)
                 if event.key == pygame.K_s:
-                    debug_start_game(object_list)
-                    Kinetic_List = []
-                    for obj in object_list:
-                        if isinstance(obj, KineticBall):
-                            print(obj)
-                            Kinetic_List.append(obj)
+                    debug_create_objects(object_list)
                 if event.key == pygame.K_q:
                     pygame.quit()
 
