@@ -31,6 +31,10 @@ class Block:
 
 
 class KineticBlock(Block):
+    """
+    Constructor takes position, width, height, color
+    """
+
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
@@ -56,6 +60,12 @@ class Paddle(KineticBlock):
 
 
 class BreakableBlock(KineticBlock):
+    """
+    Class for blocks that can be destroyed by the paddle.
+    Expects RGB values of 0-63, which it will then multiply by its number of hp.
+    Expects 1-4 hp.
+    """
+
     def __init__(self, position, width, height, color, hp):
         self.hp = hp
         self.orig_color = color

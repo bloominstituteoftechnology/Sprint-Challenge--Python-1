@@ -32,6 +32,47 @@ def debug_create_objects(object_list):
     object_list.append(paddle)
 
 
+def for_reals_create_objects(object_list):
+    kinetic = GameBall(
+        1,
+        object_list,
+        SCREEN_SIZE,
+        Vector2(
+            random.randint(20, SCREEN_SIZE[0] - 20),
+            random.randint(20, SCREEN_SIZE[1] - 20),
+        ),
+        Vector2(2 * random.random() + 4, 2 * random.random() + 4),
+        [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
+        10,
+    )
+    object_list.append(kinetic)
+
+    for j in range(0, 8):
+        for i in range(0, 12):
+            die_roll = random.random()
+            if die_roll > .95:
+                new_block = KineticBlock(
+                    Vector2(j * 50 + 25, i * 20 + 10), 50, 20, [200, 200, 200]
+                )
+                object_list.append(new_block)
+            elif die_roll > .25:
+                new_block = BreakableBlock(
+                    Vector2(j * 50 + 25, i * 20 + 10),
+                    50,
+                    20,
+                    [
+                        random.randint(0, 63),
+                        random.randint(0, 63),
+                        random.randint(0, 63),
+                    ],
+                    random.randint(1, 4),
+                )
+                object_list.append(new_block)
+
+    paddle = Paddle(Vector2(200, 750), 100, 20, [0, 255, 0])
+    object_list.append(paddle)
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -41,7 +82,7 @@ def main():
 
     object_list = []  # list of objects of all types in the toy
 
-    debug_create_objects(object_list)
+    for_reals_create_objects(object_list)
 
     while True:  # TODO:  Create more elegant condition for loop
         direction = None
