@@ -23,18 +23,22 @@ class Ball:
                                         self.radius*2, self.radius*2)
 
     def update(self, **kwargs):
-        if self.position.x <= 0 + self.radius: # screen width
+        if self.position.x <= 0 + self.radius: # left
             self.position.x = self.radius + 1
             self.velocity.x *= -1
-        if self.position.x >= self.bounds[0] - self.radius:
+        if self.position.x >= self.bounds[0] - self.radius: # right side of screen
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
-        if self.position.y <= 0 + self.radius: # screen height
-            self.position.y = self.radius + 1
-            self.velocity.y *= -1
-        if self.position.y >= self.bounds[1] - self.radius:
-            self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+        if self.position.y <= 0 + self.radius: # top of screen
+            print('\n You win!!!!!! \n') # when ball hits top of screen program exits and you win
+            pygame.quit()
+            # self.position.y = self.radius + 1
+            # self.velocity.y *= -1
+        if self.position.y >= self.bounds[1] - self.radius: # right of screen
+            print('You Lose')
+            pygame.quit()
+            # self.position.y = self.bounds[1] - self.radius - 1
+            # self.velocity.y *= -1
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
