@@ -2,6 +2,7 @@ import pygame
 
 from pygame.math import Vector2
 from pygame import Rect
+from pygame import key 
 
 class Block:
     """
@@ -33,5 +34,29 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
+class Paddle(KineticBlock):
+    pass
+
+    # def move_paddle(self):     
+        
+    #     keys = pygame.key.get_pressed()
+
+    #     self.position = keys[pygame.K_LEFT]:
+    #             left = True
+
+    #     self.position = keys[pygame.K_RIGHT]:
+    #             right = True
+                
+    #     for object in object_list:
+    #         object.update()
+    #         object.check_collision()
+    #     ) 
+
+    #     super().update()
+
+
+
+        
 
 

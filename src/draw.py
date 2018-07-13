@@ -6,7 +6,9 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+# SCREEN_SIZE = [640, 480]
+
+SCREEN_SIZE = [400, 600]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -17,6 +19,18 @@ def debug_create_objects(object_list):
     object_list.append(kinetic)
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    object_list.append(block)
+
+    block = Paddle(Vector2(200,600), 150, 60, [50, 50, 199])
+    object_list.append(block)
+
+    block = KineticBlock(Vector2(400,400), 100, 50, [255, 0, 0])
+    object_list.append(block)
+
+    block = KineticBlock(Vector2(50, 100), 30, 70, [255, 255, 0])
+    object_list.append(block)
+
+    block = KineticBlock(Vector2(100, 500), 150, 50, [0, 255, 0])
     object_list.append(block)
   
 def main():
@@ -29,7 +43,7 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
- 
+
     while True: # TODO:  Create more elegant condition for loop
         left = False
         right = False
@@ -37,15 +51,30 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         
-        #TODO:  Feed input variables into update for objects that need it.
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            left = True
-        if keys[pygame.K_RIGHT]:
-            right = True
+        
+
+        for event in pygame.event.get():
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_LEFT]:
+                left = True
+        
+            if keys[pygame.K_RIGHT]:
+                right = True 
+        
         for object in object_list:
             object.update()
             object.check_collision()
+
+        #TODO:  Feed input variables into update for objects that need it.
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_LEFT]:
+        #     left = True
+        # if keys[pygame.K_RIGHT]:
+        #     right = True
+        # for object in object_list:
+        #     object.update()
+        #     object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
@@ -60,3 +89,8 @@ def main():
  
 if __name__ == "__main__":
     main()
+
+# def update_screen_size(SCREEN_SIZE): 
+#     SCREEN_SIZE = [400, 800]
+
+#     super().update()
