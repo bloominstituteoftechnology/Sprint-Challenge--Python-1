@@ -34,4 +34,9 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+
+    pass
+
+
 
