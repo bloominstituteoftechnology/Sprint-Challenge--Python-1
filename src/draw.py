@@ -1,4 +1,5 @@
 import pygame #TODO:  Fix intellisense
+import sys
 import random
 
 from pygame.math import Vector2
@@ -18,6 +19,18 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    kinetic = GameBall(1, object_list, SCREEN_SIZE, 
+                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    [255, 10, 0], 20)
+    object_list.append(kinetic)
+
+    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    object_list.append(block)
+
+    block = KineticBlock(Vector2(200,200), 5, 500, [0, 0, 255])
+    object_list.append(block)
   
 def main():
     pygame.init()
@@ -29,6 +42,8 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
+
+
  
     while True: # TODO:  Create more elegant condition for loop
         left = False
