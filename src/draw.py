@@ -18,6 +18,9 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    paddle = Paddle(SCREEN_SIZE, Vector2(200, 500), 150, 30, [255,255,0])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -44,7 +47,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates

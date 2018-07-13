@@ -2,8 +2,9 @@ import math
 
 from pygame.math import Vector2
 from pygame import Rect
-
+from pygame import sprite
 from block import KineticBlock
+from block import Paddle
 
 class Ball:
     """
@@ -156,6 +157,8 @@ class GameBall(Ball):
                     # the same speed
                     stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
+    def check_hit_bottom(self):
+        return self.position.y >= self.bounds[1] - self.radius
 
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
@@ -163,7 +166,7 @@ class GameBall(Ball):
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
-            if issubclass(type(object), KineticBlock) and object != self:
+            if issubclass(type(object), KineticBlock) or issubclass(type(object), Paddle) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
