@@ -19,20 +19,20 @@ def debug_create_objects(object_list):
     object_list.append(kinetic)
     print(object_list)
 
-    # blocks at top of screen
-    block = KineticBlock(Vector2(200,20), 100, 30, [156, 214, 184])
+    #blocks at top of screen
+    block = TopBlock(Vector2(200,20), 100, 30, [156, 214, 184])
     object_list.append(block)
-    block = KineticBlock(Vector2(400,20), 100, 30, [156, 214, 184])
+    block = TopBlock(Vector2(400,20), 100, 30, [156, 214, 184])
     object_list.append(block)
-    block = KineticBlock(Vector2(600,20), 100, 30, [156, 214, 184])
+    block = TopBlock(Vector2(600,20), 100, 30, [156, 214, 184])
     object_list.append(block)
-    block = KineticBlock(Vector2(200,60), 100, 30, [0, 214, 200])
+    block = TopBlock(Vector2(200,60), 100, 30, [0, 214, 200])
     object_list.append(block)
-    block = KineticBlock(Vector2(400,60), 100, 30, [0, 214, 200])
+    block = TopBlock(Vector2(400,60), 100, 30, [0, 214, 200])
     object_list.append(block)
-    block = KineticBlock(Vector2(600,60), 100, 30, [0, 214, 200])
+    block = TopBlock(Vector2(600,60), 100, 30, [0, 214, 200])
     object_list.append(block)
-
+ 
     #paddle
     paddle = KineticBlock(Vector2(400,390), 80, 20, [234, 112, 90])
     object_list.append(paddle)
