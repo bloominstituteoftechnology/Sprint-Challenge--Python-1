@@ -49,19 +49,19 @@ class LessBrittleBlock(BrittleBlock):
         self.hits = 0
 
     def update(self, **kwargs):
-        if self.hit_by_ball and self.hits < 1:
+        if self.touched_by_ball and self.hits < 1:
             self.hits += 1
-            self.color = [255, 22, 10]
-            self.hit_by_ball = False
+            self.color = [5, 22, 20]
+            self.touched_by_ball = False
 
-class PlayerPaddle(KineticBlock):
+class Paddle(KineticBlock):
     def __init__(self, bounds, position, width, height, color):
         super().__init__(position, width, height, color)
         self.bounds = bounds
         
     def update(self, **kwargs):
-        left = kwargs['left'] 
-        right = kwargs['right'] 
+        left = kwargs['left']
+        right = kwargs['right']
         speed = 11
         
         if left:
@@ -72,4 +72,10 @@ class PlayerPaddle(KineticBlock):
             self.position.x += speed
             if self.position.x > self.bounds[0] - self.rectangle.width / 2:
                 self.position.x = self.bounds[0] - self.rectangle.width / 2
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.rectangle.width/2),
+            self.position.y - (self.rectangle.height/2),
+            self.rectangle.width,
+            self.rectangle.height,
+        )
         super().update()
