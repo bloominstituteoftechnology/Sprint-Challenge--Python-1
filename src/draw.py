@@ -28,7 +28,7 @@ WIDTH_GAME_BLOCK= 400
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(200, SCREEN_SIZE[0] - 200), random.randint(250, SCREEN_SIZE[1] - 250)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(4, 4),
                                     [33, 120, 125], 10)
     object_list.append(kinetic)
 
@@ -81,6 +81,7 @@ def main():
     pygame.display.set_caption("Breakout-Clone")
     # pygame.mouse.set_pos(0, 0) # for ease of getting coordinates for build
     pygame.mouse.set_visible(0) #turns off mouse pointer
+    pygame.font.SysFont("Arial", 128, bold=True)
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()

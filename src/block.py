@@ -39,12 +39,12 @@ class PaddleBlock(KineticBlock):
         super().__init__(position, width, height, color)
     def update(self, **kwargs):
         self.touched_by_ball = False
-        key = pygame.key.get_pressed()
-        dist = 1
-        if key[pygame.K_LEFT]:
-            self.rectangle.move_ip(-1, 0)
-        if key[pygame.K_RIGHT]:
-            self.rectangle.move_ip(1,0)
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    self.rectangle.move_ip(-1, 0)
+                if event.key == pygame.K_RIGHT:
+                    self.rectangle.move_ip(1,0)
 
 class GameBlock(PaddleBlock, KineticBlock):
     def __init__(self, margin, object_list, position, width, height, color):
