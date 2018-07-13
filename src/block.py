@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from pygame.math import Vector2
 from pygame import Rect
@@ -35,6 +36,21 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class VanishingBlock(KineticBlock):
+    def check_collision(self):
+        if self.touched_by_ball == True:
+            self.rectangle = pygame.Rect(0,0,0,0)
+
+class MultipleHitsBlock(KineticBlock):
+    counter = 0
+
+    def check_collision(self):
+        if self.touched_by_ball == True:
+            self.counter += 1
+            self.color = random_color()
+        if self.counter >= 1:
+            self.rectangle = pygame.Rect(0,0,0,0)
+
 class Paddle(KineticBlock):
     def update(self, **kwargs):
         self.rectangle = pygame.Rect(
@@ -42,6 +58,8 @@ class Paddle(KineticBlock):
                                     self.position.y - (self.height/2),
                                     self.width,
                                     self.height)
+
+
 
 
 
