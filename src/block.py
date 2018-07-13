@@ -32,3 +32,12 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
+
+class Paddle(KineticBlock):
+    def update(self, left, right):
+        if left:
+            self.rectangle.move_ip(-10, 0)
+        if right:
+            self.rectangle.move_ip(10, 0)
+        super().update()
