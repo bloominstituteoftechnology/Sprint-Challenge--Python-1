@@ -42,8 +42,23 @@ class KineticBlock(Block):
     pass
 
 class BreakableBlock(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.breakable = True
+
     def update(self, **kwargs):
         pass
+
+class LessBreakableBlock(BreakableBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.hits = 0
+
+    def update(self, **kwargs):
+        if self.touched_by_ball and self.hits < 1:
+            self.hits += 1
+            self.color = [255, 69, 0]
+            self.touched_by_ball = False
 
 class PlayerPaddle(KineticBlock):
     def __init__(self, bounds, position, width, height, color):
@@ -56,12 +71,10 @@ class PlayerPaddle(KineticBlock):
         speed = 10
         
         if left:
-            print('left' if left else 'nah')
             self.position.x -= speed
             if self.position.x < 0 + self.rectangle.width / 2:
                 self.position.x = 0 + self.rectangle.width / 2
         elif right:
-            print('right' if right else 'nah')
             self.position.x += speed
             if self.position.x > self.bounds[0] - self.rectangle.width / 2:
                 self.position.x = self.bounds[0] - self.rectangle.width / 2

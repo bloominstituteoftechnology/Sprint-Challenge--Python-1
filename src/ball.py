@@ -159,6 +159,9 @@ class GameBall(Ball):
                     stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
 
+    def check_hit_bottom(self):
+        return self.position.y >= self.bounds[1] - self.radius
+
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
