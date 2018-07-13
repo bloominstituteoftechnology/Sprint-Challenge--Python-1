@@ -8,24 +8,37 @@ from block import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [55, 55, 55]
+HB_COLOR = [255, 0, 255] # magenta
+EZ_COLOR = [127,255,0] #chart reuse
+STANDARD_BLOCK_SIZE = 40
+START_SPEED = 20
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                    Vector2(START_SPEED*random.random() - START_SPEED/2, START_SPEED*random.random() - START_SPEED/2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    # object_list.append(block)
-    b1 = HardBlock(Vector2(50, 100), 100, 75, [255, 0, 255])
-    b2 = HardBlock(Vector2(200, 100), 100, 75, [255, 0, 255])
-    b3 = HardBlock(Vector2(350, 100), 100, 75, [255, 0, 255])
+
+    # Beej's code for looping blocks using variables at the top^
+    for j in range(5):
+        for i in range(10):
+            block = BeejBlock(object_list, SCREEN_SIZE,
+                        Vector2(i * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2,
+                        j * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2),
+                        STANDARD_BLOCK_SIZE, STANDARD_BLOCK_SIZE, [20*j, 0, 255-10*i])
+            object_list.append(block)
+
+
+    b1 = HardBlock(object_list, Vector2(50, 70), 100, 35, HB_COLOR)
+    b2 = HardBlock(object_list, Vector2(200, 70), 100, 35, HB_COLOR)
+    b3 = HardBlock(object_list, Vector2(350, 70), 100, 35, HB_COLOR)
     object_list.extend([b1, b2, b3])
 
-    b4 = EzBlock(Vector2(50, 200), 100, 75, [127,255,0])
-    b5 = EzBlock(Vector2(200, 200), 100, 75, [127,255,0])
-    b6 = EzBlock(Vector2(350, 200), 100, 75, [127,255,0])
+    b4 = EzBlock(object_list, Vector2(50, 150), 100, 35, EZ_COLOR)
+    b5 = EzBlock(object_list, Vector2(200, 150), 100, 35, EZ_COLOR)
+    b6 = EzBlock(object_list, Vector2(350, 150), 100, 35, EZ_COLOR)
     object_list.extend([b4, b5, b6]) 
 
     paddle = Paddle(Vector2(200, 700), 200, 50, [0,206,209])
@@ -56,7 +69,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates
