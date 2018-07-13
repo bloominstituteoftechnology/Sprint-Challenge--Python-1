@@ -10,16 +10,16 @@ from block import KineticBlock, Paddle
 class GameManager:
     def __init__(self):
         # Game settings
-        self.SCREEN_SIZE = [400, 800]
+        self.SCREEN_SIZE = [800, 400]
         self.BACKGROUND_COLOR = [0, 0, 0]
         self.GAMEBALL_START_POS = Vector2(
             random.randint(20, self.SCREEN_SIZE[0] - 20),
-            random.randint(20, self.SCREEN_SIZE[1] - 20)
+            random.randint(40, self.SCREEN_SIZE[1] - 40)
         )
         self.GAMEBALL_VELOCITY = Vector2(5, 5)
-        self.GAMEBALL_SIZE = 20
+        self.GAMEBALL_SIZE = 8
         self.GAMEBALL_COLOR = [255, 10, 0]
-        self.PADDLE_START_POS = Vector2(459, 400)
+        self.PADDLE_START_POS = Vector2(459, 380)
         self.PADDLE_SPEED = 5
         self.PADDLE_SIZE = [34, 8]
 
