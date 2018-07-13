@@ -59,7 +59,8 @@ class Paddle(KeneticBlock):
 class Breakable(KineticBlock):
     def __init__ (self, object_list, bounds, position, width, height, color)
         self.object_list = object_list
-        
+        super().__init__(bounds, posotion,width height, color)
+
     def update(self, **kwargs):
         if self.touched_by_ball:
             self.object_list.remove(self)

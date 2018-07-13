@@ -16,8 +16,11 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    for i in range(10): #fix
+        block = Breakable(object_list, SCREEN_SIZE,
+                    Vector2( i * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2)
+                    j * STANDARD_BLOCK_SIZE * STANDARD_BLOCK_SIZE/2),
+                    STANDARD_BLOCK_SIZE, STANDARD_BLOCK_SIZE, [20*j, 0]
 
     paddle = Paddle(SCREEN_SIZE, Vctor2(200, 750), 100, 25, [128, 128, 128])
     object_list.append(paddle)
