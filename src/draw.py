@@ -5,7 +5,7 @@ import random
 from pygame.math import Vector2
 
 from ball import GameBall
-from block import KineticBlock, Paddle
+from block import KineticBlock, Paddle, Vanish
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -28,38 +28,30 @@ def debug_create_objects(object_list):
     block = KineticBlock(
         Vector2(50, 20), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
     block = KineticBlock(
         Vector2(151, 20), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
     block = KineticBlock(
         Vector2(252, 20), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
     block = KineticBlock(
         Vector2(353, 20), 50, 10, [0, 0, 255]
     )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
-        Vector2(50, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
-        Vector2(151, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
-        Vector2(252, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.append(block)
-    block = KineticBlock(
-        Vector2(353, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.append(block)
+    object_list.extend((block,))
+    block = Vanish(Vector2(50, 80), 50, 10, [0, 0, 255])  # position width height color
+    object_list.extend((block,))
+    block = Vanish(Vector2(151, 80), 50, 10, [0, 0, 255])  # position width height color
+    object_list.extend((block,))
+    block = Vanish(Vector2(252, 80), 50, 10, [0, 0, 255])  # position width height color
+    object_list.extend((block,))
+    block = Vanish(Vector2(353, 80), 50, 10, [0, 0, 255])  # position width height color
+    object_list.extend((block,))
 
-    paddle = Paddle(Vector2(1, 799), 100, 100, [0, 0, 0])
-    object_list.append(paddle)
+    block = Paddle(Vector2(1, 799), 100, 100, [0, 0, 0])
+    object_list.extend((block,))
 
 
 def main():
@@ -75,7 +67,7 @@ def main():
     while True:  # TODO:  Create more elegant condition for loop
         left = False
         right = False
-        for item in object_list:
+        for object in object_list:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -84,11 +76,15 @@ def main():
                     left = True
                 if keys[pygame.K_RIGHT]:
                     right = True
-            if isinstance(item, Paddle):
-                item.update(left, right)
-            else:
-                item.update()
-            item.check_collision()
+                if isinstance(object, Vanish):
+                    object.update(object_list)
+                    object.check_collision()
+                elif isinstance(object, Paddle):
+                    object.update(left, right)
+                    object.check_collision()
+                else:
+                    object.update()
+            object.check_collision()
 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)

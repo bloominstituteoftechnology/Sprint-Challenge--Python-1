@@ -34,6 +34,15 @@ class KineticBlock(Block):
     pass
 
 
+class Vanish(KineticBlock):
+    def update(self, object_list):
+        if self.touched_by_ball:
+            for item in object_list:
+                if item == self:
+                    object_list.remove(self)
+        super().update()
+
+
 class Paddle(KineticBlock):
     def update(self, left, right):
         if left:
