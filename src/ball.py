@@ -4,6 +4,7 @@ from pygame.math import Vector2
 from pygame import Rect
 
 from block import KineticBlock
+from block import Paddle
 
 class Ball:
     """
@@ -32,9 +33,11 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            sys.exit() #Win Condition
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            sys.exit() #Lose Condition
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -117,7 +120,6 @@ class GameBall(Ball):
         test = left + right + top + bottom
         
         if test == 1:
-            object.touched_by_ball = True
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
             if left or right:
@@ -133,6 +135,8 @@ class GameBall(Ball):
                     self.position.y = object.position.y - object.rectangle.height/2 - self.radius - 1
                 else:
                     self.position.y = object.position.y + object.rectangle.height/2 + self.radius + 1
+
+            object.touched_by_ball = True
 
         elif test == 4:
             # TODO:  Better error handling
@@ -150,12 +154,13 @@ class GameBall(Ball):
             for corner in corners:
                 relative_vector = self.position - corner
                 if relative_vector.length() <= self.radius:
-                    object.touched_by_ball = True
                     # Create a dummy object to make use of ball to ball collision, because the math is the same
                     # Give it a velocity of the same magnitude as the current ball to cause it to reflect at
                     # the same speed
                     stand_in = Ball(self.bounds, corner, Vector2(0, self.velocity.length()), [0,0,0], 0)
                     self.collide_with_ball(stand_in, relative_vector)
+
+                    object.touched_by_ball = True
 
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
@@ -163,7 +168,7 @@ class GameBall(Ball):
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
-            if issubclass(type(object), KineticBlock) and object != self:
+            if (issubclass(type(object), Paddle) or issubclass(type(object), KineticBlock)) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
