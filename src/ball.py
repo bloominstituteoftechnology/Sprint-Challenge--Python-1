@@ -57,7 +57,6 @@ class GameBall(Ball):
         super().__init__(bounds, position, velocity, color, radius)
 
     def collide_with_ball(self, object, relative_vector):
-
         #TODO:  Calculate the correct position and move there directly
         while relative_vector.length() <= self.radius + object.radius:
             self.position += relative_vector.normalize()
