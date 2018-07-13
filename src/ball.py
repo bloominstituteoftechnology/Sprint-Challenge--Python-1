@@ -1,7 +1,5 @@
 import math
 
-# Just some pesudo code 
-
 from pygame.math import Vector2
 from pygame import Rect
 
