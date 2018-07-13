@@ -20,18 +20,32 @@ def debug_create_objects(object_list):
     print(object_list)
 
     #blocks at top of screen
-    block1 = TopBlock(Vector2(200,20), 100, 30, [156, 214, 184], object_list)
+
+    #top row of blocks
+    block1 = TopBlock(Vector2(50,20), 90, 30, [156, 214, 184], object_list)
     object_list.append(block1)
-    block2 = TopBlock(Vector2(400,20), 100, 30, [156, 214, 184], object_list)
+    block2 = TopBlock(Vector2(150,20), 90, 30, [156, 214, 184], object_list)
     object_list.append(block2)
-    block3 = TopBlock(Vector2(600,20), 100, 30, [156, 214, 184], object_list)
+    block3 = TopBlock(Vector2(250,20), 90, 30, [156, 214, 184], object_list)
     object_list.append(block3)
-    block4 = TopBlock(Vector2(200,60), 100, 30, [0, 214, 200], object_list)
+    block4 = TopBlock(Vector2(350,20), 90, 30, [156, 214, 184], object_list)
     object_list.append(block4)
-    block5 = TopBlock(Vector2(400,60), 100, 30, [0, 214, 200], object_list)
+    block5 = TopBlock(Vector2(450,20), 90, 30, [156, 214, 184], object_list)
     object_list.append(block5)
-    block6 = TopBlock(Vector2(600,60), 100, 30, [0, 214, 200], object_list)
+    block6 = TopBlock(Vector2(550,20), 90, 30, [156, 214, 184], object_list)
     object_list.append(block6)
+    block7 = TopBlock(Vector2(650,20), 90, 30, [156, 214, 184], object_list)
+    object_list.append(block7)
+    block8 = TopBlock(Vector2(750,20), 90, 30, [156, 214, 184], object_list)
+    object_list.append(block8)
+
+    #bottom row of blocks
+    block9 = TopBlock(Vector2(200,60), 100, 30, [0, 214, 200], object_list)
+    object_list.append(block9)
+    block10 = TopBlock(Vector2(400,60), 100, 30, [0, 214, 200], object_list)
+    object_list.append(block10)
+    block11 = TopBlock(Vector2(600,60), 100, 30, [0, 214, 200], object_list)
+    object_list.append(block11)
  
     #paddle
     paddle = KineticBlock(Vector2(400,390), 80, 20, [234, 112, 90])
