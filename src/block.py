@@ -33,5 +33,15 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+class PaddleBlock(Block):
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
+        super().__init__(position, width, height, color)
+    def update(self, **kwargs):
+        self.touched_by_ball = False
+
+
+        
+
 
 

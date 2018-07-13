@@ -19,10 +19,15 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    paddle = PaddleBlock(object_list, Vector2(150, 749), 120, 15, [104, 104, 104])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
+    pygame.display.set_caption("Breakout-Clone")
+    pygame.mouse.set_pos(0, 0)
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
@@ -36,7 +41,7 @@ def main():
     while not done: # TODO:  Create more elegant condition for loop xx
         left = False
         right = False
-        
+        motion = False        
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 done = True
@@ -52,7 +57,10 @@ def main():
                 elif event.key == pygame.K_ESCAPE:
                     done = True
                     print("You've escaped the game!")
-            else:
+            elif event.type == pygame.MOUSEMOTION:
+                #get mouse position
+                x, y = pygame.mouse.get_pos()
+                print(x, y)
                 continue
         
         #TODO:  Feed input variables into update for objects that need it.
