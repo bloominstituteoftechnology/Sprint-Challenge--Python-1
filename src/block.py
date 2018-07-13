@@ -34,4 +34,14 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    """ 
+    Player controlled paddle at the bottom of the screen
+    """
 
+    def update(self, left, right):
+        distance = 2
+        if left == True:
+            self.rectangle.move_ip(-distance, 0)
+        if right == True:
+            self.rectangle.move_ip(distance, 0)

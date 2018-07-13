@@ -18,6 +18,9 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
+
+    paddle = Paddle(Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1]-15), 200, 30, [0, 0, 0])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
@@ -29,22 +32,25 @@ def main():
     object_list = [] # list of objects of all types in the toy
     
     debug_create_objects(object_list)
+
+    playing = True
  
-    while True: # TODO:  Create more elegant condition for loop
+    while playing:
         left = False
         right = False
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
-        
-        #TODO:  Feed input variables into update for objects that need it.
+            if event.type == pygame.QUIT: 
+                playing = False
+                continue
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             left = True
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates
