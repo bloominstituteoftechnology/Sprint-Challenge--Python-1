@@ -18,11 +18,18 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
-
+    def update_rectangle(self):
+        self.rectangle = pygame.Rect(
+            self.position.x - (self.rectangle.width/2),
+            self.position.y - (self.rectangle.height/2),
+            self.rectangle.width,
+            self.rectangle.height
+        )
 
     def update(self, **kwargs):
         self.touched_by_ball = False
-
+        self.update_rectangle()
+        
     def check_collision(self):
         pass
 
@@ -33,6 +40,13 @@ class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
+
+class VanishingBlock(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.breakable = True
+    def update(self, **kwargs):
+        pass
 
 class Paddle(KineticBlock):
     def __init__(self, bounds, position, width, height, color):

@@ -16,10 +16,18 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    block = KineticBlock(Vector2(200,200), 50, 50, [0, 0, 255])
     object_list.append(block)
 
-    paddle = Paddle(SCREEN_SIZE, Vector2(200, 500), 150, 30, [255,255,0])
+    block = KineticBlock(Vector2(100,100), 50, 50, [0, 0, 255])
+    object_list.append(block)
+
+    block = KineticBlock(Vector2(300,100), 50, 50, [0, 0, 255])
+    object_list.append(block)
+
+    vanishingBlock = lambda i, j : VanishingBlock(Vector2(50+(i*50), j * 50), 50, 50, [255, 0, 223])
+
+    paddle = Paddle(SCREEN_SIZE, Vector2(200, 500), 150, 30, [0,255,0])
     object_list.append(paddle)
   
 def main():
@@ -49,6 +57,11 @@ def main():
         for object in object_list:
             object.update(left=left, right=right)
             object.check_collision()
+        if object_list[0].ball_hit_bottom():
+            exit()
+        # if object_list[0].passes_top():
+        #     exit()
+
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
