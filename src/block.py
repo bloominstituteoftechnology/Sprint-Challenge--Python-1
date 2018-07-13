@@ -34,4 +34,24 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
-
+class PlayerPaddle(Block):
+    def __init__(self, bounds, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.bounds = bounds
+        
+    def update(self, **kwargs):
+        super().update()
+        left = kwargs['left'] if 'left' in kwargs else None
+        right = kwargs['right'] if 'right' in kwargs else None
+        speed = 10
+        
+        if left:
+            print('left' if left else 'nah')
+            self.rectangle.move_ip(speed * -1, 0)
+            if self.rectangle.centerx < 0 + self.rectangle.width / 2:
+                self.rectangle.centerx = 0 + self.rectangle.width / 2
+        elif right:
+            print('right' if right else 'nah')
+            self.rectangle.move_ip(speed, 0)
+            if self.rectangle.centerx > self.bounds[0] - self.rectangle.width / 2:
+                self.rectangle.centerx = self.bounds[0] - self.rectangle.width / 2

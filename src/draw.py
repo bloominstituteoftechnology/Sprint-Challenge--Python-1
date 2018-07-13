@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -18,7 +18,10 @@ def debug_create_objects(object_list):
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
-  
+
+    player_paddle = PlayerPaddle(SCREEN_SIZE, Vector2(100,750), 30, 30, [255, 255, 0])
+    object_list.append(player_paddle)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -35,7 +38,7 @@ def main():
         right = False
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.QUIT: exit()
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
@@ -44,7 +47,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates
