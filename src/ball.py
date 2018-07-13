@@ -16,6 +16,7 @@ class Ball:
         self.color = color
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
+        self.game_over = False
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
@@ -32,9 +33,13 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+
+        # Ball has hit the bottom - game over
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            self.velocity.y = 0
+            self.velocity.x = 0
+            self.game_over = True
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()

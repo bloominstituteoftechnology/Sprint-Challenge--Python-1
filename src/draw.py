@@ -79,7 +79,11 @@ def main():
                     object_list.remove(object)
             object.update(left=left, right=right)
             object.check_collision()
-            
+
+            if hasattr(object, 'game_over'):
+                if object.game_over == True:
+                    print('GAME OVER')
+                    playing = False
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
