@@ -34,7 +34,11 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            print("you are the hero sir!")
+            exit()
         if self.position.y >= self.bounds[1] - self.radius:
+            print("you done mate")
+            exit()
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
@@ -122,8 +126,28 @@ class GameBall(Ball):
             object.touched_by_ball = True
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
-            object.color = [255, 255, 255, 1]
-            del object
+            if left or right:
+                self.velocity.x *= -1
+                if left:
+                    self.position.x = object.position.x - object.rectangle.width/2 - self.radius - 1
+                    object.color = [255, 255, 255, 0]
+                    del object
+                else:
+                    self.position.x = object.position.x + object.rectangle.width/2 + self.radius + 1
+                    object.color = [255, 255, 255, 0]
+                    del object
+
+            if top or bottom:
+                self.velocity.y *= -1
+                if top:
+                    self.position.y = object.position.y - object.rectangle.height/2 - self.radius - 1
+                    object.color = [255, 255, 255, 0]
+                    del object
+                else:
+                    self.position.y = object.position.y + object.rectangle.height/2 + self.radius + 1
+                    object.color = [255, 255, 255, 0]
+                    del object
+           
 
         elif test == 4:
             # TODO:  Better error handling

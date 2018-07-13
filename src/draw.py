@@ -19,8 +19,8 @@ def debug_create_objects(object_list):
     block = KineticBlock(Vector2(200,450), 100, 100, [0, 0, 255])
     object_list.append(block)
     
-    for j in range(1,10):
-        for i in range(1,16):
+    for j in range(0,10):
+        for i in range(0,17):
             x = 0 + i * 40 + 10
             y = 0 + j * 20 + 10
             r = random.randint(1,250)
