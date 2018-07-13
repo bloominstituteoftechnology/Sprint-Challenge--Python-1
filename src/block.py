@@ -9,14 +9,17 @@ class Block:
     Base class for square or rectangular object
     """
 
-    def __init__(self, position, width, height, color):
+    def __init__(self, bounds, position, width, height, color):
         # Create a rectangle centered around the x and y
+
+        self.bounds = bounds 
         self.position = position
         self.rectangle = pygame.Rect(
-                                    position.x - (width/2),
-                                    position.y - (height/2),
-                                    width,
-                                    height)
+                                position.x - (width/2),
+                                position.y - (height/2),
+                                width,
+                                height,
+        )
         self.color = color
         self.touched_by_ball = False
 
@@ -36,27 +39,32 @@ class KineticBlock(Block):
     pass
 
 class Paddle(KineticBlock):
-    pass
 
-    # def move_paddle(self):     
-        
-    #     keys = pygame.key.get_pressed()
+    SPEED = 3 # Pixels per frame 
 
-    #     self.position = keys[pygame.K_LEFT]:
-    #             left = True
+    def update(self, **kwargs):
+        left = kwargs ['left']
+        right = kwargs ['right']
 
-    #     self.position = keys[pygame.K_RIGHT]:
-    #             right = True
-                
-    #     for object in object_list:
-    #         object.update()
-    #         object.check_collision()
-    #     ) 
+        if left: 
+            self.position.x -= self.SPEED
 
-    #     super().update()
+        if right: 
+            self.position.x += self.SPEED
 
+        # TODO: don't allow a new Rect every frame 
+        # self.rectangle = pygame.Rect(
+        #     self.position.x - (self.rectangle.width/2), 
+        #     self.position.y - (self.rectangle.height/2),
+        #     self.rectangle.width,
+        #     self.rectangle.height,
+        # )
 
+# class Breakable(KineticBall):
+#     def __init__(self, object_list, bounds, position, width, height, color)
+#         self.object_list = object_list
+#         super().__init__(bounds, position, width, height, color)
 
-        
-
-
+#     def update(self, **kwargs):
+#         if self.touched_by_ball:
+#             self.object_list.remove(self) 
