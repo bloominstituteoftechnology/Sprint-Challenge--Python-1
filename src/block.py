@@ -4,6 +4,7 @@ from pygame.math import Vector2
 from pygame import Rect
 
 class Block:
+    
     """
     Base class for square or rectangular object
     """

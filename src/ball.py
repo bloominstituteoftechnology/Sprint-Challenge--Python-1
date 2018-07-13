@@ -6,10 +6,13 @@ from pygame import Rect
 from block import KineticBlock
 
 class Ball:
+    
     """
     base class for bouncing objects
     """
+    
     def __init__(self, bounds, position, velocity, color, radius):
+        
         self.position = position
         self.velocity = velocity
         self.bounds = bounds
@@ -18,11 +21,11 @@ class Ball:
         self.collision_rectangle = self.update_rectangle()
 
     def update_rectangle(self):
-        return Rect(self.position.x - self.radius,
-                                        self.position.y - self.radius,
-                                        self.radius*2, self.radius*2)
+
+        return Rect(self.position.x - self.radius, self.position.y - self.radius, self.radius*2, self.radius*2)
 
     def update(self, **kwargs):
+        
         if self.position.x <= 0 + self.radius: # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
@@ -40,18 +43,23 @@ class Ball:
         self.collision_rectangle = self.update_rectangle()
 
     def check_collision(self):
+        
         # No collision on base models
         pass
 
     def draw(self, screen, pygame):
+        
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
 class GameBall(Ball):
+    
     """
     A ball that collides with blocks
     """
+    
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
+        
         self.object_list = object_list
         self.mass = mass
         super().__init__(bounds, position, velocity, color, radius)
@@ -77,6 +85,7 @@ class GameBall(Ball):
         object.position += object.velocity
 
     def collide_with_rectangle(self, object):
+        
         # This function is called after a first-pass test, that is the collision
         # rectangles overlap. 
         
@@ -85,7 +94,7 @@ class GameBall(Ball):
         if (
             object.position.x > self.position.x and
             object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             left = True
@@ -93,7 +102,7 @@ class GameBall(Ball):
         if (
             object.position.x < self.position.x and
             object.position.x + object.rectangle.width/2 >= self.position.x - self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             right = True
