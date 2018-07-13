@@ -9,7 +9,7 @@ from block import *
 from paddle import *
 
 SCREEN_SIZE = [400, 800]
-BACKGROUND_COLOR = [0, 0, 0] #black
+BACKGROUND_COLOR = [255, 255, 255] #black
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
