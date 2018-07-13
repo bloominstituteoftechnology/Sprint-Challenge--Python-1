@@ -23,7 +23,7 @@ def debug_create_objects(object_list):
     block1 = KineticBlock(object_list, Vector2(35,200), 50, 20, [0, 0, 255])
     object_list.append(block1)
 
-    block2 = KineticBlock(object_list, Vector2(90,200), 50, 20, [0, 0, 255])
+    block2 = StrongKineticBlock(object_list, Vector2(90,200), 50, 20, [0, 0, 255], 2)
     object_list.append(block2)
 
     block3 = KineticBlock(object_list, Vector2(145,200), 50, 20, [0, 0, 255])

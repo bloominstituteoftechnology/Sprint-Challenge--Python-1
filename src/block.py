@@ -29,17 +29,6 @@ class Block:
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
 
-class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
-    def __init__(self, object_list, position, width, height, color):
-        self.object_list = object_list
-        super().__init__(position, width, height, color)
-
-    def update(self):
-        if self.touched_by_ball == True:
-            self.object_list.remove(self)
-
 class Paddle():
     def __init__(self, position, width, height, color):
         # Create a rectangle centered around the x and y
@@ -78,3 +67,32 @@ class Paddle():
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+
+class KineticBlock(Block):
+    # No custom code needed here, just want to be able to differentiate
+    # KineticBall will handle the collison
+    def __init__(self, object_list, position, width, height, color):
+        self.object_list = object_list
+        super().__init__(position, width, height, color)
+
+    def update(self):
+        if self.touched_by_ball == True:
+            self.object_list.remove(self)
+
+class StrongKineticBlock(KineticBlock):
+    def __init__(self, object_list, position, width, height, color, strength):
+        self.strength = strength
+        super().__init__(object_list, position, width, height, color)
+
+    def update(self):
+        if self.touched_by_ball == True:
+            if self.strength == 0:
+                self.object_list.remove(self)
+            else:
+                self.strength -= 1
+                self.color[0] = (self.color[0] + 100) % 256
+                self.color[1] = (self.color[1] - 100) % 256
+                self.color[2] = (self.color[2] + 50) % 256
+                self.touched_by_ball = False
+
+        
