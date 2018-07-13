@@ -3,6 +3,8 @@ import pygame
 from pygame.math import Vector2
 from pygame import Rect
 
+white = (255, 255, 255)
+
 class Block:
     """
     Base class for square or rectangular object
@@ -34,4 +36,7 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
-
+class PlayerBlock(Block):
+    def __init__ (self):
+        super().__init__(self, color, x, y)
+       
