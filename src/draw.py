@@ -1,10 +1,11 @@
 import pygame #TODO:  Fix intellisense
 import random
+import sys
 
 from pygame.math import Vector2
 
-from ball import *
-from block import *
+from ball import GameBall
+from block import KineticBlock, Paddle, RowsOfBlock
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -16,8 +17,8 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,700), 100, 20, [0, 0, 255])
-    object_list.append(block)
+    paddle = Paddle(Vector2(200, 750), 100, 20, [0, 255, 0])
+    object_list.append(paddle)
     
     block = RowsOfBlock(Vector2(40, 100), 80, 30, [0, 255, 0])
     object_list.append(block)
@@ -84,10 +85,12 @@ def main():
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            left = True
+            direction = "l"
         if keys[pygame.K_RIGHT]:
-            right = True
+            direction = "r"
         for object in object_list:
+            if isinstance(object, Paddle):
+                object.move_paddle(direction)
             object.update()
             object.check_collision()
  
