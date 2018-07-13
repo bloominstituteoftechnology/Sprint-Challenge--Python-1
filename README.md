@@ -1,5 +1,5 @@
 # Sprint Challenge Python 1
-
+#Max Washington
 # CRITICAL INFORMATION
 Due to a bug in pygame, *Mac users* _MUST_ install pygame globally and run this program
 outside of the virtual environment:
