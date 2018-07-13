@@ -16,17 +16,14 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    # object_list.append(block)
-
     paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 170, 20, [0, 0, 0])
         # start paddle at center of X axis and 50 px above floor
     object_list.append(paddle)
 
-    regularBlock = RegularBlock(object_list, Vector2(200,200), 50, 50, [50,50,50])
+    regularBlock = RegularBlock(object_list, Vector2(100, 0), 50, 50, [50,50,50])
     object_list.append(regularBlock)
 
-    regularBlock = RegularBlock(object_list, Vector2(200,250), 50, 50, [150,150,150])
+    regularBlock = RegularBlock(object_list, Vector2(150, 0), 50, 50, [150,150,150])
     object_list.append(regularBlock)
 
     x = 25
@@ -39,10 +36,8 @@ def debug_create_objects(object_list):
         # color[0] = color[0]-30
         # print(color)
 
-    #(self, object_list, position, width, height, color)
-
-    # strongBlock = StrongBlock(object_list, Vector2(200,450), 150, 50, [10,50,250])
-    # object_list.append(strongBlock)
+    strongBlock = StrongBlock(object_list, Vector2(200,450), 150, 50, [0, 0, 0])
+    object_list.append(strongBlock)
   
 def main():
     pygame.init()
@@ -60,7 +55,6 @@ def main():
         right = False
 
         if len(object_list) == 2:
-            print('You have cleared the board')
             object_list[0].velocity.x = 0
             object_list[0].velocity.y = 0
         
