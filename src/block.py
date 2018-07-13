@@ -22,6 +22,7 @@ class Block:
 
     def update(self, **kwargs):
         self.touched_by_ball = False
+        # print(kwargs['left'])
 
     def check_collision(self):
         pass
@@ -34,4 +35,37 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    pass
+    def update(self, **kwargs):
+        # print(kwargs['right'])
+        left = kwargs['left']
+        right = kwargs['right']
+        if left:
+            # print(self.rectangle.x)
+            self.rectangle.x -= 10 
+            self.position.x -= 10 
+        elif right:
+            self.rectangle.x += 10
+            self.position.x += 10 
+        super().update()
+        
+class Breakable(KineticBlock):
+    def update(self, **kwargs):
+        # print(kwargs['list'].index(self))
+        if self.touched_by_ball:
+            kwargs['list'].pop(kwargs['list'].index(self))
 
+class HarderToBreak(KineticBlock):
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.hits = 2
+        print(self.hits)
+    def update(self, **kwargs):
+        
+        if self.touched_by_ball and self.hits == 0:
+            kwargs['list'].pop(kwargs['list'].index(self))
+        elif self.touched_by_ball and self.hits > 0:
+            self.hits -= 1
+            self.touched_by_ball = False
+            self.color[1] += 50 

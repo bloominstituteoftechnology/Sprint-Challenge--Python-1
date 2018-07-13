@@ -1,7 +1,9 @@
 import math
+import pygame
 
 from pygame.math import Vector2
 from pygame import Rect
+
 
 from block import KineticBlock
 
@@ -30,9 +32,11 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
+            pygame.quit()
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
+            pygame.quit()
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
 
@@ -79,7 +83,7 @@ class GameBall(Ball):
     def collide_with_rectangle(self, object):
         # This function is called after a first-pass test, that is the collision
         # rectangles overlap. 
-        
+        print(object)
         left, right, top, bottom = False, False, False, False
         # TODO:  This can probably be optimized
         if (
@@ -160,9 +164,11 @@ class GameBall(Ball):
     def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
+        # print(self.object_list.index(self))
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
             # Balls colliding with blocks
+            
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
