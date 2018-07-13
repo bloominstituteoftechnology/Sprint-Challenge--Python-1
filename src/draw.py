@@ -6,7 +6,7 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [800, 400]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
@@ -16,7 +16,7 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 7)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(320,460), 80, 20, [0, 0, 255])
+    block = KineticBlock(Vector2(400,380), 80, 20, [0, 0, 255])
     object_list.append(block)
   
 def main():
@@ -42,10 +42,10 @@ def main():
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            object_list[1].position.x = object_list[1].position.x - 0.1
+            object_list[1].position.x = object_list[1].position.x - 0.5
             print(object_list[1].position.x)
         if keys[pygame.K_RIGHT]:
-            object_list[1].position.x = object_list[1].position.x + 0.1
+            object_list[1].position.x = object_list[1].position.x + 0.5
             right = True
         for object in object_list:
             object.update()
