@@ -35,3 +35,32 @@ class KineticBlock(Block):
     pass
 
 
+
+class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color):
+        self.left = False
+        self.right = False
+        self.height = height
+        self.width = width
+        super().__init__(position, width, height, color)
+
+    def update(self):
+        if self.left == True:
+            self.position.x = (self.position.x - 3) if self.position.x > self.width/2 else self.width/2
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
+            self.left = False
+            
+        if self.right == True:
+            self.position.x = (self.position.x + 3) if self.position.x < 400-self.width/2 else 400-self.width/2
+            self.rectangle = pygame.Rect(
+                                    self.position.x - (self.width/2),
+                                    self.position.y - (self.height/2),
+                                    self.width,
+                                    self.height)
+            self.right = False
+
+        super().update()

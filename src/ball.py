@@ -31,14 +31,14 @@ class Ball:
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # top of screen
             print('\n You win!!!!!! \n') # when ball hits top of screen program exits and you win
-            pygame.quit()
-            # self.position.y = self.radius + 1
-            # self.velocity.y *= -1
+            # pygame.quit()
+            self.position.y = self.radius + 1
+            self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius: # right of screen
             print('You Lose')
-            pygame.quit()
-            # self.position.y = self.bounds[1] - self.radius - 1
-            # self.velocity.y *= -1
+            # pygame.quit()
+            self.position.y = self.bounds[1] - self.radius - 1
+            self.velocity.y *= -1
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
