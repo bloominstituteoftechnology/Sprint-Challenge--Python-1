@@ -43,14 +43,19 @@ class PaddleBlock(KineticBlock):
         dist = 5
         if key[pygame.K_LEFT]:
             self.rectangle.move_ip(-5, 0)
+            self.position.x -= 5
         elif key[pygame.K_RIGHT]:
             self.rectangle.move_ip(5,0)
+            self.position.x += 5
 
 class GameBlock(PaddleBlock, KineticBlock):
     def __init__(self, margin, object_list, position, width, height, color):
         self.margin = margin
         super().__init__(object_list, position, width, height, color)
+
     def update(self, **kwargs):
+        if self.touched_by_ball == True:
+            self.object_list.remove(self)
         self.touched_by_ball = False
 
 
