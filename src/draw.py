@@ -11,16 +11,16 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
+    block = KineticBlock(
+        Vector2(SCREEN_SIZE[0] / 2, SCREEN_SIZE[1]), 90, 15, [0, 0, 255])
+    object_list.append(block)
+
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
                        Vector2(random.randint(
                            20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                        Vector2(4*random.random() - 2, 4*random.random() - 2),
                        [255, 10, 0], 20)
     object_list.append(kinetic)
-
-    block = KineticBlock(
-        Vector2(SCREEN_SIZE[0] / 2, SCREEN_SIZE[1]), 90, 15, [0, 0, 255])
-    object_list.append(block)
 
 
 def main():
@@ -47,6 +47,14 @@ def main():
                     debug_create_objects(object_list)
                 if event.key == pygame.K_q:
                     pygame.quit()
+                if event.key == pygame.K_RIGHT:
+                    print("\nRight pressed")
+                    print(object_list[0].position.x)
+                    object_list[0].movePaddle('RIGHT', SCREEN_SIZE[0])
+                if event.key == pygame.K_LEFT:
+                    print("\nLeft pressed")
+                    print(object_list[0].position.x)
+                    object_list[0].movePaddle('LEFT', SCREEN_SIZE[0])
 
         # TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
