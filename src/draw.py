@@ -26,17 +26,16 @@ def debug_create_objects(object_list):
         rand = random.randint
         game_ball = kinetic
 
-        block = BreakableBlock(Vector2(posX,200), 100, 100, [rand(0, 255), rand(0, 255), rand(0, 255)], game_ball)
+        block = BreakableBlock(Vector2(posX,200), 100, 100, [rand(0, 255), rand(0, 255), rand(0, 255)])
         object_list.append(block)
 
         posX += 100
     # end for
 
-    block = PlayerBlock(Vector2(320, 465), 1000, 15, [255, 0, 255])
+    ## PlayerBlock
+    block = PlayerBlock(Vector2(320, 465), 100, 15, [255, 0, 255])
     object_list.append(block)
 
-    print(len(object_list))
-  
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -69,13 +68,12 @@ def main():
                 posX = object.position[0]
                 
                 if left:
-                    object.position[0] -= 1
-                    print(f"posX: {posX}")
-                    print(object.position[0])
+                    object.rectangle.x -= 5
+                    object.position[0] -= 5
 
                 if right:
-                    object.position[0] += 1
-                    print(object.position[0])
+                    object.rectangle.x += 5
+                    object.position[0] += 5
             
             object.update()
             object.check_collision()
