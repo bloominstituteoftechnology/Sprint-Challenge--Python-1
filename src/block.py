@@ -18,8 +18,8 @@ class Block:
                                     height)
         self.color = color
         self.touched_by_ball = False
-
-
+        
+        
     def update(self, **kwargs):
         self.touched_by_ball = False
 
@@ -39,10 +39,13 @@ class KineticBlock(Block):
         super().__init__(position, width, height, color)
         self.hits_left = difficulty
         self.defeated = False
+        self.colors = [[255, 0, 0], [255,140,0], [255, 215, 0], [0, 255, 0]]
+        self.color = self.colors[-difficulty]
 
     def check_collision(self):
         if self.touched_by_ball:
             self.hits_left -= 1
+            self.color = self.colors[-self.hits_left]
         if self.hits_left == 0:
             self.defeated = True
 
