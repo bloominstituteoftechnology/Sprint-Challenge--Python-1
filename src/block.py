@@ -34,4 +34,11 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    def update(self, left, right):
+        if left == True:
+            self.rectangle.move_ip(-1, 0) # move_ip: moves the rectangle, in place
+        if right == True:
+            self.rectangle.move_ip(1, 0)
+        super().update()
 

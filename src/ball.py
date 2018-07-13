@@ -9,7 +9,7 @@ class Ball:
     """
     base class for bouncing objects
     """
-    def __init__(self, bounds, position, velocity, color, radius):
+    def __init__(self, bounds, position, velocity, color, radius): # constructor
         self.position = position
         self.velocity = velocity
         self.bounds = bounds
