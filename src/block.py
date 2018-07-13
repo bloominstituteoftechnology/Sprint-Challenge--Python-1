@@ -43,8 +43,9 @@ class KineticBlock(Block):
 
 
 class TopBlock(KineticBlock):
-    def __init__(self, position, width, height, color):
-        # Create a rectangle centered around the x and y
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
+        super().__init__(position, width, height, color)
         self.position = position
         self.rectangle = pygame.Rect(
                                     position.x - (width/2),
@@ -55,12 +56,10 @@ class TopBlock(KineticBlock):
         self.touched_by_ball = False
 
     def update(self, *args):
-        count = 0
         if self.touched_by_ball:
             for object in self.object_list:
 
                 if object == self:
-                    count += 1
                     self.object_list.remove(object)
                 else:
                     continue
