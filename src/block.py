@@ -34,4 +34,10 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color):
+        self.paddle = True
+        super().__init__(position, width, height, color)
+
+
 
