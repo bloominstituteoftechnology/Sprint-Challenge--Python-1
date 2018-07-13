@@ -5,7 +5,7 @@ import sys
 from pygame.math import Vector2
 
 from ball import GameBall
-from block import KineticBlock, Paddle
+from block import KineticBlock, Paddle, BreakableBlock
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -26,7 +26,7 @@ def debug_create_objects(object_list):
     )
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
+    block = BreakableBlock(Vector2(200, 200), 100, 100, [0, 0, 63], 3)
     object_list.append(block)
     paddle = Paddle(Vector2(200, 750), 100, 20, [0, 255, 0])
     object_list.append(paddle)

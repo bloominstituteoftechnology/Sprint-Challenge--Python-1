@@ -2,6 +2,7 @@
 
 from pygame.math import Vector2
 from pygame import Rect
+from block import BreakableBlock
 
 from block import KineticBlock
 
@@ -134,6 +135,10 @@ class GameBall(Ball):
 
         if test == 1:
             object.touched_by_ball = True
+            if isinstance(object, BreakableBlock):
+                object.got_hit()
+                if object.hp == 0:
+                    self.object_list.remove(object)
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
             if left or right:
@@ -193,6 +198,10 @@ class GameBall(Ball):
                 relative_vector = self.position - corner
                 if relative_vector.length() <= self.radius:
                     object.touched_by_ball = True
+                    if isinstance(object, BreakableBlock):
+                        object.got_hit()
+                        if object.hp == 0:
+                            self.object_list.remove(object)
                     # Create a dummy object to make use of ball to ball collision,
                     # because the math is the same. Give it a velocity of the
                     # same magnitude as the current ball to cause it to reflect at the

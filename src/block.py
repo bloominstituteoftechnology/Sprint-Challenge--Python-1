@@ -58,11 +58,10 @@ class Paddle(KineticBlock):
 class BreakableBlock(KineticBlock):
     def __init__(self, position, width, height, color, hp):
         self.hp = hp
+        self.orig_color = color
         color = [i * hp for i in color]
-        super().init(position, width, height, color)
+        super().__init__(position, width, height, color)
 
     def got_hit(self):
         self.hp -= 1
-        if self.hp == 0:
-            del self
-        self.color = []
+        self.color = [i * self.hp for i in self.orig_color]
