@@ -13,7 +13,7 @@ BLOCK_WIDTH = 55
 BLOCK_HEIGHT = 25
 TOTAL_BLOCK = 6
 BLOCK_POSITION = [53,60]
-BLOCK_ROW = 1
+BLOCK_ROW = 5
 BLOCK_COLUMN = 6
 BLOCK_SPACING = 5
 
@@ -45,6 +45,7 @@ def debug_create_objects(object_list):
         x = BLOCK_POSITION[0]
         y += BLOCK_HEIGHT + BLOCK_SPACING
 
+    #Create Paddle
     paddle = Paddle(Vector2(PADDLE_POSITION), PADDLE_WIDTH, PADDLE_HEIGHT, [255, 255, 255])
     object_list.append(paddle)
 
@@ -74,7 +75,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
  
         # Draw Updates
