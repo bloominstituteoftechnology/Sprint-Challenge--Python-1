@@ -62,14 +62,14 @@ class Paddle(KineticBlock):
 
         self.touched_by_ball = False
         if self.left == True:
-            self.position.x = (self.position.x - 3) if self.position.x > 30 else 30 #TODO: dynamic min
+            self.position.x = (self.position.x - 3) if self.position.x > 30 else 30
             self.rectangle = pygame.Rect(
                                     self.position.x - (self.width/2),
                                     self.position.y - (self.height/2),
                                     self.width,
                                     self.height)
         if self.right == True:
-            self.position.x = (self.position.x + 3) if self.position.x < 370 else 370 #TODO: dynamic max
+            self.position.x = (self.position.x + 3) if self.position.x < 370 else 370 
             self.rectangle = pygame.Rect(
                                     self.position.x - (self.width/2),
                                     self.position.y - (self.height/2),

@@ -64,6 +64,12 @@ def main():
  
         clock.tick(60)
         pygame.display.flip()
+
+        if object_list[0].position.y <= 0 + object_list[0].radius:
+            object_list[0].position.y = object_list[0].radius + 1
+            object_list[0].velocity.y *= -1
+            print("YOU WIN")
+            pygame.quit()
  
     # Close everything down
     pygame.quit()
