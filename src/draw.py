@@ -79,7 +79,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
     pygame.display.set_caption("Breakout-Clone")
-    pygame.mouse.set_pos(0, 0)
+    # pygame.mouse.set_pos(0, 0) # for ease of getting coordinates for build
+    pygame.mouse.set_visible(0) #turns off mouse pointer
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
@@ -109,11 +110,11 @@ def main():
                 elif event.key == pygame.K_ESCAPE:
                     done = True
                     print("You've escaped the game!")
-            elif event.type == pygame.MOUSEMOTION:
-                #get mouse position
-                x, y = pygame.mouse.get_pos()
-                print(x, y)
-                continue
+            # elif event.type == pygame.MOUSEMOTION: # for ease of gettin coordinates for setup
+            #     #get mouse position
+            #     x, y = pygame.mouse.get_pos()
+            #     print(x, y)
+            #     continue
         
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
