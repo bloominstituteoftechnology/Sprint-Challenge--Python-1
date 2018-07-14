@@ -4,6 +4,9 @@ import random
 from pygame.math import Vector2
 from pygame import Rect
 
+def random_color():
+    return [random.randint(0, 255) for j in range(3)]
+
 class Block:
     """
     Base class for square or rectangular object

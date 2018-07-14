@@ -3,20 +3,21 @@ import random
 import sys
 
 from pygame.math import Vector2
+from time import sleep
 
 from ball import *
 from block import *
 
 SCREEN_SIZE = [400, 600]
 BACKGROUND_COLOR = [255, 255, 255]
-DIFFICULTY = 10
+LEVEL_OF_DIFFICULTY = 8
 PADDLE_WIDTH = 90
 PADDLE_HEIGHT = 20
 
 def debug_create_objects(object_list):
     ball = GameBall(1, object_list, SCREEN_SIZE, 
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(DIFFICULTY, DIFFICULTY),
+                                    Vector2(LEVEL_OF_DIFFICULTY, LEVEL_OF_DIFFICULTY),
                                     [255, 10, 0], 15)
     # object_list.append(ball)
 
@@ -34,6 +35,7 @@ def debug_create_objects(object_list):
     object_list += [ball, kinetic_block, vanishing_block, multiple_hits_block, paddle]
 
 def main():
+    timer = 0
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
 
@@ -80,6 +82,7 @@ def main():
             ball.draw(screen, pygame)
 
         clock.tick(60)
+        timer += 1
         pygame.display.flip()
 
     # Close everything down
