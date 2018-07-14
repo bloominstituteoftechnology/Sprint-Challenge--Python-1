@@ -21,10 +21,14 @@ def load_level(object_list):
         [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    for i in range(10): 
-        block = Breakable(object_list, SCREEN_SIZE, 
-            Vector2(i * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2), STANDARD_BLOCK_SIZE/2, STANDARD_BLOCK_SIZE, [0, 0, 255])
-        object_list.append(block)
+    for j in range(5): 
+        for i in range(10): 
+            block = Breakable(object_list, SCREEN_SIZE, 
+                Vector2(i * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2, 
+                j * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2), 
+                STANDARD_BLOCK_SIZE, STANDARD_BLOCK_SIZE, 
+                [20*j, 0, 255-20*j])
+            object_list.append(block)
 
     paddle = Paddle(SCREEN_SIZE, Vector2(200, 650), 100, 25, [128, 128, 128])
     object_list.append(paddle)
