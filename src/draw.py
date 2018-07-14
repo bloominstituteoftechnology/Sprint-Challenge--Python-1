@@ -33,15 +33,16 @@ def debug_create_objects(object_list):
 
 
 def for_reals_create_objects(object_list):
+    ball_vector = Vector2(random.randrange(-1000, 1000), random.randrange(-1000, 0))
+    while 0 in ball_vector:
+        ball_vector = Vector2(random.randrange(-1000, 1000), random.randrange(-1000, 0))
+    print(ball_vector)
     kinetic = GameBall(
         1,
         object_list,
         SCREEN_SIZE,
-        Vector2(
-            random.randint(20, SCREEN_SIZE[0] - 20),
-            random.randint(20, SCREEN_SIZE[1] - 20),
-        ),
-        Vector2(2 * random.random() + 4, 2 * random.random() + 4),
+        Vector2(200, 715),
+        ball_vector.normalize() * 5,
         [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
         10,
     )
@@ -61,9 +62,9 @@ def for_reals_create_objects(object_list):
                     50,
                     20,
                     [
-                        random.randint(0, 63),
-                        random.randint(0, 63),
-                        random.randint(0, 63),
+                        random.randint(32, 63),
+                        random.randint(32, 63),
+                        random.randint(32, 63),
                     ],
                     random.randint(1, 4),
                 )

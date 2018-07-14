@@ -6,6 +6,8 @@ from block import BreakableBlock
 
 from block import KineticBlock
 
+import sys
+
 
 class Ball:
     """
@@ -36,11 +38,11 @@ class Ball:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius:  # screen height
-            self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            print("You win!")
+            sys.exit()
         if self.position.y >= self.bounds[1] - self.radius:
-            self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            print("You lose!")
+            sys.exit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
