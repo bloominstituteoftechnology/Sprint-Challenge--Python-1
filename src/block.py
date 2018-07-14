@@ -46,6 +46,10 @@ class RegularBlock(KineticBlock):
         if self.touched_by_ball == True:
             self.object_list.remove(self)
 
+#This went through a lot of variations before it became this final product. I decided to use object_list.remove(self) to remove the regular blocks.
+#But then I got errors, because I wasn't passing the object_list attr in my def __init__. So I added that.
+#When I included object_list in the super().__init__, it gave me errors. When I took it out, it worked fine.
+
 class RainbowBlock(RegularBlock):
     def __init__(self, position, width, height, color, object_list):
         self.object_list = object_list
@@ -65,25 +69,23 @@ class RainbowBlock(RegularBlock):
             if self.hit >= 5:
                 self.object_list.remove(self)
 
-# The above allows the Rainbow Block to take a certain number of hits before vanishing
-# I was making this way too complicated. I tried using self.should_draw but it wasn't working so I figured the base Block has a self.touched_by_ball, so maybe I ought to use that.
-# Then maybe I could count whether it got hit and then change color once before removing. Not working 100% but I feel very close. 
-# Ok, finally working. I decided to count up instead of down, which helped. I also renamed the method to refer to the check_collision from ball.py. Not sure if that was what did the trick as I did a lot of things at the same time.
+# The RainbowBlock requires object_list in both the def __init__ and super().init__, unlike the RegularBlock. 
+# Maybe someday I'll figure out why they're different in this way, but for now I just do what the compiler tells me.
+# The above allows the Rainbow Block to take a certain number of hits before vanishing, and changes the color each time it is hit.
 
 class Paddle(KineticBlock):
     def __init__(self, position, width, height, color):
         super().__init__(position, width, height, color)
 
     def update(self, **kwargs):
-        self.rectangle = pygame.Rect(
-                                self.position.x - (self.width/2),
-                                self.position.y - (self.height/2),
-                                self.width,
-                                self.height)
+# I got the kwargs from line 25. I'm still not 100% clear on this but it works so I left it in.
         self.rectangle = pygame.Rect(
                                 self.position.x - (self.width/2),
                                 self.position.y - (self.height/2),
                                 self.width,
                                 self.height)
         super().update()
-
+# I copied this from the top - lines 16-20. The paddle is basically just like all the other blocks, except it moves.
+# And has different dimensions. 
+# Resource for pygame.Rect: https://stackoverflow.com/questions/30939830/argument-must-be-rect-style-object
+# This advice was invaluable and helped me understand what is going on a little better.

@@ -29,6 +29,10 @@ def debug_create_objects(object_list):
     object_list.append(rainbowblock)
     
     object_list += [kinetic, paddle, regularblock, rainbowblock]
+
+# Had fun tweaking the size and shape of everything. I decided on a 3X5 grid of blocks and then kept playing around with the vectors until they looked like the right size.
+# They kind of skew to the left, but close enough for now.
+# The compiler errors told me I needed to add line 31 to fill the object_list below. 
   
 def main():
     pygame.init()
@@ -52,6 +56,7 @@ def main():
         keys = pygame.key.get_pressed()
         
         paddle = object_list[1]
+# The compiler told me I needed the line above.
 
         if keys[pygame.K_LEFT]:
             paddle.position.x = max(50, paddle.position.x - 5)
@@ -61,9 +66,14 @@ def main():
             paddle.position.x = min(SCREEN_SIZE[0] - 50, paddle.position.x + 5)
             paddle.update()
 
+# I was just doing paddle.position.x +- 5 for moving the paddle but found that it would go off the screen so I tried to limit the movement
+# Resource: https://www.tutorialspoint.com/python/number_max.htm
+# This helped a lot! Once I figured out max, min was easy.
+
         for object in object_list:
             object.check_collision()
             object.update()
+# Nothing moved until I added object.update(). Which makes sense, but it took me a couple of tries to figure out that this was the right place to put it.
 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)

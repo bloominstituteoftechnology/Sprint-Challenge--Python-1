@@ -38,6 +38,8 @@ class Ball:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
             pygame.quit()
+# I think the only thing I did to this document was to add lines 36 and 40 so the game would (rather abruptly) end if the ball went out of bounds.
+# Someday I might understand the rest of this, but not today.
         
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
