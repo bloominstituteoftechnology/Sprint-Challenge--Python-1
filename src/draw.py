@@ -6,11 +6,12 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [400, 800]
-BACKGROUND_COLOR = [0, 0, 0]
+SCREEN_SIZE = [400, 700]
+BACKGROUND_COLOR = [255, 255, 255]
 
+STANDARD_BLOCK_SIZE = 40
 
-def debug_create_objects(object_list):
+def load_level(object_list):
     kinetic = GameBall(
         1, object_list, SCREEN_SIZE,
         Vector2(
@@ -20,36 +21,16 @@ def debug_create_objects(object_list):
         [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    # block = KineticBlock(Vector2(200,200), 25, 25, [0, 0, 255])
-    # object_list.append(block)
+    for i in range(10): 
+        block = Breakable(object_list, SCREEN_SIZE, 
+            Vector2(i * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2), STANDARD_BLOCK_SIZE/2, STANDARD_BLOCK_SIZE, [0, 0, 255])
+        object_list.append(block)
 
-    count = 0
-
-    while count < 3:
-        if count == 0:
-            x = 25
-            for i in range(0, 375, 25):
-                block = KineticBlock(Vector2(x, 25), 25, 25, [255, 0, 0])
-                object_list.append(block)
-                x += 25
-            count += 1
-        elif count == 1:
-            x = 25
-            for i in range(0, 375, 25):
-                block = KineticBlock(Vector2(x, 50), 25, 25, [0, 255, 0])
-                object_list.append(block)
-                x += 25
-            count += 1
-        elif count == 2:
-            x = 25
-            for i in range(0, 375, 25):
-                block = KineticBlock(Vector2(x, 75), 25, 25, [0, 0, 255])
-                object_list.append(block)
-                x += 25
-            count += 1
-
+    paddle = Paddle(SCREEN_SIZE, Vector2(200, 650), 100, 25, [128, 128, 128])
+    object_list.append(paddle)
 
 def main():
+
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
 
@@ -58,7 +39,7 @@ def main():
 
     object_list = []  # list of objects of all types in the toy
 
-    debug_create_objects(object_list)
+    load_level(object_list)
 
     while True:  # TODO:  Create more elegant condition for loop
         left = False
@@ -74,7 +55,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left=left, right=right)
             object.check_collision()
 
         # Draw Updates
@@ -87,7 +68,6 @@ def main():
 
     # Close everything down
     pygame.quit()
-
 
 if __name__ == "__main__":
     main()
