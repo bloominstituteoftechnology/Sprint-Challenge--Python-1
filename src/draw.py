@@ -9,6 +9,8 @@ from block import KineticBlock, Paddle, BreakableBlock
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
+INVINCIBLE_PERCENT = .05
+REGULAR_PERCENT = .7
 
 
 def debug_create_objects(object_list):
@@ -51,12 +53,12 @@ def for_reals_create_objects(object_list):
     for j in range(0, 8):
         for i in range(0, 12):
             die_roll = random.random()
-            if die_roll > .95:
+            if die_roll < INVINCIBLE_PERCENT:
                 new_block = KineticBlock(
                     Vector2(j * 50 + 25, i * 20 + 10), 50, 20, [200, 200, 200]
                 )
                 object_list.append(new_block)
-            elif die_roll > .25:
+            elif die_roll < INVINCIBLE_PERCENT + REGULAR_PERCENT:
                 new_block = BreakableBlock(
                     Vector2(j * 50 + 25, i * 20 + 10),
                     50,
