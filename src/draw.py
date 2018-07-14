@@ -5,10 +5,12 @@ import random
 from pygame.math import Vector2
 
 from ball import GameBall
-from block import Paddle, Vanish, SlowVanish
+from block import KineticBlock, Paddle, Vanish, SlowVanish
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
+
+STANDARD_BLOCK_SIZE = 40
 
 
 def debug_create_objects(object_list):
@@ -16,42 +18,71 @@ def debug_create_objects(object_list):
         1,  # mass
         object_list,  # object_list
         SCREEN_SIZE,  # bounds
-        Vector2(
-            random.randint(20, SCREEN_SIZE[0] - 20),
-            random.randint(20, SCREEN_SIZE[1] - 20),
-        ),  # position
-        Vector2(2, 12),  # velocity
+        Vector2(SCREEN_SIZE[0] / 2, 700),  # position
+        Vector2(2, 6),  # velocity
         [255, 10, 0],  # color
         20,  # radius
     )
     object_list.append(kinetic)
-    block = SlowVanish(
-        Vector2(50, 20), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.extend((block,))
-    block = SlowVanish(
-        Vector2(151, 20), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.extend((block,))
-    block = Vanish(Vector2(252, 20), 50, 10, [0, 0, 255])  # position width height color
-    object_list.extend((block,))
-    block = Vanish(Vector2(353, 20), 50, 10, [0, 0, 255])  # position width height color
-    object_list.extend((block,))
-    block = SlowVanish(
-        Vector2(50, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.extend((block,))
-    block = Vanish(Vector2(151, 80), 50, 10, [0, 0, 255])  # position width height color
-    object_list.extend((block,))
-    block = Vanish(Vector2(252, 80), 50, 10, [0, 0, 255])  # position width height color
-    object_list.extend((block,))
-    block = SlowVanish(
-        Vector2(353, 80), 50, 10, [0, 0, 255]
-    )  # position width height color
-    object_list.extend((block,))
+    # untouchable = KineticBlock(
+    #     object_list,  # object_list
+    #     SCREEN_SIZE,  # bounds
+    #     Vector2(
+    #         1 * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+    #         8 * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+    #     ),  # position
+    #     STANDARD_BLOCK_SIZE,
+    #     STANDARD_BLOCK_SIZE,
+    #     [0, 0, 10],  # color
+    # )
+    # object_list.append(untouchable)
+    for j in range(8):
+        for i in range(10):
+            die_roll = random.random()
+            if die_roll < .475:
+                block = SlowVanish(
+                    object_list,
+                    SCREEN_SIZE,
+                    Vector2(
+                        i * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+                        j * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+                    ),
+                    STANDARD_BLOCK_SIZE,
+                    STANDARD_BLOCK_SIZE,
+                    [0, 0, 255],
+                )
+                object_list.append(block)
+            elif die_roll < .95:
+                block = Vanish(
+                    object_list,
+                    SCREEN_SIZE,
+                    Vector2(
+                        i * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+                        j * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+                    ),
+                    STANDARD_BLOCK_SIZE,
+                    STANDARD_BLOCK_SIZE,
+                    [0, 0, 255],
+                )
+                object_list.append(block)
+            else:
+                block = KineticBlock(
+                    object_list,  # object_list
+                    SCREEN_SIZE,  # bounds
+                    Vector2(
+                        i * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+                        j * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
+                    ),  # position
+                    STANDARD_BLOCK_SIZE,
+                    STANDARD_BLOCK_SIZE,
+                    [0, 0, 10],  # color
+                )
+                object_list.append(block)
 
-    block = Paddle(Vector2(1, 799), 100, 100, [0, 0, 0])
-    object_list.extend((block,))
+    paddle = Paddle(
+        object_list, SCREEN_SIZE, Vector2(SCREEN_SIZE[0] / 2, 770), 100, 20, [0, 0, 0]
+    )
+    object_list.append(paddle)
 
 
 def main():
@@ -78,8 +109,6 @@ def main():
         for item in object_list:
             if isinstance(item, Paddle):
                 item.update(right, left)
-            elif isinstance(item, Vanish) or isinstance(item, SlowVanish):
-                item.update(object_list)
             else:
                 item.update()
             item.check_collision()

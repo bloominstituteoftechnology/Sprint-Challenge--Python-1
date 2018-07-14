@@ -9,9 +9,11 @@ class Block:
     Base class for square or rectangular object
     """
 
-    def __init__(self, position, width, height, color):
+    def __init__(self, object_list, bounds, position, width, height, color):
         # Create a rectangle centered around the x and y
         self.position = position
+        self.object_list = object_list
+        self.bounds = bounds
         self.rectangle = pygame.Rect(
             position.x - (width / 2), position.y - (height / 2), width, height
         )
@@ -35,32 +37,27 @@ class KineticBlock(Block):
 
 
 class Vanish(KineticBlock):
-    def update(self, object_list):
+    def update(self):
         if self.touched_by_ball:
-            for item in object_list:
-                if (
-                    item == self
-                    and item.color != [0, 0, 225]
-                    and item.color != [14, 253, 0]
-                    and item.color != [14, 253, 277]
-                ):
-                    object_list.remove(self)
+            for item in self.object_list:
+                if item == self:
+                    self.object_list.remove(self)
         super().update()
 
 
 class SlowVanish(KineticBlock):
-    def update(self, object_list):
+    def update(self):
         if self.touched_by_ball:
-            print("I am touched")
-            for item in object_list:
-                if item == self and item.color == [0, 0, 255]:
-                    print("I am a color and the item")
-                    self.color = [14, 253, 0]
-                    self.update()
-                if item == self and item.color == [14, 253, 0]:
-                    self.color = [14, 253, 277]
-                if item == self and item.color == [14, 253, 277]:
-                    object_list.remove(self)
+            for item in self.object_list:
+                if item == self:
+                    if self.color == [0, 0, 255]:
+                        self.color = [14, 253, 0]
+                        break
+                    if self.color == [14, 253, 0]:
+                        self.color = [14, 253, 227]
+                        break
+                    if item.color == [14, 253, 227]:
+                        self.object_list.remove(self)
         super().update()
 
 
