@@ -35,35 +35,45 @@ class KineticBlock(Block):
     pass
 
 
-class BrittleBlock(KineticBlock):
-    def __init__(self, position, width, height, color):
+class BreakableBlock(KineticBlock):
+    def __init__(self, object_list, bounds, position, width, height, color):
+        self.object_list = object_list
         super().__init__(position, width, height, color)
-        self.brittle = True
+        self.breakable = True
 
     def update(self, **kwargs):
-        pass
+         if self.touched_by_ball:
+              self.object_list.remove(self)
 
-class LessBrittleBlock(BrittleBlock):
-    def __init__(self, position, width, height, color):
-        super().__init__(position, width, height, color)
-        self.hits = 0
 
-    def update(self, **kwargs):
-        if self.touched_by_ball and self.hits < 1:
-            self.hits += 1
-            self.color = [5, 22, 20]
-            self.touched_by_ball = False
+
+# class LessBrittleBlock(BreakableBlock):
+#     def __init__(self, position, width, height, color):
+#         super().__init__(position, width, height, color)
+#         self.hits = 0
+
+
+#     def update(self, **kwargs):
+#         # if self.touched_by_ball and self.hits < 1:
+        #     self.hits += 1
+        #     self.color = [5, 22, 20]
+        #     self.touched_by_ball = False
+        #   if self.touched_by_ball:
+        #       self.rectangle.width = 0
+        #       self.rectangle.height = 0
+
+
 
 class Paddle(KineticBlock):
     def __init__(self, bounds, position, width, height, color):
         super().__init__(position, width, height, color)
         self.bounds = bounds
-        
+
     def update(self, **kwargs):
         left = kwargs['left']
         right = kwargs['right']
         speed = 11
-        
+
         if left:
             self.position.x -= speed
             if self.position.x < 0 + self.rectangle.width / 2:

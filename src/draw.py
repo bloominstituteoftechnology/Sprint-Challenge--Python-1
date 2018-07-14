@@ -14,16 +14,25 @@ def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE,
                                     Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(20*random.random() - 2, 20*random.random() - 2),
-                                    [255, 10, 0], 20)
+                                    [255, 10, 0], 15)
     object_list.append(kinetic)
 
     # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     # object_list.append(block)
-    for i in range(1, 10):
-        breakable = LessBrittleBlock(Vector2(100,100), STANDARD_BLOCK, STANDARD_BLOCK, [0, 0, 255])
-        object_list.append(breakable)
 
-    paddle = Paddle(SCREEN_SIZE, Vector2(200,600), 150, 30, [255, 55, 90])
+
+    breakable = lambda i, J, k: BreakableBlock(object_list, SCREEN_SIZE, Vector2(20+(i*60), j * 50),60,30,[125,0,10])
+    breakableblocks = []
+
+    for i in range(0, 10):
+        for j in range(1, 10):
+            for k in range(2, 10):
+                if i % 2 == 0:
+                    breakableblocks.append(breakable(i, j, k))
+
+    object_list.extend(breakableblocks)
+
+    paddle = Paddle(SCREEN_SIZE, Vector2(200,600), 150, 20, [25, 55, 0])
     object_list.append(paddle)
 
 
