@@ -52,8 +52,50 @@ class Paddle(KineticBlock):
 
 class Brick(KineticBlock):
 
+    def __init__(self, object_list,bounds, position, width, height, color, hp):
+      super().__init__(bounds, position, width, height, color)
+      self.object_list = object_list
+      self.hp = hp
+      self.colors = {
+        1 : [255, 181, 0],
+        2 : [255, 165, 255],
+        3 : [99, 179, 7],
+        4 : [15, 151, 230]
+      }
+      self.color = self.colors[self.hp]
+
     def update(self, **kwargs):
       # for key, value in kwargs.items():
+      if self.touched_by_ball == True:
+        print('Touched ', self.hp)
+        self.hp-=1
+        if self.hp == 0:
+          self.object_list.remove(self)
+        else:
+          self.color = self.colors[self.hp]
       super().update()
 
+class Floor(KineticBlock):
 
+    def __init__(self, object_list,bounds, position, width, height, color, lives):
+      super().__init__(bounds, position, width, height, color)
+      self.object_list = object_list
+      self.lives = lives
+      self.colors = {
+        1 : [255, 181, 0],
+        2 : [255, 165, 255],
+        3 : [99, 179, 7],
+        4 : [15, 151, 230]
+      }
+      self.color = self.colors[self.lives]
+
+    def update(self, **kwargs):
+      # for key, value in kwargs.items():
+      if self.touched_by_ball == True:
+        print('Dead ', self.lives)
+        self.lives-=1
+        if self.lives == 0:
+          self.lives = 4
+        else:
+          self.color = self.colors[self.lives]
+      super().update()

@@ -168,7 +168,3 @@ class GameBall(Ball):
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
-                    if issubclass(type(object), Brick):
-                      print("remove block")
-                      print(object)
-                      self.object_list.remove(object)
