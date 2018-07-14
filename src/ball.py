@@ -16,6 +16,7 @@ class Ball:
         self.color = color
         self.radius = radius
         self.collision_rectangle = self.update_rectangle()
+        self.dropped_count = 0
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
@@ -35,6 +36,8 @@ class Ball:
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            self.dropped_count += 1
+            print(self.dropped_count)
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
