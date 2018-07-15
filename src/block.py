@@ -50,6 +50,7 @@ class Paddle(KineticBlock):
         if right: 
             self.position.x += self.SPEED
         
+        #TODO: don't allow a new Rect every frame
         self.rectangle = pygame.Rect(
             self.position.x - (self.rectangle.width/2), 
             self.position.y - (self.rectangle.height/2), 
