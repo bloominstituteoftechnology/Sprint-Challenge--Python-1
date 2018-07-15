@@ -11,13 +11,15 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 STANDARD_BLOCK_SIZE = 40
 
+START_SPEED = 20
+
 def load_level(object_list):
     kinetic = GameBall(
         1, object_list, SCREEN_SIZE,
         Vector2(
             random.randint(20, SCREEN_SIZE[0] - 20),
             random.randint(20, SCREEN_SIZE[1] - 20)),
-        Vector2(4 * random.random() - 2, 4 * random.random() - 2),
+        Vector2(START_SPEED * random.random() - START_SPEED/2, START_SPEED * random.random() - START_SPEED/2),
         [255, 10, 0], 20)
     object_list.append(kinetic)
 
@@ -27,7 +29,7 @@ def load_level(object_list):
                 Vector2(i * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2, 
                 j * STANDARD_BLOCK_SIZE + STANDARD_BLOCK_SIZE/2), 
                 STANDARD_BLOCK_SIZE, STANDARD_BLOCK_SIZE, 
-                [20*j, 0, 255-20*j])
+                [0, 20*j, 255-20*i])
             object_list.append(block)
 
     paddle = Paddle(SCREEN_SIZE, Vector2(200, 650), 100, 25, [128, 128, 128])
