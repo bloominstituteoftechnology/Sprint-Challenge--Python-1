@@ -4,6 +4,7 @@ from pygame.math import Vector2
 from pygame import Rect
 
 from block import KineticBlock
+import pygame
 
 class Ball:
     """
@@ -33,8 +34,10 @@ class Ball:
             self.position.y = self.radius + 1
             self.velocity.y *= -1
         if self.position.y >= self.bounds[1] - self.radius:
-            self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            print("Game Over")
+            pygame.quit()
+            # self.position.y = self.bounds[1] - self.radius - 1
+            # self.velocity.y *= -1
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -115,7 +118,7 @@ class GameBall(Ball):
             bottom = True
 
         test = left + right + top + bottom
-        
+
         if test == 1:
             object.touched_by_ball = True
             # the ball has collided with an edge
