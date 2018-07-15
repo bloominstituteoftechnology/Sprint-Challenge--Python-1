@@ -1,7 +1,9 @@
 import pygame
-
-from pygame.math import Vector2
 from pygame import Rect
+from pygame.math import Vector2
+
+
+
 """Color Scheme for Modified version:
 #7a15c6
 #FF5555

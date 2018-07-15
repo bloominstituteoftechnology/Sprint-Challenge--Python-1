@@ -1,23 +1,32 @@
-import pygame #TODO:  Fix intellisense
-import random
+import pygame  # TODO:  Fix intellisense
 
-from pygame.math import Vector2
-
+import pygame  # TODO:  Fix intellisense
 from ball import *
 from block import *
+from pygame.math import Vector2
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
+
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
-                                    Vector2(4*random.random() - 2, 4*random.random() - 2),
-                                    [255, 10, 0], 20)
-    object_list.append(kinetic)
+    kinetic = GameBall(
+        1,
+        object_list,
+        SCREEN_SIZE,
+        Vector2(
+            random.randint(20, SCREEN_SIZE[0] - 20),
+            random.randint(20, SCREEN_SIZE[1] - 20),
+        ),
+        Vector2(4 * random.random() - 2, 4 * random.random() - 2),
+        [255, 10, 0],
+        20,
+    )
 
     block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    block = KineticBlock(Vector2(200, 200), 100, 100, [0, 0, 255])
+
 
 def main():
     pygame.init()
@@ -27,18 +36,19 @@ def main():
     clock = pygame.time.Clock()
 
     object_list = [] # list of objects of all types in the toy
-    
-    debug_create_objects(object_list)
+    object_list = []  # list of objects of all types in the toy
+
 
     while True: # TODO:  Create more elegant condition for loop
-        left = False
+    while True:  # TODO:  Create more elegant condition for loop
         right = False
         
-        for event in pygame.event.get():
+
             if event.type == pygame.QUIT: sys.exit()
-        
-        #TODO:  Feed input variables into update for objects that need it.
-        keys = pygame.key.get_pressed()
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+        # TODO:  Feed input variables into update for objects that need it.
         if keys[pygame.K_LEFT]:
             left = True
         if keys[pygame.K_RIGHT]:
@@ -59,4 +69,5 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
+
     main()
