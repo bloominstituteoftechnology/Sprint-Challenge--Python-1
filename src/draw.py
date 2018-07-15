@@ -8,7 +8,6 @@ from block import *
 
 SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
-NUM_OF_BREAKABLES = True
 
 def debug_create_objects(object_list):
     speed = 6
@@ -20,9 +19,10 @@ def debug_create_objects(object_list):
                                     [255, 0, 0], 20)
     object_list.append(kinetic)
 
-    less_breakable = lambda i, j: LessBreakableBlock(Vector2(40+(i*80), j * 50),80,50,[255,215,0])
-    breakable_block = lambda i, j: BreakableBlock(Vector2(40+(i*80), j * 50),80,50,[255,69,0])
-
+    less_breakable = lambda i, j: LessBreakableBlock(Vector2(40+(i*80), j * 50),80,50,[255,69,0])
+    breakable_block = lambda i, j: BreakableBlock(Vector2(40+(i*80), j * 50),80,50,[255,215,0])
+    # orange [255,69,0]
+    # orange-red [255,215,0]
     breakableblocks = []
     
     for i in range(0, 5):
@@ -43,14 +43,17 @@ def debug_create_objects(object_list):
     player_paddle = PlayerPaddle(SCREEN_SIZE, Vector2(200,750), 150, 30, [255, 255, 0])
     object_list.append(player_paddle)
 
-def break_breakables(object_list):
+def list_with_no_broken_blocks_from(object_list):
     def is_ball_touched(object):
         if hasattr(object, 'touched_by_ball'):
             return object.touched_by_ball
 
     global NUM_OF_BREAKABLES
     NUM_OF_BREAKABLES = len([object for object in object_list if hasattr(object, 'breakable')])
-    object_list[:] = [object for object in object_list if not is_ball_touched(object)]
+    return [object for object in object_list if not is_ball_touched(object)]
+
+def num_of_breakables_in(object_list):
+    return len([object for object in object_list if hasattr(object, 'breakable')])
 
 def main():
     pygame.init()
@@ -81,9 +84,9 @@ def main():
         for object in object_list:
             object.update(left=left, right=right)
             object.check_collision()
-        if game_ball.check_hit_bottom() or NUM_OF_BREAKABLES <= 0:
+        if game_ball.check_hit_bottom() or num_of_breakables_in(object_list) <= 0:
             exit()
-        break_breakables(object_list)
+        object_list = list_with_no_broken_blocks_from(object_list)
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)

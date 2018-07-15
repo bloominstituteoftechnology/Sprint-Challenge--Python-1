@@ -19,16 +19,8 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-    def update_rectangle(self):
-        self.rectangle = pygame.Rect(
-                            self.position.x - (self.rectangle.width/2),
-                            self.position.y - (self.rectangle.height/2),
-                            self.rectangle.width,
-                            self.rectangle.height)
-
     def update(self, **kwargs):
         self.touched_by_ball = False
-        self.update_rectangle()
 
     def check_collision(self):
         pass
@@ -64,6 +56,13 @@ class PlayerPaddle(KineticBlock):
     def __init__(self, bounds, position, width, height, color):
         super().__init__(position, width, height, color)
         self.bounds = bounds
+    
+    def update_rectangle(self):
+        self.rectangle = pygame.Rect(
+                            self.position.x - (self.rectangle.width/2),
+                            self.position.y - (self.rectangle.height/2),
+                            self.rectangle.width,
+                            self.rectangle.height)
         
     def update(self, **kwargs):
         left = kwargs['left'] 
@@ -79,3 +78,4 @@ class PlayerPaddle(KineticBlock):
             if self.position.x > self.bounds[0] - self.rectangle.width / 2:
                 self.position.x = self.bounds[0] - self.rectangle.width / 2
         super().update()
+        self.update_rectangle()
