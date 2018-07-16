@@ -1,9 +1,10 @@
+import pygame
 import math
 
 from pygame.math import Vector2
 from pygame import Rect
 
-from block import KineticBlock
+from block import KineticBlock, RegularBlock
 
 class Ball:
     """
@@ -32,10 +33,14 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            pygame.quit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
-
+            pygame.quit()
+# I think the only thing I did to this document was to add lines 36 and 40 so the game would (rather abruptly) end if the ball went out of bounds.
+# Someday I might understand the rest of this, but not today.
+        
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
 
