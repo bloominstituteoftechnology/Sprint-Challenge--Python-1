@@ -1,8 +1,9 @@
 import math
 
-from block import KineticBlock
-from pygame import Rect
 from pygame.math import Vector2
+from pygame import Rect
+
+from block import KineticBlock
 
 
 class Ball:
@@ -208,8 +209,8 @@ class GameBall(Ball):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
         index = self.object_list.index(self)
-        for object in self.object_list[index + 1:]:  # TODO: Check effeciency
         for object in self.object_list[index + 1 :]:  # TODO: Check effeciency
+            # Balls colliding with blocks
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
