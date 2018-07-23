@@ -58,7 +58,7 @@ class GameBall(Ball):
 
     def collide_with_ball(self, object, relative_vector):
 
-        #TODO:  Calculate the correct position and move there directly
+        #TODO item for Lambda staff:  Calculate the correct position and move there directly
         while relative_vector.length() <= self.radius + object.radius:
             self.position += relative_vector.normalize()
             object.position -= relative_vector.normalize()
@@ -81,7 +81,7 @@ class GameBall(Ball):
         # rectangles overlap. 
         
         left, right, top, bottom = False, False, False, False
-        # TODO:  This can probably be optimized
+        # TODO item for Lambda staff:  This can probably be optimized
         if (
             object.position.x > self.position.x and
             object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and 
@@ -119,7 +119,7 @@ class GameBall(Ball):
         if test == 1:
             object.touched_by_ball = True
             # the ball has collided with an edge
-            # TODO:  # fix sticky edges
+            # TODO item for Lambda staff:  # fix sticky edges
             if left or right:
                 self.velocity.x *= -1
                 if left:
@@ -135,7 +135,7 @@ class GameBall(Ball):
                     self.position.y = object.position.y + object.rectangle.height/2 + self.radius + 1
 
         elif test == 4:
-            # TODO:  Better error handling
+            # TODO item for Lambda staff:  Better error handling
             print('error:  ball inside rectangle')
 
         elif test == 0:
@@ -161,7 +161,7 @@ class GameBall(Ball):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
         index = self.object_list.index(self)
-        for object in self.object_list[index+1:]:  # TODO: Check effeciency
+        for object in self.object_list[index+1:]:  # TODO item for Lambda staff: Check effeciency
             # Balls colliding with blocks
             if issubclass(type(object), KineticBlock) and object != self:
                 # Do a first round pass for collision (we know object is a KineticBlock)
