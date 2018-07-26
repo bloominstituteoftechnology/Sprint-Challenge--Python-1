@@ -16,8 +16,11 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
-    object_list.append(block)
+    # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    # object_list.append(block)
+
+    paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 70, 15, [0, 0, 0])
+    object_list.append(paddle)
   
 def main():
     pygame.init()
