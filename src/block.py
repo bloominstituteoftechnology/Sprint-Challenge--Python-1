@@ -67,3 +67,29 @@ class Paddle(KineticBlock):
 
     def move_right(self):
         self.right = True
+
+class Obstacle_Block(KineticBlock):
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
+        self.hp = 1
+        super().__init__(position, width, height, color)
+    
+    def update(self):
+        if self.touched_by_ball == True:
+            self.hp -= 1
+            if self.hp < 1:
+                self.object_list.remove(self)
+        super().update()
+
+class Tough_Obstacle_Block(KineticBlock):
+    def __init__(self, position, width, height, color, object_list):
+        self.object_list = object_list
+        self.hp = 2
+        super().__init__(position, width, height, color)
+
+    def update(self):
+        if self.touched_by_ball == True:
+            self.hp -= 1
+            if self.hp < 1:
+                self.object_list.remove(self)
+        super().update()

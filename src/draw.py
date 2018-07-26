@@ -25,9 +25,15 @@ def debug_create_objects(object_list):
 
     for i in range(5):
         color = [random.randint(10, 250), random.randint(10, 250), random.randint(10, 250)]
-        for j in range(5):
-            block = KineticBlock(Vector2(54 + (i*70),100 + (j* 40)), 70, 30, color)
+        for j in range(3):
+            block = Obstacle_Block(Vector2(54 + (i*70),140 + (j* 40)), 70, 30, color, object_list)
             object_list.append(block)
+    
+    for k in range (5):
+        color = [0,0,0]
+        for j in range(1):
+            h_block = Tough_Obstacle_Block(Vector2(54 + (k*70),100 + (j* 40)), 60, 30, color, object_list)
+            object_list.append(h_block)
 
   
 def main():
