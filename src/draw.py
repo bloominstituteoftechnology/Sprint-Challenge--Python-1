@@ -6,12 +6,12 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [400, 800]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     kinetic = GameBall(1, object_list, SCREEN_SIZE, 
-                                    Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                    Vector2(random.randint(200, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                     Vector2(4*random.random() - 2, 4*random.random() - 2),
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
@@ -19,7 +19,7 @@ def debug_create_objects(object_list):
     # block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
     # object_list.append(block)
 
-    paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 70, 15, [0, 0, 0])
+    paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 100, 25, [0, 0, 0])
     object_list.append(paddle)
   
 def main():
@@ -43,13 +43,12 @@ def main():
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            left = True
+            object_list[1].move_left()
         if keys[pygame.K_RIGHT]:
-            right = True
+            object_list[1].move_right()
         for object in object_list:
             object.update()
             object.check_collision()
- 
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
