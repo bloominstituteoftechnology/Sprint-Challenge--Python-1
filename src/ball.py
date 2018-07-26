@@ -32,9 +32,13 @@ class Ball:
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
             self.velocity.y *= -1
+            print("Game Over")
+            pygame.quit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
             self.velocity.y *= -1
+            print("Game Over")
+            pygame.quit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
