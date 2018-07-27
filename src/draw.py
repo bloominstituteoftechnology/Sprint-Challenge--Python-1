@@ -24,18 +24,6 @@ def debug_create_objects(object_list):
         20,  # radius
     )
     object_list.append(kinetic)
-    # untouchable = KineticBlock(
-    #     object_list,  # object_list
-    #     SCREEN_SIZE,  # bounds
-    #     Vector2(
-    #         1 * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
-    #         8 * (STANDARD_BLOCK_SIZE + 5) + STANDARD_BLOCK_SIZE / 2,
-    #     ),  # position
-    #     STANDARD_BLOCK_SIZE,
-    #     STANDARD_BLOCK_SIZE,
-    #     [0, 0, 10],  # color
-    # )
-    # object_list.append(untouchable)
     for j in range(8):
         for i in range(10):
             die_roll = random.random()
@@ -108,7 +96,7 @@ def main():
             right = True
         for item in object_list:
             if isinstance(item, Paddle):
-                item.update(right, left)
+                item.update(left, right)
             else:
                 item.update()
             item.check_collision()

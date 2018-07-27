@@ -17,6 +17,7 @@ class Block:
         self.rectangle = pygame.Rect(
             position.x - (width / 2), position.y - (height / 2), width, height
         )
+        self.width = width
         self.color = color
         self.touched_by_ball = False
 
@@ -63,10 +64,10 @@ class SlowVanish(KineticBlock):
 
 class Paddle(KineticBlock):
     def update(self, left, right):
-        if left:
-            self.position.x += 5
-        if right:
+        if left and self.position.x > self.width / 2:
             self.position.x -= 5
+        if right and self.position.x < 400 - self.width / 2:
+            self.position.x += 5
 
         self.rectangle = pygame.Rect(
             self.position.x - (self.rectangle.width / 2),
