@@ -19,9 +19,8 @@ def debug_create_objects(object_list):
     block = HardBlock(4, Vector2(200,200), 100, 100, [0, 0, 255])
     object_list.append(block)
 
-paddle = Paddle(
-    Vector2(SCREEN_SIZE[0]/2, SCREEN_SIZE[1] - 50), 100, 25 [55, 255, 20] ))
-object_list.append(paddle)
+    paddle = Paddle(Vector2(SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 50), 100, 25 [55, 255, 20], [])
+    object_list.append(paddle)
   
 def main():
     pygame.init()

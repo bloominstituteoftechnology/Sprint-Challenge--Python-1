@@ -30,22 +30,57 @@ class Block:
         pygame.draw.rect(screen, self.color, self.rectangle)
 
 class KineticBlock(Block):
-    # No custom code needed here, just want to be able to differentiate
-    # KineticBall will handle the collison
-    pass
+    def __init__(self, position, width, height, color, hits):
+        super().__init__(position, width, height, color)
+        self.hits_to_break = hits
+        self.broken = False
+        self.colors = [[255, 0, 0], [255,140,0], [0, 255, 0]]
+        self.color = self.colors[-hits]
     
-class Paddle(KineticBlock)
-    SPEED = 4
+    def check_collision(self):
+        if self.touched_by_ball:
+            self.hits_to_break -= 1
+            self.color = self.colors[-self.hits_to_break]
+        if self.hits_to_break == 0:
+            self.broken = True
 
-    def update(self, **input):
-        self.left = input['left']
-        self.right = inmput['right']
+class UnbreakableBlock(Block):
+    #This a block that is bounceable but not breakable
+    
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.color = [75, 75, 75]
+
+class GhostBlock(Block):
+    #The block is destroyed when hit but the ball can't bounce off of it
+    def __init__(self, position, width, height, color):
+        super().__init__(position, width, height, color)
+        self.color = [200, 200, 200]
+        self.broken = False
+    
+    def check_collision(self):
+        if self.touched_by_ball:
+            self.broken = True
+        
+class Paddle(KineticBlock):
+    #this is the paddle that the player controls at the bottom of the screen
+
+    def update(self, **kwargs):
+        distance = 2
+        for k, v in kwargs.items():
+            if k == "left" and v == True:
+                self.rectangle = self.rectangle.move(-distance, 0)
+                self.position.x -= distance
+            if k == "right" and v == True:
+                self.rectangle = self.rectangle.move(distance, 0)
+                self.position.x += distance
+        
 
         if self.left:
             self.position.x -= self.SPEED
         
         if self.right:
-        self.position.x += self.SPEED
+            self.position.x += self.SPEED
 
         self.rectangle = pygame.Rect(
             self.position.x - (self.rectangle.width/2),
@@ -66,7 +101,7 @@ class HardBlock(EasyBlock):
         self.life = life
         super().__init__(position, width, height, color)
 
-    random_color = [random.randint(0, 255), random.randint(0, 255), random.randint(0,255)]
+    rand_color = [random.randint(0, 255), random.randint(0, 255), random.randint(0,255)]
 
     def update(self, **kwargs):
         if self.touched_by_ball:
