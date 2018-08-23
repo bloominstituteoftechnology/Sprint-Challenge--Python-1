@@ -16,9 +16,26 @@ def debug_create_objects(object_list):
                                     [255, 10, 0], 20)
     object_list.append(kinetic)
 
-    block = KineticBlock(Vector2(200,200), 100, 100, [0, 0, 255])
+    # starting X and Y axis of breakable blocks
+    # values change after each iteration of the for loop a few lines below
+    posX = 50
+    posY = 200
+
+    # start for
+    for block in range(1, 10):
+        rand = random.randint
+        game_ball = kinetic
+
+        block = BreakableBlock(Vector2(posX,200), 100, 100, [rand(0, 255), rand(0, 255), rand(0, 255)])
+        object_list.append(block)
+
+        posX += 100
+    # end for
+
+    ## PlayerBlock
+    block = PlayerBlock(Vector2(320, 465), 100, 15, [255, 0, 255])
     object_list.append(block)
-  
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -44,6 +61,24 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
+            # check if `object` is an instance of `PlayerBlock`
+            # updates the X position but DOES NOT ACTUALLY WORK
+            if isinstance(object, PlayerBlock):
+                # grab `object` current position
+                posX = object.position[0]
+                
+                if left:
+                    object.rectangle.x -= 5
+                    object.position[0] -= 5
+
+                if right:
+                    object.rectangle.x += 5
+                    object.position[0] += 5
+            
+            if isinstance(object, BreakableBlock):
+                if object.touched_by_ball:
+                    object_list.remove(object)
+            
             object.update()
             object.check_collision()
  

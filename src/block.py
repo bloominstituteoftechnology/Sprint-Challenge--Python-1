@@ -19,7 +19,6 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-
     def update(self, **kwargs):
         self.touched_by_ball = False
 
@@ -34,4 +33,8 @@ class KineticBlock(Block):
     # KineticBall will handle the collison
     pass
 
+class PlayerBlock(KineticBlock):
+    pass
 
+class BreakableBlock(KineticBlock):
+    pass
