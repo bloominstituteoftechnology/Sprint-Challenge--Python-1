@@ -56,8 +56,13 @@ class PaddleBlock(KineticBlock):
 class MultipleBounceBlock(KineticBlock):
     # This block will chage colors each time the ball touch it
     # And will disappear after 4th hit
-    pass 
+    pass
+
+
+     
 
 class SingleBounceBlock(KineticBlock):
     # This block will disappear after the ball touch it
-    pass
+    def update(self, **kwargs):
+        if self.touched_by_ball:
+            self.object_list.remove(self)
