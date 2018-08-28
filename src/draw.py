@@ -24,9 +24,6 @@ def debug_create_objects(object_list):
     paddle = PaddleBlock(Vector2(200,700), 100, 30, [255, 0, 0])
     object_list.append(paddle)
 
-    # paddle = Paddle(Vector2(320,400), 100, 50, [0, 255, 255])
-    # object_list.append(paddle)
-
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -52,7 +49,7 @@ def main():
         if keys[pygame.K_RIGHT]:
             right = True
         for object in object_list:
-            object.update()
+            object.update(left = left, right = right) # move paddle
             object.check_collision()
  
         # Draw Updates
