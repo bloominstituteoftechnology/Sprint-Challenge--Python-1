@@ -36,17 +36,15 @@ class KineticBlock(Block):
 
 class PaddleBlock(KineticBlock):
 
-
-
     def update(self, **kwargs):
         left = kwargs['left']
         right = kwargs['right']
 
         if left:
-            self.position.x -= 7
+            self.position.x -= 10
         
         if right:
-            self.position.x += 7
+            self.position.x += 10
         
         self.rectangle = pygame.Rect(
             self.position.x - (self.rectangle.width/2),
@@ -54,3 +52,12 @@ class PaddleBlock(KineticBlock):
             self.rectangle.width,
             self.rectangle.height,
         )
+
+class MultipleBounceBlock(KineticBlock):
+    # This block will chage colors each time the ball touch it
+    # And will disappear after 4th hit
+    pass 
+
+class SingleBounceBlock(KineticBlock):
+    # This block will disappear after the ball touch it
+    pass

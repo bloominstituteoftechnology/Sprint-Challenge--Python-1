@@ -24,6 +24,13 @@ def debug_create_objects(object_list):
     paddle = PaddleBlock(Vector2(200,700), 100, 30, [255, 0, 0])
     object_list.append(paddle)
 
+    multipleBounceBlock = MultipleBounceBlock(Vector2(200,300), 50, 50, [0, 0, 255])
+    object_list.append(multipleBounceBlock)
+
+    singleBounceBlock = SingleBounceBlock(Vector2(200,400), 50, 50, [0, 0, 255])
+    object_list.append(singleBounceBlock)
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
