@@ -10,8 +10,9 @@ class Block:
     Base class for square or rectangular object
     """
 
-    def __init__(self, position, width, height, color):
+    def __init__(self, bounds, position, width, height, color):
         # Create a rectangle centered around the x and y
+        self.bounds = bounds
         self.position = position
         self.rectangle = pygame.Rect(
                                     position.x - (width/2),
@@ -56,8 +57,25 @@ class PlayerBlock(KineticBlock):
 
 class SingleHit(KineticBlock):
     pass
-    def __init__(self, position, width, height, color):
-        super().__init__(position, width, height, color)
+    def __init__(self, object_list, bounds, position, width, height, color):
+        self.object_list = object_list
+        super().__init__(bounds, position, width, height, color)
 
-    
+    def update(self, **kwargs):
+        if self.touched_by_ball:
+            self.object_list.remove(self)
+
+class MultiHit(KineticBlock):
+    def __init__(self, object_list, bounds, position, width, height, color):
+        self.object_list = object_list
+        super().__init__(bounds, position, width, height, color)
+        self.hits = 2
+    def update(self, **kwargs):
+        
+        if self.touched_by_ball and self.hits == 0:
+            self.object_list.remove(self)
+        elif self.touched_by_ball and self.hits > 0:
+            self.hits -= 1
+            self.touched_by_ball = False
+            self.color[1] -= 50     
                 
