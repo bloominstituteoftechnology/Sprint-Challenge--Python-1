@@ -1,9 +1,10 @@
 import math
+import pygame
 
 from pygame.math import Vector2
 from pygame import Rect
 
-from block import KineticBlock
+from block import KineticBlock, BlockOne
 
 class Ball:
     """
@@ -19,22 +20,25 @@ class Ball:
 
     def update_rectangle(self):
         return Rect(self.position.x - self.radius,
-                                        self.position.y - self.radius,
-                                        self.radius*2, self.radius*2)
+                    self.position.y - self.radius,
+                    self.radius*2, self.radius*2)
 
     def update(self, **kwargs):
-        if self.position.x <= 0 + self.radius: # screen width
+        if self.position.x <= 0 + self.radius:  # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
+            
         if self.position.x >= self.bounds[0] - self.radius:
             self.position.x = self.bounds[0] - self.radius - 1
             self.velocity.x *= -1
-        if self.position.y <= 0 + self.radius: # screen height
-            self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            
+        if self.position.y <= 0 + self.radius:  # screen height
+            print('~~~~~~~~~ Loser ~~~~~~~~!')
+            pygame.quit()
+            
         if self.position.y >= self.bounds[1] - self.radius:
-            self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            print('########## Winner ########!')
+            pygame.quit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
@@ -85,7 +89,7 @@ class GameBall(Ball):
         if (
             object.position.x > self.position.x and
             object.position.x - object.rectangle.width/2 <= self.position.x + self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             left = True
@@ -93,7 +97,7 @@ class GameBall(Ball):
         if (
             object.position.x < self.position.x and
             object.position.x + object.rectangle.width/2 >= self.position.x - self.radius and 
-            self.position.y <= object.position.y+object.rectangle.height/2 and 
+            self.position.y <= object.position.y + object.rectangle.height/2 and 
             self.position.y >= object.position.y - object.rectangle.height/2
         ):
             right = True
@@ -101,7 +105,7 @@ class GameBall(Ball):
         if (
             object.position.y > self.position.y and
             object.position.y - object.rectangle.height/2 <= self.position.y + self.radius and 
-            self.position.x <= object.position.x+object.rectangle.width/2 and 
+            self.position.x <= object.position.x + object.rectangle.width/2 and 
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             top = True
@@ -109,7 +113,7 @@ class GameBall(Ball):
         if (
             object.position.y < self.position.y and
             object.position.y + object.rectangle.width/2 >= self.position.y - self.radius and 
-            self.position.x <= object.position.x+object.rectangle.width/2 and 
+            self.position.x <= object.position.x + object.rectangle.width/2 and 
             self.position.x >= object.position.x - object.rectangle.width/2
         ):
             bottom = True
@@ -118,6 +122,8 @@ class GameBall(Ball):
         
         if test == 1:
             object.touched_by_ball = True
+            if isinstance(object, BlockOne):
+                self.object_list.remove(object)
             # the ball has collided with an edge
             # TODO:  # fix sticky edges
             if left or right:

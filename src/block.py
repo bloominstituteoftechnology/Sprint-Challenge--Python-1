@@ -1,7 +1,5 @@
 import pygame
 
-from pygame.math import Vector2
-from pygame import Rect
 
 class Block:
     """
@@ -19,7 +17,6 @@ class Block:
         self.color = color
         self.touched_by_ball = False
 
-
     def update(self, **kwargs):
         self.touched_by_ball = False
 
@@ -29,9 +26,32 @@ class Block:
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
 
+
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
     pass
 
+
+class Paddle(KineticBlock):
+    def __init__(self, position, width, height, color):
+        self.paddle = True
+        super().__init__(position, width, height, color)
+
+    def update(self, **kwargs):
+        position = kwargs['position']
+        if position > 330:
+            self.position.x = 330
+            self.rectangle.x = 330
+        else:
+            self.position.x = position
+            self.rectangle.x = position
+
+
+class BlockOne(KineticBlock):
+    pass
+
+
+class BlockThree(KineticBlock):
+    pass
 
