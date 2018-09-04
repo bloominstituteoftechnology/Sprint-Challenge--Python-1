@@ -49,9 +49,7 @@ class Paddle(KineticBlock):
 
 
 class BlockOne(KineticBlock):
-    def update(self, **kwargs):
-        if self.touched_by_ball:
-            kwargs['list'].pop(kwargs['list'].index(self))
+    pass
 
 
 class BlockThree(KineticBlock):

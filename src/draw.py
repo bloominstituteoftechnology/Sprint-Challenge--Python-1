@@ -27,27 +27,29 @@ def debug_create_objects(object_list):
     block_dict = {
         "1": BlockOne,
         "2": KineticBlock,
-        "3": BlockThree
+        "3": BlockOne,
+        "4": BlockOne,
+        "5": BlockOne
     }
 
     for i in range(0,11):
-        block_type = block_dict[f'{random.randint(1,3)}']
+        block_type = block_dict[f'{random.randint(1,5)}']
         block = block_type(Vector2(40 * i, 10), 40, 30, [0, 0, 255])
         row_1.append(block)
     for i in range(0,11):
-        block_type = block_dict[f'{random.randint(1,3)}']
+        block_type = block_dict[f'{random.randint(1,5)}']
         block = block_type(Vector2(40 * i, 40), 40, 30, [255, 0, 0])
         row_2.append(block)
     for i in range(0,11):
-        block_type = block_dict[f'{random.randint(1,3)}']
+        block_type = block_dict[f'{random.randint(1,5)}']
         block = block_type(Vector2(40 * i, 70), 40, 30, [0, 200, 100])
         row_3.append(block)
     for i in range(0,11):
-        block_type = block_dict[f'{random.randint(1,3)}']
+        block_type = block_dict[f'{random.randint(1,5)}']
         block = block_type(Vector2(40 * i, 100), 40, 30, [0, 100, 255])
         row_4.append(block)
     for i in range(0,11):
-        block_type = block_dict[f'{random.randint(1,3)}']
+        block_type = block_dict[f'{random.randint(1,5)}']
         block = block_type(Vector2(40 * i, 130), 40, 30, [255, 255, 0])
         row_5.append(block)
 
