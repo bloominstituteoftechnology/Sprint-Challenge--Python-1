@@ -1,4 +1,4 @@
-import pygame #TODO:  Fix intellisense
+import pygame  #TODO:  Fix intellisense
 import random
 
 from pygame.math import Vector2
@@ -52,27 +52,28 @@ def debug_create_objects(object_list):
         row_5.append(block)
 
     object_list.extend([ball, paddle, *row_1, *row_2, *row_3, *row_4, *row_5])
-  
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
- 
+
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
- 
-    object_list = [] # list of objects of all types in the toy
-    
+
+    object_list = []  # list of objects of all types in the toy
+
     debug_create_objects(object_list)
- 
-    while True: # TODO:  Create more elegant condition for loop
+
+    while True:  # TODO:  Create more elegant condition for loop
         left = False
         right = False
-        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
             if event.type == pygame.MOUSEMOTION:
                 mouse_pos = pygame.mouse.get_pos()
-        
+
         #TODO:  Feed input variables into update for objects that need it.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_q]:
@@ -82,17 +83,18 @@ def main():
         for object in object_list:
             object.update(position=mouse_pos[0])
             object.check_collision()
- 
+
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
- 
+
         clock.tick(60)
         pygame.display.flip()
- 
+
     # Close everything down
     pygame.quit()
- 
+
+
 if __name__ == "__main__":
     main()
