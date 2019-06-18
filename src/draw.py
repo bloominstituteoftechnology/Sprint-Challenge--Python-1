@@ -36,10 +36,7 @@ def main():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-        
-        #TODO:  Feed input variables into update for objects that need it.
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+@@ -43,20 +72,26 @@ def main():
             left = True
         if keys[pygame.K_RIGHT]:
             right = True

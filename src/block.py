@@ -1,8 +1,8 @@
 import pygame
-
+ 
 from pygame.math import Vector2
 from pygame import Rect
-
+ 
 class Block:
     """
     Base class for square or rectangular object
@@ -20,7 +20,7 @@ class Block:
         self.touched_by_ball = False
 
 
-    def update(self, **kwargs):
+   def update(self, **kwargs):
         self.touched_by_ball = False
 
     def check_collision(self):
@@ -32,6 +32,4 @@ class Block:
 class KineticBlock(Block):
     # No custom code needed here, just want to be able to differentiate
     # KineticBall will handle the collison
-    pass
-
-
+    pass 

@@ -1,10 +1,10 @@
 import math
-
+import sys
+import pygame
 from pygame.math import Vector2
 from pygame import Rect
-
 from block import KineticBlock
-
+ 
 class Ball:
     """
     base class for bouncing objects
@@ -31,10 +31,14 @@ class Ball:
             self.velocity.x *= -1
         if self.position.y <= 0 + self.radius: # screen height
             self.position.y = self.radius + 1
-            self.velocity.y *= -1
+            # self.velocity.y *= -1
+            print('You won, congrats!')
+            sys.exit()
         if self.position.y >= self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius - 1
-            self.velocity.y *= -1
+            # self.velocity.y *= -1
+            print('Wah wah, you lose...')
+            sys.exit()
 
         self.position += self.velocity
         self.collision_rectangle = self.update_rectangle()
